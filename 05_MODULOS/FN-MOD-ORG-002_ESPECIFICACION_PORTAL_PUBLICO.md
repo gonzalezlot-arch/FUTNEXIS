@@ -1,6 +1,6 @@
 # FN-MOD-ORG-002 — Especificación funcional: portal público
 
-- **Versión documental:** 1.5
+- **Versión documental:** 1.6
 - **Estado:** EN_REVISION
 - **Fecha de consolidación:** 2026-11-02
 - **Base conocida:** versión 1.4, WritingBlock de referencia 61482
@@ -118,6 +118,34 @@ Rutas generales conocidas: `/` para inicio, `/login` para autenticación, `/app`
 
 ## 6. Reglas de negocio
 
+> Las reglas RN-PORT-001 a RN-PORT-020 de esta sección son una normalización documental de decisiones ya registradas. Se mantienen en estado [EN_REVISION] y no agregan decisiones nuevas. Los aspectos expresamente pendientes continúan marcados como tales.
+
+### 6.0 Catálogo numerado de reglas
+
+| ID | Regla de negocio | Estado / trazabilidad |
+|---|---|---|
+| RN-PORT-001 | La publicación del portal de organización es independiente de la publicación individual de cada torneo. | [CONFIRMADO] — DEC-PORT-002/registro general; pendiente recuperar DEC-PORT-001 a 008 literal para correspondencia exacta |
+| RN-PORT-002 | El portal público permanece desactivado por defecto y solo usuarios autorizados pueden publicarlo o despublicarlo. | [CONFIRMADO] — reglas generales del portal |
+| RN-PORT-003 | La portada de organización muestra únicamente torneos publicados y no muestra próximos partidos ni resultados. | [CONFIRMADO] — DEC-PORT-010 y alcance PORT-01 |
+| RN-PORT-004 | Los torneos se agrupan en curso, próximos y finalizados, en ese orden; cada grupo se ordena del más reciente al más antiguo. | [CONFIRMADO] — DEC-PORT-011 y DEC-PORT-036; campo temporal exacto [PENDIENTE] |
+| RN-PORT-005 | Las secciones del torneo son Información general, Equipos, Calendario, Resultados, Clasificación y Estadísticas individuales. | [CONFIRMADO] — DEC-PORT-013 y DEC-PORT-014 |
+| RN-PORT-006 | El calendario ofrece vista por jornadas y lista cronológica, con filtros por equipo y estado. | [CONFIRMADO] — DEC-PORT-015 |
+| RN-PORT-007 | La clasificación pública presenta posición, equipo, PJ, PG, PE, PP, GF, GC, DG y PTS. | [CONFIRMADO] — DEC-PORT-016 |
+| RN-PORT-008 | Las estadísticas individuales incluyen goles, partidos jugados y tarjetas amarillas, rojas y azules; no incluyen asistencias en el alcance actual. | [CONFIRMADO] — DEC-PORT-017 |
+| RN-PORT-009 | El ranking general de goleadores aplica goles, avance deportivo, menor cantidad de partidos oficiales y empate compartido como criterios sucesivos. | [CONFIRMADO] — DEC-PORT-018 y DEC-PORT-038; definición algorítmica parcial |
+| RN-PORT-010 | Los rankings disciplinarios se presentan separados por tipo de tarjeta y en orden descendente. | [CONFIRMADO] — DEC-PORT-019 |
+| RN-PORT-011 | Cada jugador dispone de ficha pública con identificador estable, nombre deportivo y datos deportivos autorizados. | [CONFIRMADO] — DEC-PORT-020 y reglas de privacidad |
+| RN-PORT-012 | El historial del jugador conserva la participación por torneo y equipo, sin sobrescribir el historial por cambios posteriores de equipo. | [CONFIRMADO] — DEC-PORT-021 y reglas transversales |
+| RN-PORT-013 | El historial de participaciones se presenta en tarjetas desplegables en orden cronológico inverso. | [CONFIRMADO] — DEC-PORT-022 |
+| RN-PORT-014 | La ficha pública de equipo contiene resumen, plantilla, torneos y resultados, con estadísticas colectivas autorizadas. | [CONFIRMADO] — DEC-PORT-023 a 026 |
+| RN-PORT-015 | Los resultados públicos corresponden a partidos oficiales confirmados y se vinculan al partido correspondiente. | [CONFIRMADO] — DEC-PORT-027 y DEC-PORT-037 |
+| RN-PORT-016 | El detalle disciplinario muestra nombre deportivo, número y cantidad de tarjetas por jugador. | [CONFIRMADO] — DEC-PORT-028 |
+| RN-PORT-017 | El ranking de goleadores del equipo se ordena por goles y no hereda los desempates del ranking general. | [CONFIRMADO] — DEC-PORT-029 y DEC-PORT-030 |
+| RN-PORT-018 | Los reconocimientos públicos solo se muestran cuando están confirmados oficialmente. | [CONFIRMADO] — DEC-PORT-031 a 034 |
+| RN-PORT-019 | La navegación pública entre organización, torneo, equipo y jugador no requiere login y utiliza identificadores estables. | [CONFIRMADO] — DEC-PORT-035 |
+| RN-PORT-020 | Las estadísticas públicas requieren torneo publicado y datos oficialmente confirmados; partidos no confirmados no modifican los resultados públicos. | [CONFIRMADO] — DEC-PORT-037 |
+
+
 ### 6.1 Publicación y estados
 - Estado de publicación y estado deportivo son independientes.
 - Próximos: publicado y la competición no ha comenzado.
@@ -186,7 +214,7 @@ Registrar publicaciones, despublicaciones, modificaciones y cambios de estado co
 | CA-PORT-003 | La portada solo muestra torneos publicados. |
 | CA-PORT-004 | La portada no muestra próximos partidos ni resultados. |
 | CA-PORT-005 | Los torneos se muestran en tarjetas y con paginación. |
-| CA-PORT-006 | El orden de grupos corresponde a DEC-PORT-036 y DEC-PORT-009. |
+| CA-PORT-006 | El orden de grupos corresponde a DEC-PORT-011 y DEC-PORT-036. |
 | CA-PORT-007 | Los estados deportivos se calculan independientemente del estado de publicación. |
 | CA-PORT-008 | El portal de torneo presenta sus seis secciones. |
 | CA-PORT-009 | El calendario permite vista por jornada y lista cronológica. |
@@ -205,6 +233,23 @@ Registrar publicaciones, despublicaciones, modificaciones y cambios de estado co
 | CA-PORT-022 | Las operaciones de publicación y cambios de estado quedan auditadas. |
 | CA-PORT-023 | Solo páginas publicadas y disponibles son elegibles para indexación. |
 | CA-PORT-024 | Un visitante no puede acceder a contenido privado cambiando identificadores de URL. |
+
+| CA-PORT-025 | En PORT-01, los filtros por estado y modalidad no se consideran obligatorios mientras permanezcan [PROPUESTA]/[PENDIENTE]. |
+| CA-PORT-026 | El calendario permite consultar tanto la vista por jornadas como la lista cronológica. |
+| CA-PORT-027 | Los filtros del calendario limitan los partidos por equipo y estado seleccionado. |
+| CA-PORT-028 | Cada partido muestra equipos, escudos autorizados, fecha/hora, jornada, escenario y estado; el marcador solo aparece como confirmado cuando corresponde. |
+| CA-PORT-029 | La ficha pública de equipo presenta las secciones Resumen, Plantilla, Torneos y Resultados. |
+| CA-PORT-030 | Cada tarjeta de plantilla muestra número, nombre deportivo y posición, y enlaza a la ficha pública del jugador correcto. |
+| CA-PORT-031 | Las estadísticas colectivas del equipo muestran PJ, PG, PE, PP, GF, GC, DG, PTS y tarjetas amarillas, rojas y azules. |
+| CA-PORT-032 | El detalle disciplinario identifica al jugador por nombre deportivo y número y muestra el conteo de cada tipo de tarjeta. |
+| CA-PORT-033 | El ranking de goleadores del equipo se ubica en el resumen de la ficha del equipo y se ordena por cantidad de goles, sin desempates del ranking general. |
+| CA-PORT-034 | El historial del jugador se presenta en tarjetas desplegables en orden cronológico inverso y conserva el equipo correspondiente a cada torneo. |
+| CA-PORT-035 | El nombre real, documento, contacto y fotografía personal no aparecen en ficha, historial, metadatos ni resultados públicos. |
+| CA-PORT-036 | Un reconocimiento no confirmado oficialmente no se muestra en la ficha pública del jugador. |
+| CA-PORT-037 | Una organización suspendida muestra el mensaje neutral definido en todas sus rutas públicas asociadas y no expone contenido del portal. |
+| CA-PORT-038 | Al reactivar una organización, vuelven a estar disponibles únicamente los contenidos que continúen publicados. |
+| CA-PORT-039 | La retirada de publicación o suspensión genera una señal técnica de exclusión/retirada de indexación, sin revelar información privada. |
+| CA-PORT-040 | Los registros de auditoría contienen usuario, fecha, acción, entidad afectada y motivo cuando corresponda; solo usuarios autorizados pueden consultarlos. |
 
 ## 9. Dependencias
 
@@ -233,4 +278,4 @@ Registrar publicaciones, despublicaciones, modificaciones y cambios de estado co
 
 ## 11. Historial
 
-- 1.5 — 2026-11-02: consolidación de requisitos y reglas conocidas; integra DEC-PORT-036 a 043 y marca explícitamente pendientes. Requiere comparación con versión original 1.4.
+- 1.6 — 2026-11-02: incorpora catálogo numerado RN-PORT-001 a 020, amplía CA-PORT-025 a 040 y corrige la referencia de CA-PORT-006. Se mantiene EN_REVISION y requiere comparación con versión original 1.4.
