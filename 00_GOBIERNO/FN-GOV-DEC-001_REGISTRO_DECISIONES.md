@@ -1,6 +1,6 @@
 # FN-GOV-DEC-001 — Registro maestro de decisiones
 
-- Versión: 1.8
+- Versión: 1.9
 - Estado: EN_REVISION
 - Fecha de corte: 2026-11-02
 
@@ -69,12 +69,17 @@ Cuando un equipo sea retirado o descalificado en una fase eliminatoria y su riva
 [CONFIRMADO — 2026-11-02]
 Si un equipo es retirado o descalificado durante la final y su rival permanece activo, el rival será declarado campeón del torneo. El partido final quedará registrado con el marcador administrativo común vigente, aplicado a favor del equipo que obtiene el título. Se actualizarán las métricas colectivas correspondientes y no se generarán estadísticas individuales. Si ambos finalistas están excluidos, se mantiene el procedimiento de doble exclusión: no se declara campeón automáticamente ni se asigna marcador; el organizador resuelve la situación conforme a las decisiones aplicables.
 
+### DEC-TOR-009 — Retiro/descalificación después del cierre oficial del torneo
+[CONFIRMADO — 2026-11-02]
+Una vez que el torneo haya sido declarado oficialmente finalizado, FUTNEXIS no aplicará automáticamente cambios deportivos, administrativos ni estadísticos por un retiro o descalificación posterior. Cualquier decisión o medida sobre esa situación corresponderá exclusivamente al organizador del torneo.
+
 ## Pendientes
 1. Verificar el texto original de DEC-PORT-001 a 008 si aparece una fuente histórica.
 2. Armonizar especificaciones funcionales y UX con DEC-PORT-036 a 043.
 3. Actualizar este registro ante cada nueva decisión.
 
 ## Historial
+- 1.9 — 2026-11-02: incorpora DEC-TOR-009: después del cierre oficial del torneo, cualquier decisión por retiro/descalificación corresponde al organizador; FUTNEXIS no aplica cambios automáticos.
 - 1.8 — 2026-11-02: incorpora DEC-TOR-008: si el retiro/descalificación ocurre en la final, el rival activo es declarado campeón con el marcador administrativo común.\n- 1.7 — 2026-11-02: incorpora DEC-TOR-007: el avance del rival en fase eliminatoria queda registrado con el marcador administrativo común.\n- 1.6 — 2026-11-02: incorpora DEC-TOR-006 sobre avance del rival en fase eliminatoria y continuidad normal del torneo.\n- 1.5 — 2026-11-02: incorpora DEC-TOR-005 sobre partidos futuros pendientes tras retiro/descalificación.
 - 1.4 — 2026-11-02: incorpora DEC-TOR-004 y limita su efecto al partido que motivó la decisión.
 - 1.3 — 2026-11-02: incorpora DEC-TOR-003 sobre elegibilidad de equipos sustitutos ante doble exclusión.
