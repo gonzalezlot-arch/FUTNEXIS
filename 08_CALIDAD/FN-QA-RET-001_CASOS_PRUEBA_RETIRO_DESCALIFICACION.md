@@ -1,6 +1,6 @@
 # FN-QA-RET-001 — Casos de prueba: retiro y descalificación de equipos
 
-- **Versión:** 1.9
+- **Versión:** 2.0
 - **Estado:** EN_REVISION
 - **Fecha:** 2026-11-02
 - **Decisiones relacionadas:** DEC-PORT-048, DEC-PORT-049, DEC-PORT-050 y DEC-PORT-051
@@ -28,6 +28,7 @@
 | CP-RET-009 | Se consulta un partido disputado antes del retiro/descalificación. | Se conservan el resultado y las estadísticas originales, individuales y colectivas. |
 | CP-RET-010 | Se consulta auditoría de retiro/descalificación. | Se identifica causa, fecha, responsable, marcador administrativo cuando aplique y partidos afectados. |
 | CP-RET-011 | Ambos equipos de un partido pendiente están retirados/descalificados. | No se asigna ganador, marcador ni puntos; no se modifican estadísticas colectivas ni individuales; el encuentro queda registrado con el estado «No disputado por doble baja». |
+| CP-RET-019 | Se consulta calendario, historial y actas de un partido entre dos equipos dados de baja. | El partido permanece visible en la jornada con nombres y escudos, sin marcador y con el estado «No disputado por doble baja»; aparece en el historial con el motivo; no se genera acta deportiva, sí un registro administrativo; no computa PJ, puntos, goles ni estadísticas para ninguno. |
 | CP-RET-012 | Un equipo está excluido antes de un partido eliminatorio y su rival está activo. | El rival avanza automáticamente mediante victoria administrativa; el organizador establece el marcador; no se generan estadísticas individuales. |
 | CP-RET-013 | Ambos equipos de un enfrentamiento eliminatorio están excluidos antes de disputarlo. | Ninguno avanza automáticamente; no se asigna ganador ni marcador; FUTNEXIS no elige sustituto; el organizador resuelve la plaza y su decisión queda auditada. |\n| CP-RET-014 | Un equipo es retirado/descalificado durante una fase eliminatoria y su rival continúa activo. | El rival avanza a la siguiente fase; el enfrentamiento queda registrado con el marcador administrativo común a favor del rival activo; se actualizan métricas colectivas sin estadísticas individuales; el cuadro se actualiza y el torneo continúa con normalidad. No se asigna un sustituto para esa plaza. |\n| CP-RET-015 | Durante la final, uno de los finalistas es retirado/descalificado y el otro permanece activo. | El finalista activo es declarado campeón; la final queda registrada con el marcador administrativo común a su favor; se actualizan métricas colectivas y no se generan estadísticas individuales. |\n| CP-RET-016 | Ambos finalistas están retirados/descalificados. | No se declara campeón automáticamente ni se asigna marcador administrativo; se activa el procedimiento de doble exclusión y la resolución queda a cargo del organizador autorizado. |\n| CP-RET-017 | Se registra un retiro/descalificación después del cierre oficial del torneo. | FUTNEXIS no modifica automáticamente resultados, clasificación, estadísticas ni reconocimientos; cualquier medida queda a decisión del organizador. |\n| CP-RET-018 | Un equipo dado de baja por cualquier motivo (retiro, abandono o descalificación) solicita reintegrarse mientras el torneo sigue en curso. | El sistema rechaza la reincorporación a esa misma edición; el equipo conserva su estado e historial de salida. |
 
@@ -60,6 +61,7 @@ Ninguno de los dos equipos avanza automáticamente. La plaza queda pendiente de 
 Estos casos son una base de validación en revisión. No autorizan desarrollo ni sustituyen la aprobación integral del módulo. La ejecución documentará datos de entrada, resultado observado, resultado esperado, evidencia y estado (aprobado/rechazado/bloqueado).
 
 ## 7. Historial
+- 2.0 — 2026-11-02: incorpora CP-RET-019 para validar la visualización en calendario e historial y el registro administrativo sin acta deportiva ni efectos estadísticos, conforme a DEC-TOR-012.
 - 1.9 — 2026-11-02: incorpora DEC-TOR-011: partido pendiente entre dos equipos dados de baja con estado «No disputado por doble baja», sin ganador, marcador ni efectos estadísticos.
 - 1.8 — 2026-11-02: amplía CP-RET-018 para validar que ningún equipo dado de baja pueda reintegrarse, cualquiera que sea el motivo.
 - 1.7 — 2026-11-02: amplía CP-RET-018 a cualquier equipo retirado o que haya abandonado el torneo.
