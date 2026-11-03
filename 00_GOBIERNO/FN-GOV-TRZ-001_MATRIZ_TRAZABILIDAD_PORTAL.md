@@ -3,7 +3,7 @@
 - **Versión:** 1.0
 - **Estado:** EN_REVISION
 - **Fecha:** 2026-11-02
-- **Documentos relacionados:** FN-GOV-DEC-002 v1.3; FN-MOD-ORG-002 v1.5.
+- **Documentos relacionados:** FN-GOV-DEC-002 v1.3; FN-MOD-ORG-002 v1.6.
 - **Propósito:** relacionar decisiones confirmadas con requisitos funcionales, reglas de negocio y criterios de aceptación, identificando vacíos sin inventar aprobaciones.
 
 ## 1. Convenciones
@@ -11,7 +11,7 @@
 - **Directa:** el requisito/criterio implementa la decisión de forma explícita.
 - **Parcial:** existe cobertura, pero falta precisión o un caso de aceptación.
 - **Pendiente:** no existe cobertura verificable suficiente.
-- Los códigos RN propuestos en esta matriz son identificadores sugeridos para normalizar reglas que actualmente aparecen como texto sin código en FN-MOD-ORG-002. No se consideran aprobados hasta incorporarse y validarse en una nueva versión del documento.
+- FN-MOD-ORG-002 v1.6 incorpora RN-PORT-001 a RN-PORT-020 como normalización documental de decisiones ya registradas. Los aspectos expresamente pendientes continúan marcados como tales; la incorporación no implica aprobación global del módulo.
 - DEC-PORT-001 a 008 no se trazan porque su contenido literal no está disponible.
 
 ## 2. Matriz de trazabilidad
@@ -56,9 +56,9 @@
 
 ## 3. Hallazgos de trazabilidad
 
-1. **No hay sección formal de reglas de negocio numeradas** en FN-MOD-ORG-002 v1.5. Las reglas aparecen en prosa. Los códigos RN-PORT-PROP-01 a 033 son propuestas para normalización, no códigos vigentes.
+1. **No hay sección formal de reglas de negocio numeradas** en FN-MOD-ORG-002 v1.5. Las reglas aparecen en prosa. La especificación v1.6 incorpora RN-PORT-001 a RN-PORT-020 como catálogo numerado en revisión.
 2. **Los criterios de aceptación son insuficientes** para verificar varias decisiones de presentación, moderación, historial, accesibilidad, SEO y estados de partidos.
-3. **CA-PORT-006 tiene referencia incorrecta:** cita DEC-PORT-009 para el orden de torneos. La referencia correcta es DEC-PORT-011 para orden y DEC-PORT-036 para clasificación de estados.
+3. **CA-PORT-006:** la referencia fue corregida en FN-MOD-ORG-002 v1.6; ahora cita DEC-PORT-011 para el orden y DEC-PORT-036 para la clasificación de estados.
 4. **RF-PORT-012 no está aprobado:** filtros por estado/modalidad en portada siguen pendientes. No deben convertirse en criterio de aceptación obligatorio ni implementarse como alcance confirmado.
 5. **DEC-PORT-001 a 008 quedan fuera de la matriz** hasta recuperar su contenido literal.
 6. **La numeración RF/CA no se declara equivalente a la versión fuente 1.4.** Se necesita una matriz de correspondencia histórica antes de reemplazar o eliminar IDs anteriores.
@@ -84,4 +84,4 @@ Esta matriz es una herramienta de análisis y control documental. No constituye 
 
 ## 6. Historial
 
-- 1.0 — 2026-11-02: primera matriz de trazabilidad de decisiones DEC-PORT-009 a 043 con RF y CA de la consolidación v1.5.
+- 1.1 — 2026-11-02: actualiza la trazabilidad tras FN-MOD-ORG-002 v1.6; incorpora catálogo RN numerado y ampliación de criterios CA-PORT-025 a 040.
