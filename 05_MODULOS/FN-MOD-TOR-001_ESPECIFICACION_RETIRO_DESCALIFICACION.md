@@ -1,6 +1,6 @@
 # FN-MOD-TOR-001 — Especificación funcional: retiro, descalificación y resolución administrativa de equipos
 
-- **Versión:** 2.3
+- **Versión:** 2.4
 - **Estado:** EN_REVISION
 - **Fecha:** 2026-11-02
 - **Tipo:** especificación funcional parcial
@@ -66,8 +66,8 @@ El equipo excluido permanecerá consultable en el historial del torneo con su es
 ### RF-TOR-008 — No generar estadísticas individuales administrativas
 Los resultados administrativos no asignarán goles, asistencias, partidos jugados, tarjetas ni otras estadísticas individuales a jugadores. Tampoco alterarán rankings o reconocimientos individuales.
 
-### RF-TOR-009 — Resolver partido entre dos equipos excluidos
-Cuando ambos equipos asignados a un partido pendiente estén excluidos, el encuentro quedará registrado como no disputado por exclusión de ambos equipos. No se asignará marcador administrativo, puntos ni efectos estadísticos colectivos o individuales.
+### RF-TOR-009 — Resolver partido entre dos equipos dados de baja
+Cuando ambos equipos asignados a un partido pendiente estén dados de baja, el encuentro quedará registrado con el estado «No disputado por doble baja». No se asignará ganador, marcador, puntos ni efectos estadísticos colectivos o individuales. En fase eliminatoria, la plaza se resolverá por separado conforme al procedimiento de doble exclusión, sin avance automático.
 
 ### RF-TOR-010 — Resolver doble exclusión eliminatoria
 Si ambos equipos de un enfrentamiento eliminatorio están excluidos antes de disputarlo, ninguno avanzará automáticamente. FUTNEXIS no seleccionará sustitutos por sí mismo. El organizador indicará qué equipo o equipos previamente eliminados ocuparán la instancia o plaza vacante.
@@ -107,8 +107,8 @@ Un partido resuelto administrativamente no genera participación ni estadística
 ### RN-TOR-008 — Doble exclusión en fase eliminatoria
 Ante la doble exclusión, ningún equipo avanza automáticamente. La selección de los equipos previamente eliminados que ocuparán la instancia corresponde al organizador y debe quedar auditada.
 
-### RN-TOR-009 — Encuentro entre dos equipos excluidos
-No se asigna marcador ni efecto colectivo o individual a un partido pendiente entre dos equipos excluidos.
+### RN-TOR-009 — Encuentro entre dos equipos dados de baja
+Un partido pendiente entre dos equipos dados de baja se registra como «No disputado por doble baja». No tendrá ganador ni marcador y no generará puntos ni efectos estadísticos colectivos o individuales. En fase eliminatoria, la plaza se resolverá por separado conforme al procedimiento de doble exclusión, sin avance automático.
 
 ### RN-TOR-011 — Autorización para retiro y descalificación
 Podrán ejecutar el retiro o descalificación del equipo: el propietario de la organización, un administrador de la organización que tenga permiso de gestión deportiva, y el organizador o director del torneo cuando tenga asignado el permiso específico para esa competición. Un operador de resultados podrá registrar una incidencia o reportar una solicitud, pero no ejecutar por sí mismo el retiro o la descalificación.
@@ -197,6 +197,7 @@ El sistema deberá impedir:
 
 ## 11. Historial de cambios
 
+- **2.4 — 2026-11-02:** incorpora DEC-TOR-011 y define el estado «No disputado por doble baja» para partidos pendientes entre dos equipos dados de baja.
 - **2.3 — 2026-11-02:** amplía la prohibición de reintegro a cualquier baja, sin importar su motivo.
 - **2.2 — 2026-11-02:** precisa que la no reincorporación aplica a cualquier equipo retirado o que abandone el torneo.
 - **2.1 — 2026-11-02:** incorpora DEC-TOR-010: se prohíbe la reincorporación de cualquier equipo retirado o que haya abandonado la misma edición del torneo.
