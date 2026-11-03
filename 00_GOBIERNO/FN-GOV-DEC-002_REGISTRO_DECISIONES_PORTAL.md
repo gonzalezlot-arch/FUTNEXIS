@@ -1,11 +1,11 @@
 # FN-GOV-DEC-002 — Registro de decisiones del portal público
 
-- Versión: 1.7
+- Versión: 1.8
 - Estado: EN_REVISION
 - Fecha: 2026-11-02
 
 ## Propósito y trazabilidad
-Consolida las decisiones conocidas del portal público de FUTNEXIS. DEC-PORT-001 a 008 existían en un registro anterior, pero su redacción literal no está disponible para verificación y no se reconstruye ni inventa. DEC-PORT-009 a 043 se registran como síntesis de las definiciones disponibles. DEC-PORT-036 a 048 fueron aprobadas expresamente el 2026-11-02.
+Consolida las decisiones conocidas del portal público de FUTNEXIS. DEC-PORT-001 a 008 existían en un registro anterior, pero su redacción literal no está disponible para verificación y no se reconstruye ni inventa. DEC-PORT-009 a 043 se registran como síntesis de las definiciones disponibles. DEC-PORT-036 a 049 fueron aprobadas expresamente el 2026-11-02.
 
 ## DEC-PORT-001 a 008
 [PENDIENTE] Recuperar el texto literal desde la versión histórica original antes de declararlas consolidadas.
@@ -168,6 +168,18 @@ Esta decisión complementa DEC-PORT-045 para torneos donde los equipos ingresan 
 - Los partidos disputados antes del retiro o descalificación mantienen sus resultados y estadísticas originales, incluidas las individuales.
 - La decisión, causa, fecha, responsable, marcador administrativo configurado y partidos afectados deben conservar trazabilidad/auditoría.
 
+## DEC-PORT-049 — Doble exclusión en enfrentamiento eliminatorio
+[CONFIRMADO — aprobación expresa del propietario del producto, 2026-11-02]
+
+Cuando los dos equipos de un enfrentamiento eliminatorio estén retirados o descalificados antes de disputar el partido:
+- Ninguno avanza automáticamente.
+- El encuentro se registra como no disputado por exclusión de ambos equipos.
+- No se asignan puntos ni marcador administrativo.
+- FUTNEXIS no selecciona automáticamente un equipo sustituto.
+- El organizador decide cómo completar la plaza o resolver el cuadro.
+- La decisión registra responsable, fecha, motivo y resolución.
+- No se generan estadísticas individuales ni efectos colectivos de resultado para ese encuentro.
+
 ## Reglas transversales de privacidad y navegación
 - Cada organización configura nombre, logotipo, colores, descripción y contacto; FUTNEXIS conserva su identidad de plataforma.
 - Portal público desactivado por defecto y requiere publicación autorizada.
@@ -202,6 +214,7 @@ Esta decisión complementa DEC-PORT-045 para torneos donde los equipos ingresan 
 - DEC-PORT-038 aprueba el principio de avance deportivo, no el algoritmo de formatos mixtos.
 
 ## Historial
+- 1.8 — 2026-11-02: incorpora DEC-PORT-049 sobre doble exclusión en enfrentamiento eliminatorio; se complementa DEC-PORT-048 con la resolución de encuentros entre dos equipos excluidos.
 - 1.7 — 2026-11-02: incorpora DEC-PORT-047 y DEC-PORT-048, y precisa que las reclasificaciones que formen parte del camino al título cuentan para el avance deportivo.
 - 1.6 — 2026-11-02: incorpora DEC-PORT-046 para cuadros escalonados y comparación por partidos oficiales disputados; elimina duplicación de DEC-PORT-045.
 - 1.5 — 2026-11-02: incorpora DEC-PORT-045, que define el algoritmo base de avance deportivo para formatos mixtos.
