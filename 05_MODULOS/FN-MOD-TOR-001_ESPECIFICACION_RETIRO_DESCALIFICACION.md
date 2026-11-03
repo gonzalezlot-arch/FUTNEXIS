@@ -1,6 +1,6 @@
 # FN-MOD-TOR-001 — Especificación funcional: retiro, descalificación y resolución administrativa de equipos
 
-- **Versión:** 2.2
+- **Versión:** 2.3
 - **Estado:** EN_REVISION
 - **Fecha:** 2026-11-02
 - **Tipo:** especificación funcional parcial
@@ -120,7 +120,7 @@ Si el retiro o descalificación se presenta respecto de un enfrentamiento ya dis
 Para ocupar una plaza vacante por doble exclusión, el equipo debe haber participado en el mismo torneo, haber sido eliminado en una instancia anterior, cumplir las condiciones deportivas y reglamentarias de la ronda y no tener una exclusión o sanción que le impida continuar. La selección corresponde al organizador autorizado y debe quedar auditada.
 
 ### RN-TOR-015 — Avance del rival en fase eliminatoria\nCuando un equipo sea retirado o descalificado durante una fase eliminatoria, el rival contra el que se encontraba enfrentado en esa instancia avanzará a la siguiente fase. El torneo continuará con normalidad conforme al calendario y cuadro resultantes. Si ambos equipos del enfrentamiento están excluidos, no habrá avance automático y se aplicará el procedimiento de doble exclusión definido en DEC-PORT-049/051.\n\n### RN-TOR-019 — No reincorporación tras retiro voluntario
-Todo equipo que sea registrado como retirado o que abandone el torneo no podrá reincorporarse a esa misma edición, aunque la competición continúe en curso. La salida será definitiva para esa edición y el equipo conservará su registro histórico con el estado correspondiente.
+Ningún equipo dado de baja del torneo podrá reintegrarse a esa misma edición, cualquiera que sea el motivo de la baja (retiro voluntario, abandono, descalificación u otra causa), incluso si la competición continúa en curso. La baja será definitiva para esa edición y se conservará el registro histórico con el estado y motivo correspondientes.
 
 ### RN-TOR-018 — Decisión posterior al cierre oficial del torneo
 Una vez que el torneo haya sido declarado oficialmente finalizado, FUTNEXIS no ejecutará automáticamente cambios deportivos, administrativos ni estadísticos por un retiro o descalificación posterior. Cualquier decisión o medida sobre esa situación queda exclusivamente a criterio del organizador del torneo; la plataforma no modificará automáticamente resultados, clasificación, estadísticas ni reconocimientos ya cerrados.
@@ -197,6 +197,7 @@ El sistema deberá impedir:
 
 ## 11. Historial de cambios
 
+- **2.3 — 2026-11-02:** amplía la prohibición de reintegro a cualquier baja, sin importar su motivo.
 - **2.2 — 2026-11-02:** precisa que la no reincorporación aplica a cualquier equipo retirado o que abandone el torneo.
 - **2.1 — 2026-11-02:** incorpora DEC-TOR-010: se prohíbe la reincorporación de cualquier equipo retirado o que haya abandonado la misma edición del torneo.
 - **2.0 — 2026-11-02:** incorpora DEC-TOR-009: después del cierre oficial, cualquier medida por retiro/descalificación queda a decisión del organizador y no genera cambios automáticos.
