@@ -131,6 +131,17 @@ El segundo criterio de desempate del ranking general de goleadores se determina 
 - En torneos de liga sin eliminación directa, se utiliza la posición final oficial de la clasificación.
 - Las estructuras especiales no clasificables con estas reglas requieren definición específica antes de calcular el ranking.
 
+## DEC-PORT-045 — Algoritmo base de avance deportivo para formatos mixtos
+[CONFIRMADO — aprobación expresa del propietario del producto, 2026-11-02]
+
+El segundo criterio de desempate del ranking general de goleadores se determina por el avance deportivo del equipo del jugador en el torneo:
+- Se considera la fase más avanzada alcanzada oficialmente por el equipo, incluso si el torneo combina grupos y eliminación directa.
+- La jerarquía base es: campeón, subcampeón, eliminado en semifinales, cuartos de final, octavos de final, rondas eliminatorias anteriores y fase de grupos.
+- Alcanzar una fase eliminatoria prevalece sobre quedar eliminado en fase de grupos.
+- Entre equipos eliminados en la misma fase, se utiliza la posición final oficial que establezca el reglamento. Si no hay posiciones diferenciadas, comparten nivel de avance.
+- En torneos de liga sin eliminación directa, se utiliza la posición final oficial de la clasificación.
+- Las estructuras especiales no clasificables con estas reglas requieren definición específica antes de calcular el ranking.
+
 ## Reglas transversales de privacidad y navegación
 - Cada organización configura nombre, logotipo, colores, descripción y contacto; FUTNEXIS conserva su identidad de plataforma.
 - Portal público desactivado por defecto y requiere publicación autorizada.
@@ -165,6 +176,7 @@ El segundo criterio de desempate del ranking general de goleadores se determina 
 - DEC-PORT-038 aprueba el principio de avance deportivo, no el algoritmo de formatos mixtos.
 
 ## Historial
+- 1.5 — 2026-11-02: incorpora DEC-PORT-045, que define el algoritmo base de avance deportivo para formatos mixtos.
 - 1.5 — 2026-11-02: incorpora DEC-PORT-045, que define el algoritmo base de avance deportivo para formatos mixtos.
 - 1.4 — 2026-11-02: incorpora DEC-PORT-044, que precisa el conteo de partidos para el tercer desempate del ranking general de goleadores.
 - 1.3 — 2026-11-02: consolidación de DEC-PORT-009 a 043, reglas transversales y pendientes. DEC-PORT-001 a 008 quedan expresamente pendientes de recuperación literal.
