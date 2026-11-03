@@ -1,6 +1,6 @@
 # FN-MOD-TOR-001 — Especificación funcional: retiro, descalificación y resolución administrativa de equipos
 
-- **Versión:** 2.1
+- **Versión:** 2.2
 - **Estado:** EN_REVISION
 - **Fecha:** 2026-11-02
 - **Tipo:** especificación funcional parcial
@@ -197,6 +197,7 @@ El sistema deberá impedir:
 
 ## 11. Historial de cambios
 
+- **2.2 — 2026-11-02:** precisa que la no reincorporación aplica a cualquier equipo retirado o que abandone el torneo.
 - **2.1 — 2026-11-02:** incorpora DEC-TOR-010: se prohíbe la reincorporación de cualquier equipo retirado o que haya abandonado la misma edición del torneo.
 - **2.0 — 2026-11-02:** incorpora DEC-TOR-009: después del cierre oficial, cualquier medida por retiro/descalificación queda a decisión del organizador y no genera cambios automáticos.
 - **1.9 — 2026-11-02:** incorpora DEC-TOR-008 sobre declaración de campeón cuando el rival de la final es retirado/descalificado.\n- **1.8 — 2026-11-02:** incorpora DEC-TOR-007 sobre registro del marcador administrativo en el avance eliminatorio.\n- **1.7 — 2026-11-02:** incorpora DEC-TOR-006 sobre avance del rival en fase eliminatoria y continuidad del torneo.\n- **1.6 — 2026-11-02:** incorpora DEC-TOR-005 sobre resolución de todos los partidos futuros pendientes contra equipos activos.
