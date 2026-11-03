@@ -1,6 +1,6 @@
 # FN-GOV-DEC-001 — Registro maestro de decisiones
 
-- Versión: 2.4
+- Versión: 2.5
 - Estado: EN_REVISION
 - Fecha de corte: 2026-11-02
 
@@ -88,12 +88,21 @@ Cuando ambos equipos de un partido pendiente estén dados de baja, el encuentro 
 - No se genera acta deportiva. Se conserva un registro administrativo de la situación.
 - El encuentro no suma partidos jugados, puntos ni goles a ninguno de los equipos y no genera estadísticas colectivas ni individuales.
 
+### DEC-TOR-013 — Detalle de la causa de no disputa en informes y reportes
+[CONFIRMADO — 2026-11-02]
+- Los informes administrativos y reportes descargables mostrarán el partido no disputado e identificarán el estado de baja de cada equipo por separado.
+- Si ambos equipos están retirados, la indicación será «Partido no disputado por retiro de ambos equipos».
+- Si ambos están descalificados, será «Partido no disputado por descalificación de ambos equipos».
+- Si uno está retirado y el otro descalificado, será «Partido no disputado por baja de ambos equipos», detallando individualmente cuál equipo está retirado y cuál descalificado.
+- Se conservarán los nombres de ambos equipos y el motivo/estado de baja correspondiente a cada uno. No se asignará marcador, ganador ni efectos estadísticos.
+
 ## Pendientes
 1. Verificar el texto original de DEC-PORT-001 a 008 si aparece una fuente histórica.
 2. Armonizar especificaciones funcionales y UX con DEC-PORT-036 a 043.
 3. Actualizar este registro ante cada nueva decisión.
 
 ## Historial
+- 2.5 — 2026-11-02: incorpora DEC-TOR-013 sobre identificación individual del estado de baja de cada equipo en informes administrativos y reportes descargables.
 - 2.4 — 2026-11-02: incorpora DEC-TOR-012 sobre visualización en calendario e historial y registro administrativo del partido no disputado por doble baja.
 - 2.3 — 2026-11-02: incorpora DEC-TOR-011: partidos pendientes entre dos equipos dados de baja quedan «No disputado por doble baja», sin marcador ni efectos estadísticos.
 - 2.2 — 2026-11-02: amplía DEC-TOR-010: ningún equipo dado de baja puede reintegrarse, cualquiera que sea el motivo.
