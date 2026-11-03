@@ -1,6 +1,6 @@
 # FN-GOV-DEC-001 — Registro maestro de decisiones
 
-- Versión: 1.4
+- Versión: 1.5
 - Estado: EN_REVISION
 - Fecha de corte: 2026-11-02
 
@@ -53,12 +53,17 @@ La selección corresponde al organizador autorizado y debe quedar auditada.
 [CONFIRMADO — 2026-11-02]
 Cuando la decisión de retiro/descalificación se presenta respecto de un partido ya disputado, únicamente ese encuentro se sustituye por el marcador administrativo común a favor del rival. Se recalculan las métricas colectivas de ese encuentro. Los demás partidos anteriores conservan sus resultados y estadísticas originales. El marcador original del encuentro afectado se conserva en auditoría y no genera estadísticas individuales como resultado administrativo.
 
+### DEC-TOR-005 — Partidos futuros pendientes tras retiro/descalificación
+[CONFIRMADO — 2026-11-02]
+Todos los partidos futuros pendientes del equipo retirado/descalificado contra equipos activos se resuelven administrativamente con el marcador común del torneo, siempre a favor del equipo activo, sin importar la localía. Se aplican los efectos colectivos correspondientes conforme a DEC-PORT-050, sin estadísticas individuales. Los partidos pendientes entre dos equipos excluidos no reciben marcador ni efectos estadísticos.
+
 ## Pendientes
 1. Verificar el texto original de DEC-PORT-001 a 008 si aparece una fuente histórica.
 2. Armonizar especificaciones funcionales y UX con DEC-PORT-036 a 043.
 3. Actualizar este registro ante cada nueva decisión.
 
 ## Historial
+- 1.5 — 2026-11-02: incorpora DEC-TOR-005 sobre partidos futuros pendientes tras retiro/descalificación.
 - 1.4 — 2026-11-02: incorpora DEC-TOR-004 y limita su efecto al partido que motivó la decisión.
 - 1.3 — 2026-11-02: incorpora DEC-TOR-003 sobre elegibilidad de equipos sustitutos ante doble exclusión.
 - 1.2 — 2026-11-02: incorpora DEC-TOR-002 sobre roles autorizados para retiro/descalificación.
