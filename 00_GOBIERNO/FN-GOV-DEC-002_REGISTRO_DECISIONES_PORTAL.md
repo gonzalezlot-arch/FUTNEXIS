@@ -1,11 +1,11 @@
 # FN-GOV-DEC-002 — Registro de decisiones del portal público
 
-- Versión: 1.8
+- Versión: 1.9
 - Estado: EN_REVISION
 - Fecha: 2026-11-02
 
 ## Propósito y trazabilidad
-Consolida las decisiones conocidas del portal público de FUTNEXIS. DEC-PORT-001 a 008 existían en un registro anterior, pero su redacción literal no está disponible para verificación y no se reconstruye ni inventa. DEC-PORT-009 a 043 se registran como síntesis de las definiciones disponibles. DEC-PORT-036 a 049 fueron aprobadas expresamente el 2026-11-02.
+Consolida las decisiones conocidas del portal público de FUTNEXIS. DEC-PORT-001 a 008 existían en un registro anterior, pero su redacción literal no está disponible para verificación y no se reconstruye ni inventa. DEC-PORT-009 a 043 se registran como síntesis de las definiciones disponibles. DEC-PORT-036 a 051 fueron aprobadas expresamente el 2026-11-02.
 
 ## DEC-PORT-001 a 008
 [PENDIENTE] Recuperar el texto literal desde la versión histórica original antes de declararlas consolidadas.
@@ -192,6 +192,24 @@ Cuando los dos equipos de un enfrentamiento eliminatorio estén retirados o desc
 - La decisión registra responsable, fecha, motivo y resolución.
 - No se generan estadísticas individuales ni efectos colectivos de resultado para ese encuentro.
 
+
+## DEC-PORT-050 — Marcador administrativo común
+[CONFIRMADO — 2026-11-02]
+- El organizador configura un único marcador administrativo común para el torneo.
+- Se aplica a todos los partidos pendientes contra equipos activos y siempre se orienta a favor del equipo activo, incluso si figura como visitante.
+- Cada resultado suma al equipo activo PJ, PG, GF, GC y puntos conforme al marcador; se recalculan DG, PTS, posición y demás métricas colectivas según el reglamento.
+- El equipo retirado/descalificado permanece visible en el historial con su estado, PJ y estadísticas colectivas, incluidos los efectos administrativos. No integra la clasificación vigente ni el total de equipos activos.
+- No se generan estadísticas individuales ni se afectan rankings o reconocimientos individuales.
+- Los encuentros entre dos equipos excluidos no usan el marcador común ni generan puntos o efectos estadísticos.
+
+## DEC-PORT-051 — Plaza vacante por doble exclusión eliminatoria
+[CONFIRMADO — 2026-11-02]
+- Si ambos equipos de un enfrentamiento eliminatorio están retirados/descalificados, ninguno avanza automáticamente.
+- No se asigna ganador, marcador ni efectos estadísticos al encuentro.
+- FUTNEXIS no selecciona sustitutos automáticamente.
+- El organizador indica qué equipo o equipos previamente eliminados ocuparán esa instancia.
+- La selección y su justificación se registran con responsable y fecha.
+
 ## Reglas transversales de privacidad y navegación
 - Cada organización configura nombre, logotipo, colores, descripción y contacto; FUTNEXIS conserva su identidad de plataforma.
 - Portal público desactivado por defecto y requiere publicación autorizada.
@@ -226,8 +244,7 @@ Cuando los dos equipos de un enfrentamiento eliminatorio estén retirados o desc
 - DEC-PORT-038 aprueba el principio de avance deportivo, no el algoritmo de formatos mixtos.
 
 ## Historial
-- 1.8 — 2026-11-02: incorpora DEC-PORT-049 sobre doble exclusión en enfrentamiento eliminatorio; se complementa DEC-PORT-048 con la resolución de encuentros entre dos equipos excluidos.
-- 1.8 — 2026-11-02: incorpora DEC-PORT-049 sobre doble exclusión en enfrentamiento eliminatorio.
+- 1.9 — 2026-11-02: incorpora DEC-PORT-050/051 sobre marcador administrativo común, cómputo colectivo, historial de equipos excluidos y selección del organizador ante doble exclusión eliminatoria.
 - 1.7 — 2026-11-02: incorpora DEC-PORT-047 y DEC-PORT-048, y precisa que las reclasificaciones que formen parte del camino al título cuentan para el avance deportivo.
 - 1.6 — 2026-11-02: incorpora DEC-PORT-046 para cuadros escalonados y comparación por partidos oficiales disputados; elimina duplicación de DEC-PORT-045.
 - 1.5 — 2026-11-02: incorpora DEC-PORT-045, que define el algoritmo base de avance deportivo para formatos mixtos.
