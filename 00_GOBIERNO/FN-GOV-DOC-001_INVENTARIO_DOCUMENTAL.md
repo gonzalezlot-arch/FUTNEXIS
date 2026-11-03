@@ -1,6 +1,6 @@
 # FN-GOV-DOC-001 — Inventario documental
 
-- Versión: 3.4
+- Versión: 3.5
 - Estado: EN_REVISION
 - Fecha de corte: 2026-11-02
 
@@ -22,7 +22,7 @@
 
 | FN-QA-RET-001 | Casos de prueba: retiro y descalificación de equipos | 08_CALIDAD/FN-QA-RET-001_CASOS_PRUEBA_RETIRO_DESCALIFICACION.md | 1.9 | EN_REVISION |
 
-| FN-MOD-TOR-001 | Especificación funcional: retiro, descalificación y resolución administrativa de equipos | 05_MODULOS/FN-MOD-TOR-001_ESPECIFICACION_RETIRO_DESCALIFICACION.md | 2.3 | EN_REVISION; especificación parcial |
+| FN-MOD-TOR-001 | Especificación funcional: retiro, descalificación y resolución administrativa de equipos | 05_MODULOS/FN-MOD-TOR-001_ESPECIFICACION_RETIRO_DESCALIFICACION.md | 2.4 | EN_REVISION; especificación parcial |
 
 ## Versiones fuente conocidas pendientes de cotejo
 | Código | Versión fuente conocida | Estado conocido | Acción pendiente |
@@ -37,7 +37,7 @@
 No marcar APROBADO sin aprobación expresa. No declarar verificada una versión conocida solo por resumen. Conservar versiones obsoletas. Actualizar el inventario junto con cada cambio documental.
 
 ## Historial
-- 3.4 — 2026-11-02: actualiza el registro maestro de decisiones a v2.3 y los casos de prueba a v1.9 por DEC-TOR-011; la especificación funcional queda pendiente de sincronización.
+- 3.5 — 2026-11-02: sincroniza FN-MOD-TOR-001 v2.4 con DEC-TOR-011 y registra el estado «No disputado por doble baja»; el registro maestro está en v2.3 y los casos de prueba en v1.9.
 - 3.3 — 2026-11-02: actualiza el registro de decisiones a v2.2, la especificación a v2.3 y los casos de prueba a v1.8; ningún equipo dado de baja puede reintegrarse, cualquiera que sea el motivo.
 - 3.2 — 2026-11-02: actualiza el registro de decisiones a v2.1, la especificación de retiro/descalificación a v2.2 y los casos de prueba a v1.7; aclara que ningún equipo retirado o que abandone puede reincorporarse.
 - 3.1 — 2026-11-02: incorpora DEC-TOR-010 y actualiza el registro de decisiones a v2.0, la especificación a v2.1 y los casos de prueba a v1.6.
