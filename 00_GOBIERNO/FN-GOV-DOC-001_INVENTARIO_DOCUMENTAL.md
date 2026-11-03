@@ -1,6 +1,6 @@
 # FN-GOV-DOC-001 — Inventario documental
 
-- Versión: 2.6
+- Versión: 2.7
 - Estado: EN_REVISION
 - Fecha de corte: 2026-11-02
 
@@ -8,7 +8,7 @@
 | Código | Documento | Ruta | Versión | Estado |
 |---|---|---|---|---|
 | FN-GOV-MET-001 | Metodología de gobierno documental | 00_GOBIERNO/FN-GOV-MET-001_METODOLOGIA.md | 1.0 | BORRADOR |
-| FN-GOV-DEC-001 | Registro maestro de decisiones | 00_GOBIERNO/FN-GOV-DEC-001_REGISTRO_DECISIONES.md | 1.5 | EN_REVISION |
+| FN-GOV-DEC-001 | Registro maestro de decisiones | 00_GOBIERNO/FN-GOV-DEC-001_REGISTRO_DECISIONES.md | 1.6 | EN_REVISION |
 | FN-GOV-GLO-001 | Glosario maestro | 00_GOBIERNO/FN-GOV-GLO-001_GLOSARIO.md | 1.0 | BORRADOR |
 | FN-GOV-DOC-001 | Inventario documental | 00_GOBIERNO/FN-GOV-DOC-001_INVENTARIO_DOCUMENTAL.md | 1.8 | EN_REVISION |
 | FN-MOD-ORG-001 | Especificación funcional organizaciones | 05_MODULOS/FN-MOD-ORG-001_ESPECIFICACION_ORGANIZACIONES.md | 1.2 | EN_REVISION; consolidación por verificar contra original |
@@ -22,7 +22,7 @@
 
 | FN-QA-RET-001 | Casos de prueba: retiro y descalificación de equipos | 08_CALIDAD/FN-QA-RET-001_CASOS_PRUEBA_RETIRO_DESCALIFICACION.md | 1.1 | EN_REVISION |
 
-| FN-MOD-TOR-001 | Especificación funcional: retiro, descalificación y resolución administrativa de equipos | 05_MODULOS/FN-MOD-TOR-001_ESPECIFICACION_RETIRO_DESCALIFICACION.md | 1.6 | EN_REVISION; especificación parcial |
+| FN-MOD-TOR-001 | Especificación funcional: retiro, descalificación y resolución administrativa de equipos | 05_MODULOS/FN-MOD-TOR-001_ESPECIFICACION_RETIRO_DESCALIFICACION.md | 1.7 | EN_REVISION; especificación parcial |
 
 ## Versiones fuente conocidas pendientes de cotejo
 | Código | Versión fuente conocida | Estado conocido | Acción pendiente |
@@ -37,7 +37,7 @@
 No marcar APROBADO sin aprobación expresa. No declarar verificada una versión conocida solo por resumen. Conservar versiones obsoletas. Actualizar el inventario junto con cada cambio documental.
 
 ## Historial
-- 2.6 — 2026-11-02: actualiza FN-MOD-TOR-001 a v1.6 y FN-GOV-DEC-001 a v1.5 por DEC-TOR-005; incorpora resolución de partidos futuros pendientes.
+- 2.7 — 2026-11-02: actualiza FN-MOD-TOR-001 a v1.7 y FN-GOV-DEC-001 a v1.6 por DEC-TOR-006; incorpora avance del rival en fase eliminatoria.\n- 2.6 — 2026-11-02: actualiza FN-MOD-TOR-001 a v1.6 y FN-GOV-DEC-001 a v1.5 por DEC-TOR-005; incorpora resolución de partidos futuros pendientes.
 - 2.2 — 2026-11-02: incorpora FN-MOD-TOR-001 v1.0 como especificación operativa parcial para retiro/descalificación y resolución administrativa.
 - 2.1 — 2026-11-02: registra FN-GOV-AUD-001 v1.5 y consolida el seguimiento de DEC-PORT-050/051.
 - 2.0 — 2026-11-02: registra FN-GOV-DEC-002 v1.9, FN-GOV-TRZ-001 v1.6 y FN-QA-RET-001 v1.1; incorpora DEC-PORT-050/051 al seguimiento documental.
