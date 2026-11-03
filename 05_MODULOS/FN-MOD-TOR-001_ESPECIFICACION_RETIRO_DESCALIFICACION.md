@@ -1,6 +1,6 @@
 # FN-MOD-TOR-001 — Especificación funcional: retiro, descalificación y resolución administrativa de equipos
 
-- **Versión:** 1.5
+- **Versión:** 1.6
 - **Estado:** EN_REVISION
 - **Fecha:** 2026-11-02
 - **Tipo:** especificación funcional parcial
@@ -73,7 +73,7 @@ Cuando ambos equipos asignados a un partido pendiente estén excluidos, el encue
 Si ambos equipos de un enfrentamiento eliminatorio están excluidos antes de disputarlo, ninguno avanzará automáticamente. FUTNEXIS no seleccionará sustitutos por sí mismo. El organizador indicará qué equipo o equipos previamente eliminados ocuparán la instancia o plaza vacante.
 
 ### RF-TOR-013 — Reemplazar resultado del enfrentamiento objeto de retiro/descalificación
-Cuando la decisión de retiro o descalificación se presente respecto de un enfrentamiento ya disputado entre el equipo excluido y su rival, el sistema reemplazará el resultado deportivo original por el resultado administrativo común del torneo, aplicado a favor del rival. Actualizará las métricas colectivas de ambos equipos conforme a ese marcador y conservará el resultado original en la auditoría histórica, sin generar ni conservar estadísticas individuales derivadas del encuentro como resultado oficial.
+Cuando la decisión de retiro o descalificación se presente respecto de un enfrentamiento ya disputado entre el equipo excluido y su rival, únicamente ese encuentro reemplazará su resultado deportivo original por el resultado administrativo común del torneo, aplicado a favor del rival. Los demás encuentros anteriores conservarán sus resultados originales. Actualizará las métricas colectivas de ambos equipos conforme a ese marcador y conservará el resultado original en la auditoría histórica, sin generar ni conservar estadísticas individuales derivadas del encuentro como resultado oficial.
 
 ### RF-TOR-012 — Validar equipos sustitutos en plazas vacantes
 El sistema permitirá al organizador seleccionar equipos previamente eliminados para ocupar una instancia o plaza vacante por doble exclusión, validando que hayan participado en el mismo torneo, que hayan sido eliminados en una instancia anterior, que cumplan las condiciones deportivas y reglamentarias de la ronda y que no tengan una exclusión o sanción que les impida continuar.
@@ -119,6 +119,9 @@ Si el retiro o descalificación se presenta respecto de un enfrentamiento ya dis
 ### RN-TOR-012 — Elegibilidad de equipos sustitutos
 Para ocupar una plaza vacante por doble exclusión, el equipo debe haber participado en el mismo torneo, haber sido eliminado en una instancia anterior, cumplir las condiciones deportivas y reglamentarias de la ronda y no tener una exclusión o sanción que le impida continuar. La selección corresponde al organizador autorizado y debe quedar auditada.
 
+### RN-TOR-014 — Resolución de partidos futuros pendientes
+Al registrar el retiro o descalificación, todos los partidos futuros que permanezcan pendientes contra equipos activos se resolverán administrativamente con el marcador común vigente del torneo, siempre a favor del equipo activo y sin importar la localía. Los partidos pendientes contra equipos también excluidos no recibirán marcador ni efectos estadísticos. No se generarán estadísticas individuales por ningún resultado administrativo.
+
 ### RN-TOR-010 — Configuración y modificación del marcador administrativo
 El organizador configura el marcador administrativo común al crear el torneo. Durante la competición podrá modificarlo mediante una acción autorizada y auditada. La modificación tendrá efecto únicamente sobre las resoluciones administrativas que se apliquen después del cambio; no alterará automáticamente resultados administrativos ya aplicados. Cualquier corrección de un resultado anterior requerirá un procedimiento explícito, autorizado y auditado.
 
@@ -157,7 +160,8 @@ El sistema deberá impedir:
 - **CA-TOR-009:** ante doble exclusión eliminatoria, ninguno avanza automáticamente.
 - **CA-TOR-010:** el organizador puede seleccionar equipos previamente eliminados para ocupar la instancia vacante y la decisión queda auditada.
 - **CA-TOR-011:** el sistema valida participación en el mismo torneo, eliminación en instancia anterior, compatibilidad reglamentaria/deportiva y ausencia de exclusión o sanción impeditiva antes de aceptar al sustituto.
-- **CA-TOR-012:** cuando la decisión de retiro/descalificación afecta un enfrentamiento ya disputado contra el rival correspondiente, el marcador oficial se sustituye por el administrativo común a favor de ese rival, se recalculan las métricas colectivas y se conserva el resultado original en auditoría.
+- **CA-TOR-012:** cuando la decisión de retiro/descalificación afecta un enfrentamiento ya disputado contra el rival correspondiente, únicamente ese partido sustituye su marcador oficial por el administrativo común a favor de ese rival; los demás partidos anteriores conservan sus resultados y el original afectado queda en auditoría.
+- **CA-TOR-013:** todos los partidos futuros pendientes contra equipos activos se resuelven con el marcador administrativo común vigente, a favor del equipo activo y con efectos colectivos; los pendientes contra equipos excluidos no reciben marcador ni efectos estadísticos.
 
 ## 9. Dependencias y riesgos
 
@@ -173,12 +177,14 @@ El sistema deberá impedir:
 2. ¿Qué roles pueden registrar un retiro/descalificación y confirmar la resolución administrativa?
 3. [RESUELTO — DEC-TOR-003] Para ser elegible, el equipo debe haber participado en el mismo torneo, haber sido eliminado en una instancia anterior, cumplir las condiciones deportivas y reglamentarias de la ronda y no tener exclusión o sanción que le impida continuar.
 4. [RESUELTO — DEC-TOR-004] La sustitución por marcador administrativo se limita exclusivamente al partido que motivó la decisión. Los demás partidos disputados anteriormente conservan sus resultados y estadísticas originales.
+5. [RESUELTO — DEC-TOR-005] Todos los partidos futuros pendientes contra equipos activos se resuelven administrativamente con el marcador común; los partidos contra equipos excluidos no reciben marcador ni efectos estadísticos.
 6. ¿Qué estados exactos tendrá un partido no disputado por doble exclusión y cómo se mostrará en calendario, actas e informes?
 7. ¿Cómo se recalculan o congelan las clasificaciones históricas al cierre del torneo?
 8. ¿Qué procedimiento autorizado permite corregir un retiro/descalificación registrado por error?
 
 ## 11. Historial de cambios
 
+- **1.6 — 2026-11-02:** incorpora DEC-TOR-005 sobre resolución de todos los partidos futuros pendientes contra equipos activos.
 - **1.5 — 2026-11-02:** precisa que DEC-TOR-004 afecta exclusivamente al partido que motivó la decisión; los demás encuentros anteriores conservan sus resultados y estadísticas.
 - **1.4 — 2026-11-02:** incorpora DEC-TOR-004 sobre el efecto de retiro/descalificación en el enfrentamiento ya disputado contra el rival correspondiente.
 - **1.3 — 2026-11-02:** incorpora DEC-TOR-003 sobre condiciones de elegibilidad de equipos sustitutos ante doble exclusión.
