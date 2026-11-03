@@ -1,6 +1,6 @@
 # FN-GOV-DOC-001 — Inventario documental
 
-- Versión: 2.3
+- Versión: 2.4
 - Estado: EN_REVISION
 - Fecha de corte: 2026-11-02
 
@@ -8,7 +8,7 @@
 | Código | Documento | Ruta | Versión | Estado |
 |---|---|---|---|---|
 | FN-GOV-MET-001 | Metodología de gobierno documental | 00_GOBIERNO/FN-GOV-MET-001_METODOLOGIA.md | 1.0 | BORRADOR |
-| FN-GOV-DEC-001 | Registro maestro de decisiones | 00_GOBIERNO/FN-GOV-DEC-001_REGISTRO_DECISIONES.md | 1.0 | EN_REVISION |
+| FN-GOV-DEC-001 | Registro maestro de decisiones | 00_GOBIERNO/FN-GOV-DEC-001_REGISTRO_DECISIONES.md | 1.3 | EN_REVISION |
 | FN-GOV-GLO-001 | Glosario maestro | 00_GOBIERNO/FN-GOV-GLO-001_GLOSARIO.md | 1.0 | BORRADOR |
 | FN-GOV-DOC-001 | Inventario documental | 00_GOBIERNO/FN-GOV-DOC-001_INVENTARIO_DOCUMENTAL.md | 1.8 | EN_REVISION |
 | FN-MOD-ORG-001 | Especificación funcional organizaciones | 05_MODULOS/FN-MOD-ORG-001_ESPECIFICACION_ORGANIZACIONES.md | 1.2 | EN_REVISION; consolidación por verificar contra original |
@@ -37,7 +37,7 @@
 No marcar APROBADO sin aprobación expresa. No declarar verificada una versión conocida solo por resumen. Conservar versiones obsoletas. Actualizar el inventario junto con cada cambio documental.
 
 ## Historial
-- 2.3 — 2026-11-02: actualiza FN-MOD-TOR-001 a v1.2 y FN-GOV-DEC-001 a v1.2 por DEC-TOR-002.
+- 2.4 — 2026-11-02: actualiza FN-MOD-TOR-001 a v1.3 y FN-GOV-DEC-001 a v1.3 por DEC-TOR-003; corrige las versiones registradas de ambos documentos.
 - 2.2 — 2026-11-02: incorpora FN-MOD-TOR-001 v1.0 como especificación operativa parcial para retiro/descalificación y resolución administrativa.
 - 2.1 — 2026-11-02: registra FN-GOV-AUD-001 v1.5 y consolida el seguimiento de DEC-PORT-050/051.
 - 2.0 — 2026-11-02: registra FN-GOV-DEC-002 v1.9, FN-GOV-TRZ-001 v1.6 y FN-QA-RET-001 v1.1; incorpora DEC-PORT-050/051 al seguimiento documental.
