@@ -1,6 +1,6 @@
 # FN-QA-RET-001 — Casos de prueba: retiro y descalificación de equipos
 
-- **Versión:** 1.6
+- **Versión:** 1.7
 - **Estado:** EN_REVISION
 - **Fecha:** 2026-11-02
 - **Decisiones relacionadas:** DEC-PORT-048, DEC-PORT-049, DEC-PORT-050 y DEC-PORT-051
@@ -60,5 +60,6 @@ Ninguno de los dos equipos avanza automáticamente. La plaza queda pendiente de 
 Estos casos son una base de validación en revisión. No autorizan desarrollo ni sustituyen la aprobación integral del módulo. La ejecución documentará datos de entrada, resultado observado, resultado esperado, evidencia y estado (aprobado/rechazado/bloqueado).
 
 ## 7. Historial
+- 1.7 — 2026-11-02: amplía CP-RET-018 a cualquier equipo retirado o que haya abandonado el torneo.
 - 1.6 — 2026-11-02: incorpora CP-RET-018 para DEC-TOR-010: se rechaza la reincorporación de cualquier equipo retirado o que haya abandonado el torneo.\n- 1.5 — 2026-11-02: incorpora CP-RET-017 para DEC-TOR-009: ninguna modificación automática después del cierre oficial; decisión del organizador.\n- 1.4 — 2026-11-02: incorpora CP-RET-015/016 para DEC-TOR-008: campeón por retiro/descalificación de un finalista y tratamiento de doble exclusión en la final.\n- 1.3 — 2026-11-02: actualiza CP-RET-014 para DEC-TOR-007: el avance eliminatorio se registra con el marcador administrativo común y efectos colectivos, sin estadísticas individuales.\n- 1.2 — 2026-11-02: incorpora CP-RET-014 para DEC-TOR-006: avance del rival activo en fase eliminatoria y continuidad del torneo.\n- 1.1 — 2026-11-02: incorpora DEC-PORT-050/051: marcador común, orientación a favor del activo, cómputo colectivo, historial visible y selección de equipos previamente eliminados por el organizador.
 - 1.0 — 2026-11-02: primera consolidación de CP-RET-001 a CP-RET-013 con base en DEC-PORT-048/049.
