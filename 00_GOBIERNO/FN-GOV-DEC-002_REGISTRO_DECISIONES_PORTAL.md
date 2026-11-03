@@ -1,11 +1,11 @@
 # FN-GOV-DEC-002 — Registro de decisiones del portal público
 
-- Versión: 1.6
+- Versión: 1.7
 - Estado: EN_REVISION
 - Fecha: 2026-11-02
 
 ## Propósito y trazabilidad
-Consolida las decisiones conocidas del portal público de FUTNEXIS. DEC-PORT-001 a 008 existían en un registro anterior, pero su redacción literal no está disponible para verificación y no se reconstruye ni inventa. DEC-PORT-009 a 043 se registran como síntesis de las definiciones disponibles. DEC-PORT-036 a 046 fueron aprobadas expresamente el 2026-11-02.
+Consolida las decisiones conocidas del portal público de FUTNEXIS. DEC-PORT-001 a 008 existían en un registro anterior, pero su redacción literal no está disponible para verificación y no se reconstruye ni inventa. DEC-PORT-009 a 043 se registran como síntesis de las definiciones disponibles. DEC-PORT-036 a 048 fueron aprobadas expresamente el 2026-11-02.
 
 ## DEC-PORT-001 a 008
 [PENDIENTE] Recuperar el texto literal desde la versión histórica original antes de declararlas consolidadas.
@@ -143,8 +143,30 @@ Esta decisión complementa DEC-PORT-045 para torneos donde los equipos ingresan 
 - No se incluyen partidos de la fase inicial de liga o grupos.
 - Los partidos anulados se excluyen; los suspendidos se consideran según su resolución oficial.
 - Si persiste el empate, se utiliza la posición final oficial del reglamento. Si no hay diferencia oficial, comparten nivel de avance.
-- Las rondas de reclasificación que no formen parte del camino hacia el campeonato no aumentan la instancia de avance; pueden determinar la posición final cuando el reglamento así lo establezca.
+- Las rondas de reclasificación que formen parte del recorrido oficial hacia el título sí se consideran para determinar el avance deportivo y la cantidad de partidos eliminatorios disputados. Las rondas que no formen parte de ese recorrido no aumentan el avance deportivo, aunque pueden determinar posiciones finales si el reglamento así lo establece.
 - La estructura y las reglas configuradas para cada torneo gobiernan el cálculo; FUTNEXIS no impone formatos ni criterios universales de clasificación.
+
+## DEC-PORT-047 — Posición oficial de equipos eliminados en fase de grupos
+[CONFIRMADO — aprobación expresa del propietario del producto, 2026-11-02]
+
+- Cuando equipos queden eliminados en fase de grupos, se compara su posición oficial dentro del grupo si el reglamento establece esa diferencia.
+- Entre equipos de grupos distintos, solo se comparan posiciones mediante la tabla general, tabla de mejores terceros u otro mecanismo comparativo definido por el reglamento y configurado por el organizador.
+- FUTNEXIS no impone criterios universales para ordenar mejores terceros.
+- Si no existe un criterio reglamentario válido para diferenciar a los equipos comparados, comparten nivel de avance.
+- Una vez que un mejor tercero clasifica a una fase eliminatoria, su posición original de tercero deja de utilizarse para comparar su avance deportivo. Desde ese momento se aplican DEC-PORT-045 y DEC-PORT-046, incluida la comparación de partidos eliminatorios disputados cuando corresponda.
+
+## DEC-PORT-048 — Retiro o descalificación de equipos y resultados administrativos
+[CONFIRMADO — aprobación expresa del propietario del producto, 2026-11-02]
+
+- Un equipo que abandone el torneo o sea descalificado cambia a un estado que identifique la causa: retirado o descalificado. Deja de integrar la clasificación competitiva vigente y se excluye del total de equipos activos.
+- La clasificación se recalcula únicamente entre equipos activos y sus posiciones se reajustan consecutivamente, sin reservar puestos a equipos retirados o descalificados.
+- Los resultados y puntos obtenidos por el equipo antes de su retiro o descalificación se conservan en el historial oficial; no se eliminan ni recalculan retroactivamente.
+- Todos los partidos pendientes de ese equipo se resuelven administrativamente a favor de cada rival al que faltaba enfrentar. Se otorgan a cada rival los puntos correspondientes a una victoria administrativa.
+- El marcador administrativo aplicable a esos encuentros lo establece el organizador del torneo. El sistema registra el marcador, los puntos asignados, el estado/causa del equipo y la resolución administrativa.
+- Los resultados administrativos tienen efectos exclusivamente colectivos: resultado del encuentro, puntos, goles a favor/en contra, diferencia de goles y clasificación/estadísticas colectivas.
+- Los resultados administrativos no generan goles, partidos jugados, asistencias, tarjetas ni ninguna otra estadística individual. Tampoco afectan rankings o reconocimientos individuales.
+- Los partidos disputados antes del retiro o descalificación mantienen sus resultados y estadísticas originales, incluidas las individuales.
+- La decisión, causa, fecha, responsable, marcador administrativo configurado y partidos afectados deben conservar trazabilidad/auditoría.
 
 ## Reglas transversales de privacidad y navegación
 - Cada organización configura nombre, logotipo, colores, descripción y contacto; FUTNEXIS conserva su identidad de plataforma.
@@ -180,6 +202,7 @@ Esta decisión complementa DEC-PORT-045 para torneos donde los equipos ingresan 
 - DEC-PORT-038 aprueba el principio de avance deportivo, no el algoritmo de formatos mixtos.
 
 ## Historial
+- 1.7 — 2026-11-02: incorpora DEC-PORT-047 y DEC-PORT-048, y precisa que las reclasificaciones que formen parte del camino al título cuentan para el avance deportivo.
 - 1.6 — 2026-11-02: incorpora DEC-PORT-046 para cuadros escalonados y comparación por partidos oficiales disputados; elimina duplicación de DEC-PORT-045.
 - 1.5 — 2026-11-02: incorpora DEC-PORT-045, que define el algoritmo base de avance deportivo para formatos mixtos.
 - 1.4 — 2026-11-02: incorpora DEC-PORT-044, que precisa el conteo de partidos para el tercer desempate del ranking general de goleadores.
