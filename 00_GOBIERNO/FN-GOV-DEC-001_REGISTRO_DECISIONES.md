@@ -1,6 +1,6 @@
 # FN-GOV-DEC-001 — Registro maestro de decisiones
 
-- Versión: 1.2
+- Versión: 1.3
 - Estado: EN_REVISION
 - Fecha de corte: 2026-11-02
 
@@ -40,12 +40,22 @@ El detalle se mantiene en FN-GOV-DEC-002.
 - El operador de resultados puede registrar incidencias o solicitudes, pero no ejecutar por sí mismo el retiro/descalificación.
 - La matriz granular de permisos para resolver partidos y seleccionar equipos en plazas vacantes se definirá en la especificación operativa.
 
+### DEC-TOR-003 — Elegibilidad de equipos sustitutos ante doble exclusión
+[CONFIRMADO — 2026-11-02]
+Un equipo previamente eliminado podrá ser seleccionado para ocupar una instancia o plaza vacante si:
+- Participó en el mismo torneo.
+- Fue eliminado en una instancia anterior.
+- Cumple las condiciones deportivas y reglamentarias de la ronda.
+- No tiene una exclusión o sanción que le impida continuar.
+La selección corresponde al organizador autorizado y debe quedar auditada.
+
 ## Pendientes
 1. Verificar el texto original de DEC-PORT-001 a 008 si aparece una fuente histórica.
 2. Armonizar especificaciones funcionales y UX con DEC-PORT-036 a 043.
 3. Actualizar este registro ante cada nueva decisión.
 
 ## Historial
+- 1.3 — 2026-11-02: incorpora DEC-TOR-003 sobre elegibilidad de equipos sustitutos ante doble exclusión.
 - 1.2 — 2026-11-02: incorpora DEC-TOR-002 sobre roles autorizados para retiro/descalificación.
 - 1.1 — 2026-11-02: incorpora DEC-TOR-001 sobre configuración y modificación del marcador administrativo.
 - 1.0 — 2026-11-02: registro inicial basado en decisiones disponibles; no es transcripción literal de documentos anteriores.
