@@ -1,10 +1,10 @@
 # FN-QA-RET-001 — Casos de prueba: retiro y descalificación de equipos
 
-- **Versión:** 1.0
+- **Versión:** 1.1
 - **Estado:** EN_REVISION
 - **Fecha:** 2026-11-02
-- **Decisiones relacionadas:** DEC-PORT-048 y DEC-PORT-049
-- **Documento funcional relacionado:** FN-MOD-ORG-002 v2.0
+- **Decisiones relacionadas:** DEC-PORT-048, DEC-PORT-049, DEC-PORT-050 y DEC-PORT-051
+- **Documento funcional relacionado:** FN-MOD-ORG-002 v2.0 (referencia del portal; la lógica operativa debe trasladarse al módulo de torneos y partidos)
 
 ## 1. Precondiciones generales
 - Existe un torneo con equipos inscritos y calendario oficial.
@@ -18,12 +18,12 @@
 | ID | Escenario | Resultado esperado |
 |---|---|---|
 | CP-RET-001 | Un equipo se retira después de disputar cinco partidos. | Cambia a estado retirado; se conservan íntegros los cinco resultados y estadísticas originales. |
-| CP-RET-002 | Un equipo se retira y tiene partidos pendientes contra equipos activos. | Cada partido pendiente se resuelve administrativamente a favor del respectivo rival activo. |
-| CP-RET-003 | El organizador configura el marcador de un partido administrativo. | El marcador configurado queda registrado junto con puntos, causa, responsable y resolución. |
+| CP-RET-002 | Un equipo se retira y tiene partidos pendientes contra equipos activos. | Cada partido pendiente contra un equipo activo se resuelve con un único marcador administrativo común configurado por el organizador y orientado a favor del equipo activo, incluso si figura como visitante. |
+| CP-RET-003 | El organizador configura el marcador de un partido administrativo. | El marcador común configurado por el organizador se aplica a todos los partidos administrativos y siempre favorece al equipo activo, independientemente de la localía original. |
 | CP-RET-004 | Un equipo es descalificado. | Cambia a estado descalificado y deja de integrar la clasificación vigente y el total de equipos activos. |
 | CP-RET-005 | Se retiran/descalifican varios equipos. | Todos los excluidos salen de la clasificación vigente y la tabla se renumera consecutivamente entre equipos activos. |
 | CP-RET-006 | Se consulta la clasificación después de una exclusión. | No se reservan posiciones para equipos excluidos; los activos ocupan posiciones consecutivas. |
-| CP-RET-007 | Se confirma un resultado administrativo contra un equipo activo. | Se actualizan los datos colectivos conforme al marcador y las reglas de clasificación aplicables. El detalle de PJ/PG/PE/PP sigue pendiente de definición. |
+| CP-RET-007 | Se confirma un resultado administrativo contra un equipo activo. | El equipo activo suma PJ, PG, GF, GC y puntos conforme al marcador; se recalculan DG, PTS, posición y demás métricas colectivas según el reglamento. |
 | CP-RET-008 | Se consultan estadísticas individuales tras un resultado administrativo. | No se generan goles, partidos jugados, asistencias, tarjetas ni otras estadísticas individuales; no cambia ningún ranking/reconocimiento individual por ese resultado. |
 | CP-RET-009 | Se consulta un partido disputado antes del retiro/descalificación. | Se conservan el resultado y las estadísticas originales, individuales y colectivas. |
 | CP-RET-010 | Se consulta auditoría de retiro/descalificación. | Se identifica causa, fecha, responsable, marcador administrativo cuando aplique y partidos afectados. |
@@ -50,14 +50,15 @@ El rival activo avanza mediante victoria administrativa. El marcador lo define e
 Ninguno de los dos equipos avanza automáticamente. La plaza queda pendiente de resolución del organizador. FUTNEXIS no selecciona automáticamente un sustituto. La decisión debe quedar auditada.
 
 ## 5. Pendientes que bloquean el cierre completo de pruebas
-1. Definir si el marcador administrativo se configura por encuentro o mediante un marcador común.
-2. Precisar cómo se representa el equipo excluido en el historial frente a la clasificación vigente.
-3. Definir cómo los resultados administrativos afectan PJ, PG, PE, PP, GF, GC, DG y PTS.
-4. Definir cómo el organizador resuelve la plaza vacante por doble exclusión y qué opciones reglamentarias se permiten.
+1. Cerrado por DEC-PORT-050: se utiliza un único marcador común para el torneo.
+2. Cerrado por DEC-PORT-050: aparece en el historial con estado, PJ y estadísticas colectivas, pero no en la clasificación vigente.
+3. Cerrado en lo esencial por DEC-PORT-050: el equipo activo suma PJ, PG, GF, GC y puntos; se recalculan DG, posición y demás métricas conforme al reglamento.
+4. Cerrado en cuanto a la autoridad de decisión por DEC-PORT-051: el organizador selecciona equipos previamente eliminados. Quedan por especificar validaciones, elegibilidad y tratamiento de plazas múltiples.
 5. Precisar estados y tratamiento de partidos no disputados por doble exclusión en fases de liga y eliminatorias.
 
 ## 6. Restricción de aprobación
 Estos casos son una base de validación en revisión. No autorizan desarrollo ni sustituyen la aprobación integral del módulo. La ejecución documentará datos de entrada, resultado observado, resultado esperado, evidencia y estado (aprobado/rechazado/bloqueado).
 
 ## 7. Historial
+- 1.1 — 2026-11-02: incorpora DEC-PORT-050/051: marcador común, orientación a favor del activo, cómputo colectivo, historial visible y selección de equipos previamente eliminados por el organizador.
 - 1.0 — 2026-11-02: primera consolidación de CP-RET-001 a CP-RET-013 con base en DEC-PORT-048/049.
