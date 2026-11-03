@@ -1,6 +1,6 @@
 # FN-GOV-DEC-001 — Registro maestro de decisiones
 
-- Versión: 2.3
+- Versión: 2.4
 - Estado: EN_REVISION
 - Fecha de corte: 2026-11-02
 
@@ -81,12 +81,20 @@ Ningún equipo que sea dado de baja del torneo, cualquiera que sea el motivo (re
 [CONFIRMADO — 2026-11-02]
 Cuando ambos equipos de un partido pendiente estén dados de baja, el encuentro se registrará con el estado «No disputado por doble baja». No se asignará ganador, marcador, puntos ni efectos estadísticos colectivos o individuales. En fases eliminatorias, la plaza o continuidad del cuadro se resolverá por separado conforme al procedimiento de doble exclusión y a la decisión auditada del organizador; el estado del partido no otorga avance automático.
 
+### DEC-TOR-012 — Visualización y registro del partido no disputado por doble baja
+[CONFIRMADO — 2026-11-02]
+- En el calendario, el encuentro permanece visible dentro de su jornada con los nombres y escudos de ambos equipos, sin marcador y con el estado «No disputado por doble baja».
+- En el historial de partidos, se conserva el encuentro y el motivo de no disputa para consulta posterior.
+- No se genera acta deportiva. Se conserva un registro administrativo de la situación.
+- El encuentro no suma partidos jugados, puntos ni goles a ninguno de los equipos y no genera estadísticas colectivas ni individuales.
+
 ## Pendientes
 1. Verificar el texto original de DEC-PORT-001 a 008 si aparece una fuente histórica.
 2. Armonizar especificaciones funcionales y UX con DEC-PORT-036 a 043.
 3. Actualizar este registro ante cada nueva decisión.
 
 ## Historial
+- 2.4 — 2026-11-02: incorpora DEC-TOR-012 sobre visualización en calendario e historial y registro administrativo del partido no disputado por doble baja.
 - 2.3 — 2026-11-02: incorpora DEC-TOR-011: partidos pendientes entre dos equipos dados de baja quedan «No disputado por doble baja», sin marcador ni efectos estadísticos.
 - 2.2 — 2026-11-02: amplía DEC-TOR-010: ningún equipo dado de baja puede reintegrarse, cualquiera que sea el motivo.
 - 2.1 — 2026-11-02: aclara DEC-TOR-010: la prohibición de reincorporación aplica a todo equipo retirado o que abandone el torneo.
