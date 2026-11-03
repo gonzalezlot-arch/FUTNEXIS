@@ -1,6 +1,6 @@
 # FN-QA-RET-001 — Casos de prueba: retiro y descalificación de equipos
 
-- **Versión:** 1.3
+- **Versión:** 1.4
 - **Estado:** EN_REVISION
 - **Fecha:** 2026-11-02
 - **Decisiones relacionadas:** DEC-PORT-048, DEC-PORT-049, DEC-PORT-050 y DEC-PORT-051
@@ -29,7 +29,7 @@
 | CP-RET-010 | Se consulta auditoría de retiro/descalificación. | Se identifica causa, fecha, responsable, marcador administrativo cuando aplique y partidos afectados. |
 | CP-RET-011 | Ambos equipos de un partido pendiente están retirados/descalificados. | No se asignan puntos ni marcador administrativo; no se modifican estadísticas colectivas ni individuales; el encuentro queda registrado como no disputado por doble exclusión. |
 | CP-RET-012 | Un equipo está excluido antes de un partido eliminatorio y su rival está activo. | El rival avanza automáticamente mediante victoria administrativa; el organizador establece el marcador; no se generan estadísticas individuales. |
-| CP-RET-013 | Ambos equipos de un enfrentamiento eliminatorio están excluidos antes de disputarlo. | Ninguno avanza automáticamente; no se asigna ganador ni marcador; FUTNEXIS no elige sustituto; el organizador resuelve la plaza y su decisión queda auditada. |\n| CP-RET-014 | Un equipo es retirado/descalificado durante una fase eliminatoria y su rival continúa activo. | El rival avanza a la siguiente fase; el enfrentamiento queda registrado con el marcador administrativo común a favor del rival activo; se actualizan métricas colectivas sin estadísticas individuales; el cuadro se actualiza y el torneo continúa con normalidad. No se asigna un sustituto para esa plaza. |
+| CP-RET-013 | Ambos equipos de un enfrentamiento eliminatorio están excluidos antes de disputarlo. | Ninguno avanza automáticamente; no se asigna ganador ni marcador; FUTNEXIS no elige sustituto; el organizador resuelve la plaza y su decisión queda auditada. |\n| CP-RET-014 | Un equipo es retirado/descalificado durante una fase eliminatoria y su rival continúa activo. | El rival avanza a la siguiente fase; el enfrentamiento queda registrado con el marcador administrativo común a favor del rival activo; se actualizan métricas colectivas sin estadísticas individuales; el cuadro se actualiza y el torneo continúa con normalidad. No se asigna un sustituto para esa plaza. |\n| CP-RET-015 | Durante la final, uno de los finalistas es retirado/descalificado y el otro permanece activo. | El finalista activo es declarado campeón; la final queda registrada con el marcador administrativo común a su favor; se actualizan métricas colectivas y no se generan estadísticas individuales. |\n| CP-RET-016 | Ambos finalistas están retirados/descalificados. | No se declara campeón automáticamente ni se asigna marcador administrativo; se activa el procedimiento de doble exclusión y la resolución queda a cargo del organizador autorizado. |
 
 ## 3. Escenario de referencia
 Torneo de liga con 20 equipos y 19 partidos previstos por equipo. Un equipo se retira después de disputar cinco partidos y mantiene 14 encuentros pendientes:
@@ -60,5 +60,5 @@ Ninguno de los dos equipos avanza automáticamente. La plaza queda pendiente de 
 Estos casos son una base de validación en revisión. No autorizan desarrollo ni sustituyen la aprobación integral del módulo. La ejecución documentará datos de entrada, resultado observado, resultado esperado, evidencia y estado (aprobado/rechazado/bloqueado).
 
 ## 7. Historial
-- 1.3 — 2026-11-02: actualiza CP-RET-014 para DEC-TOR-007: el avance eliminatorio se registra con el marcador administrativo común y efectos colectivos, sin estadísticas individuales.\n- 1.2 — 2026-11-02: incorpora CP-RET-014 para DEC-TOR-006: avance del rival activo en fase eliminatoria y continuidad del torneo.\n- 1.1 — 2026-11-02: incorpora DEC-PORT-050/051: marcador común, orientación a favor del activo, cómputo colectivo, historial visible y selección de equipos previamente eliminados por el organizador.
+- 1.4 — 2026-11-02: incorpora CP-RET-015/016 para DEC-TOR-008: campeón por retiro/descalificación de un finalista y tratamiento de doble exclusión en la final.\n- 1.3 — 2026-11-02: actualiza CP-RET-014 para DEC-TOR-007: el avance eliminatorio se registra con el marcador administrativo común y efectos colectivos, sin estadísticas individuales.\n- 1.2 — 2026-11-02: incorpora CP-RET-014 para DEC-TOR-006: avance del rival activo en fase eliminatoria y continuidad del torneo.\n- 1.1 — 2026-11-02: incorpora DEC-PORT-050/051: marcador común, orientación a favor del activo, cómputo colectivo, historial visible y selección de equipos previamente eliminados por el organizador.
 - 1.0 — 2026-11-02: primera consolidación de CP-RET-001 a CP-RET-013 con base en DEC-PORT-048/049.
