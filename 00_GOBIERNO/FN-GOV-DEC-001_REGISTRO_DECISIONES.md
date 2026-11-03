@@ -1,6 +1,6 @@
 # FN-GOV-DEC-001 — Registro maestro de decisiones
 
-- Versión: 1.6
+- Versión: 1.7
 - Estado: EN_REVISION
 - Fecha de corte: 2026-11-02
 
@@ -61,13 +61,17 @@ Todos los partidos futuros pendientes del equipo retirado/descalificado contra e
 [CONFIRMADO — 2026-11-02]
 Cuando un equipo sea retirado o descalificado durante una fase eliminatoria, avanzará a la siguiente fase el rival contra el que se encontraba enfrentado en esa instancia. El torneo continuará con normalidad conforme al calendario y cuadro resultantes. Esta regla no aplica a la doble exclusión del enfrentamiento: en ese caso se mantiene el procedimiento de DEC-PORT-049/051, sin avance automático y con resolución de la plaza por el organizador.
 
+### DEC-TOR-007 — Marcador administrativo en avance eliminatorio
+[CONFIRMADO — 2026-11-02]
+Cuando un equipo sea retirado o descalificado en una fase eliminatoria y su rival activo avance a la siguiente fase, el enfrentamiento quedará registrado oficialmente con el marcador administrativo común configurado para el torneo, aplicado a favor del rival activo. Se actualizarán las métricas colectivas que correspondan y no se generarán estadísticas individuales. La doble exclusión conserva el tratamiento especial de DEC-PORT-049/051 y no recibe marcador ni avance automático.
+
 ## Pendientes
 1. Verificar el texto original de DEC-PORT-001 a 008 si aparece una fuente histórica.
 2. Armonizar especificaciones funcionales y UX con DEC-PORT-036 a 043.
 3. Actualizar este registro ante cada nueva decisión.
 
 ## Historial
-- 1.6 — 2026-11-02: incorpora DEC-TOR-006 sobre avance del rival en fase eliminatoria y continuidad normal del torneo.\n- 1.5 — 2026-11-02: incorpora DEC-TOR-005 sobre partidos futuros pendientes tras retiro/descalificación.
+- 1.7 — 2026-11-02: incorpora DEC-TOR-007: el avance del rival en fase eliminatoria queda registrado con el marcador administrativo común.\n- 1.6 — 2026-11-02: incorpora DEC-TOR-006 sobre avance del rival en fase eliminatoria y continuidad normal del torneo.\n- 1.5 — 2026-11-02: incorpora DEC-TOR-005 sobre partidos futuros pendientes tras retiro/descalificación.
 - 1.4 — 2026-11-02: incorpora DEC-TOR-004 y limita su efecto al partido que motivó la decisión.
 - 1.3 — 2026-11-02: incorpora DEC-TOR-003 sobre elegibilidad de equipos sustitutos ante doble exclusión.
 - 1.2 — 2026-11-02: incorpora DEC-TOR-002 sobre roles autorizados para retiro/descalificación.
