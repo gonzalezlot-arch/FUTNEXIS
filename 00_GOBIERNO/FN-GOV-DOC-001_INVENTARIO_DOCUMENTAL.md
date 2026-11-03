@@ -1,6 +1,6 @@
 # FN-GOV-DOC-001 — Inventario documental
 
-- Versión: 2.4
+- Versión: 2.5
 - Estado: EN_REVISION
 - Fecha de corte: 2026-11-02
 
@@ -37,7 +37,7 @@
 No marcar APROBADO sin aprobación expresa. No declarar verificada una versión conocida solo por resumen. Conservar versiones obsoletas. Actualizar el inventario junto con cada cambio documental.
 
 ## Historial
-- 2.4 — 2026-11-02: actualiza FN-MOD-TOR-001 a v1.3 y FN-GOV-DEC-001 a v1.3 por DEC-TOR-003; corrige las versiones registradas de ambos documentos.
+- 2.5 — 2026-11-02: actualiza FN-MOD-TOR-001 a v1.5 y FN-GOV-DEC-001 a v1.4 por DEC-TOR-004; corrige las versiones registradas de ambos documentos.
 - 2.2 — 2026-11-02: incorpora FN-MOD-TOR-001 v1.0 como especificación operativa parcial para retiro/descalificación y resolución administrativa.
 - 2.1 — 2026-11-02: registra FN-GOV-AUD-001 v1.5 y consolida el seguimiento de DEC-PORT-050/051.
 - 2.0 — 2026-11-02: registra FN-GOV-DEC-002 v1.9, FN-GOV-TRZ-001 v1.6 y FN-QA-RET-001 v1.1; incorpora DEC-PORT-050/051 al seguimiento documental.
