@@ -1,9 +1,9 @@
 # FN-GOV-TRZ-001 — Matriz de trazabilidad del portal público
 
-- **Versión:** 1.0
+- **Versión:** 1.3
 - **Estado:** EN_REVISION
 - **Fecha:** 2026-11-02
-- **Documentos relacionados:** FN-GOV-DEC-002 v1.4; FN-MOD-ORG-002 v1.7.
+- **Documentos relacionados:** FN-GOV-DEC-002 v1.6; FN-MOD-ORG-002 v1.8.
 - **Propósito:** relacionar decisiones confirmadas con requisitos funcionales, reglas de negocio y criterios de aceptación, identificando vacíos sin inventar aprobaciones.
 
 ## 1. Convenciones
@@ -53,7 +53,9 @@
 | DEC-PORT-041 | Organización suspendida | Reglas generales de publicación y disponibilidad | RN-PORT-PROP-31: ocultar rutas públicas, conservar datos y bloquear gestión | CA-PORT-020 | Parcial: mensaje y reactivación no validados |
 | DEC-PORT-042 | SEO e indexación | Reglas de publicación y metadatos | RN-PORT-PROP-32: indexar solo recursos publicados y disponibles | CA-PORT-023 | Parcial: retirada de índices no probada |
 | DEC-PORT-043 | Auditoría y conservación | RF-PORT-003 y reglas de publicación/estado | RN-PORT-PROP-33: auditoría con actor, fecha, acción, entidad y motivo | CA-PORT-022 | Parcial: campos auditados y acceso no validados |
-| DEC-PORT-044 | Definición de partidos para tercer desempate de goleadores | RF-PORT-027 | RN-PORT-009: participación efectiva en partidos oficiales hasta alcanzar el total de goles; convocatoria sin ingreso no cuenta; titular/suplente sí; goles múltiples en un partido cuentan como un encuentro; anulados excluidos | CA-PORT-041 | Directa para el conteo; pendiente algoritmo de avance deportivo en formatos mixtos/especiales |
+| DEC-PORT-044 | Definición de partidos para tercer desempate de goleadores | RF-PORT-027 | RN-PORT-009: participación efectiva en partidos oficiales hasta alcanzar el total de goles; convocatoria sin ingreso no cuenta; titular/suplente sí; goles múltiples en un partido cuentan como un encuentro; anulados excluidos | CA-PORT-041 | Directa para el conteo |
+| DEC-PORT-045 | Algoritmo base de avance deportivo en formatos mixtos | RF-PORT-027 | RN-PORT-009: fase oficial más avanzada y posición reglamentaria | CA-PORT-013 | Directa para regla base |
+| DEC-PORT-046 | Cuadros escalonados y comparación por partidos disputados | RF-PORT-027 | RN-PORT-009: instancia más avanzada; a igual instancia, menor cantidad de partidos oficiales disputados en rondas eliminatorias, incluyendo rondas previas y todos los resultados; excluye fase inicial y anulados; desempate por posición oficial | CA-PORT-042 | Directa para regla base; estructuras especiales pendientes |
 
 ## 3. Hallazgos de trazabilidad
 
@@ -63,7 +65,7 @@
 4. **RF-PORT-012 no está aprobado:** filtros por estado/modalidad en portada siguen pendientes. No deben convertirse en criterio de aceptación obligatorio ni implementarse como alcance confirmado.
 5. **DEC-PORT-001 a 008 quedan fuera de la matriz** hasta recuperar su contenido literal.
 6. **La numeración RF/CA no se declara equivalente a la versión fuente 1.4.** Se necesita una matriz de correspondencia histórica antes de reemplazar o eliminar IDs anteriores.
-7. **El tercer criterio del ranking general quedó precisado por DEC-PORT-044** y se incorporó a RN-PORT-009 y CA-PORT-041. Permanecen pendientes los casos de prueba del avance deportivo en formatos mixtos/especiales y empates residuales.
+7. **El tercer criterio del ranking general quedó precisado por DEC-PORT-044** y se incorporó a RN-PORT-009 y CA-PORT-041. Permanecen pendientes pruebas ampliadas de estructuras especiales, reclasificaciones y empates residuales.
 8. **Las reglas de partidos suspendidos y anulados necesitan enlace** con el módulo operativo de partidos y con el procedimiento de recálculo estadístico.
 
 ## 4. Acciones recomendadas
@@ -76,7 +78,7 @@
 | Recuperar DEC-PORT-001 a 008 | Alta | Registro histórico completo |
 | Comparar RF/CA con versión 1.4 | Alta | Correspondencia de IDs y control de cambios |
 | Incorporar definición del conteo de partidos al ranking | Alta | RN-PORT-009 y CA-PORT-041 trazables a DEC-PORT-044 |
-| Definir avance deportivo en formatos mixtos/especiales | Alta | Algoritmo verificable y pruebas |
+| Validar estructuras deportivas especiales no cubiertas por DEC-PORT-045/046 | Alta | Algoritmo verificable y pruebas |
 | Mantener filtros PORT-01 como pendientes | Media | Evitar alcance no aprobado |
 | Vincular estados de partido con módulo operativo | Alta | Coherencia de resultados y estadísticas |
 
@@ -86,5 +88,6 @@ Esta matriz es una herramienta de análisis y control documental. No constituye 
 
 ## 6. Historial
 
+- 1.3 — 2026-11-02: incorpora DEC-PORT-045/046 y su trazabilidad mediante RN-PORT-009 y CA-PORT-042.
 - 1.2 — 2026-11-02: incorpora DEC-PORT-044 y su trazabilidad mediante RN-PORT-009 y CA-PORT-041.
 - 1.1 — 2026-11-02: actualiza la trazabilidad tras FN-MOD-ORG-002 v1.6; incorpora catálogo RN numerado y ampliación de criterios CA-PORT-025 a 040.
