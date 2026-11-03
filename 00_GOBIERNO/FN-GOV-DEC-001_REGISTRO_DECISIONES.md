@@ -1,6 +1,6 @@
 # FN-GOV-DEC-001 — Registro maestro de decisiones
 
-- Versión: 2.2
+- Versión: 2.3
 - Estado: EN_REVISION
 - Fecha de corte: 2026-11-02
 
@@ -77,12 +77,17 @@ Una vez que el torneo haya sido declarado oficialmente finalizado, FUTNEXIS no a
 [CONFIRMADO — 2026-11-02]
 Ningún equipo que sea dado de baja del torneo, cualquiera que sea el motivo (retiro voluntario, abandono, descalificación u otra causa), podrá reintegrarse a esa misma edición, aunque la competición continúe en curso. La baja será definitiva para esa edición.
 
+### DEC-TOR-011 — Partido pendiente entre dos equipos dados de baja
+[CONFIRMADO — 2026-11-02]
+Cuando ambos equipos de un partido pendiente estén dados de baja, el encuentro se registrará con el estado «No disputado por doble baja». No se asignará ganador, marcador, puntos ni efectos estadísticos colectivos o individuales. En fases eliminatorias, la plaza o continuidad del cuadro se resolverá por separado conforme al procedimiento de doble exclusión y a la decisión auditada del organizador; el estado del partido no otorga avance automático.
+
 ## Pendientes
 1. Verificar el texto original de DEC-PORT-001 a 008 si aparece una fuente histórica.
 2. Armonizar especificaciones funcionales y UX con DEC-PORT-036 a 043.
 3. Actualizar este registro ante cada nueva decisión.
 
 ## Historial
+- 2.3 — 2026-11-02: incorpora DEC-TOR-011: partidos pendientes entre dos equipos dados de baja quedan «No disputado por doble baja», sin marcador ni efectos estadísticos.
 - 2.2 — 2026-11-02: amplía DEC-TOR-010: ningún equipo dado de baja puede reintegrarse, cualquiera que sea el motivo.
 - 2.1 — 2026-11-02: aclara DEC-TOR-010: la prohibición de reincorporación aplica a todo equipo retirado o que abandone el torneo.
 - 2.0 — 2026-11-02: incorpora DEC-TOR-010: todo equipo retirado o que abandone el torneo no puede reincorporarse a la misma edición.
