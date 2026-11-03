@@ -1,6 +1,6 @@
 # FN-GOV-DEC-001 — Registro maestro de decisiones
 
-- Versión: 1.1
+- Versión: 1.2
 - Estado: EN_REVISION
 - Fecha de corte: 2026-11-02
 
@@ -34,11 +34,18 @@ El detalle se mantiene en FN-GOV-DEC-002.
 - Los resultados administrativos ya aplicados no se modifican automáticamente.
 - La corrección de un resultado anterior requiere un procedimiento explícito, autorizado y auditado.
 
+### DEC-TOR-002 — Roles autorizados para retiro y descalificación
+[CONFIRMADO — 2026-11-02]
+- Pueden ejecutar el retiro/descalificación: propietario de la organización; administrador con permiso de gestión deportiva; organizador o director del torneo con permiso específico asignado para esa competición.
+- El operador de resultados puede registrar incidencias o solicitudes, pero no ejecutar por sí mismo el retiro/descalificación.
+- La matriz granular de permisos para resolver partidos y seleccionar equipos en plazas vacantes se definirá en la especificación operativa.
+
 ## Pendientes
 1. Verificar el texto original de DEC-PORT-001 a 008 si aparece una fuente histórica.
 2. Armonizar especificaciones funcionales y UX con DEC-PORT-036 a 043.
 3. Actualizar este registro ante cada nueva decisión.
 
 ## Historial
+- 1.2 — 2026-11-02: incorpora DEC-TOR-002 sobre roles autorizados para retiro/descalificación.
 - 1.1 — 2026-11-02: incorpora DEC-TOR-001 sobre configuración y modificación del marcador administrativo.
 - 1.0 — 2026-11-02: registro inicial basado en decisiones disponibles; no es transcripción literal de documentos anteriores.
