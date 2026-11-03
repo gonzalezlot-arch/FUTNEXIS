@@ -1,11 +1,11 @@
 # FN-GOV-DEC-002 — Registro de decisiones del portal público
 
-- Versión: 1.4
+- Versión: 1.5
 - Estado: EN_REVISION
 - Fecha: 2026-11-02
 
 ## Propósito y trazabilidad
-Consolida las decisiones conocidas del portal público de FUTNEXIS. DEC-PORT-001 a 008 existían en un registro anterior, pero su redacción literal no está disponible para verificación y no se reconstruye ni inventa. DEC-PORT-009 a 043 se registran como síntesis de las definiciones disponibles. DEC-PORT-036 a 044 fueron aprobadas expresamente el 2026-11-02.
+Consolida las decisiones conocidas del portal público de FUTNEXIS. DEC-PORT-001 a 008 existían en un registro anterior, pero su redacción literal no está disponible para verificación y no se reconstruye ni inventa. DEC-PORT-009 a 043 se registran como síntesis de las definiciones disponibles. DEC-PORT-036 a 045 fueron aprobadas expresamente el 2026-11-02.
 
 ## DEC-PORT-001 a 008
 [PENDIENTE] Recuperar el texto literal desde la versión histórica original antes de declararlas consolidadas.
@@ -62,7 +62,9 @@ Consolida las decisiones conocidas del portal público de FUTNEXIS. DEC-PORT-001
 Ranking general de goleadores, en orden: (1) mayor cantidad de goles; (2) mayor avance deportivo del equipo con el que participa el jugador en ese torneo; (3) menor cantidad de partidos oficiales jugados para alcanzar esa cantidad de goles. Si persiste el empate, comparten posición.
 - En formatos eliminatorios se consideran campeón, subcampeón, eliminado en semifinales, cuartos, octavos y fases anteriores/grupos.
 - En formatos de liga sin eliminatorias se considera la posición final del equipo.
-- [PENDIENTE] Precisar el algoritmo para formatos mixtos y estructuras especiales.
+- En formatos mixtos se determina el avance por la fase más avanzada alcanzada oficialmente; la fase eliminatoria prevalece sobre la eliminación en grupos.
+- Entre equipos eliminados en la misma fase, se utiliza la posición final oficial establecida por el reglamento. Si no diferencia posiciones, comparten nivel de avance.
+- [PENDIENTE] Precisar estructuras especiales no clasificables con estas reglas generales.
 
 ## DEC-PORT-039 — Partidos aplazados, suspendidos, anulados y reprogramados
 [CONFIRMADO]
@@ -118,6 +120,17 @@ Para el tercer criterio del ranking general de goleadores —menor cantidad de p
 - Solo se consideran partidos oficiales del torneo.
 - Los partidos anulados quedan excluidos del conteo.
 
+## DEC-PORT-045 — Algoritmo base de avance deportivo para formatos mixtos
+[CONFIRMADO — aprobación expresa del propietario del producto, 2026-11-02]
+
+El segundo criterio de desempate del ranking general de goleadores se determina por el avance deportivo del equipo del jugador en el torneo:
+- Se considera la fase más avanzada alcanzada oficialmente por el equipo, incluso si el torneo combina grupos y eliminación directa.
+- La jerarquía base es: campeón, subcampeón, eliminado en semifinales, cuartos de final, octavos de final, rondas eliminatorias anteriores y fase de grupos.
+- Alcanzar una fase eliminatoria prevalece sobre quedar eliminado en fase de grupos.
+- Entre equipos eliminados en la misma fase, se utiliza la posición final oficial que establezca el reglamento. Si no hay posiciones diferenciadas, comparten nivel de avance.
+- En torneos de liga sin eliminación directa, se utiliza la posición final oficial de la clasificación.
+- Las estructuras especiales no clasificables con estas reglas requieren definición específica antes de calcular el ranking.
+
 ## Reglas transversales de privacidad y navegación
 - Cada organización configura nombre, logotipo, colores, descripción y contacto; FUTNEXIS conserva su identidad de plataforma.
 - Portal público desactivado por defecto y requiere publicación autorizada.
@@ -137,7 +150,7 @@ Para el tercer criterio del ranking general de goleadores —menor cantidad de p
 ## Pendientes
 1. Recuperar DEC-PORT-001 a 008 literalmente.
 2. Confirmar filtros por estado y modalidad en portada; por ahora [PROPUESTA]/[PENDIENTE].
-3. Precisar avance deportivo para formatos mixtos y especiales.
+3. Precisar únicamente estructuras especiales no cubiertas por DEC-PORT-045.
 4. Definir plazos de conservación de auditoría y política de privacidad.
 5. Definir responsables, tiempos y apelaciones de moderación.
 6. Definir estados completos de publicación y transiciones.
@@ -152,6 +165,7 @@ Para el tercer criterio del ranking general de goleadores —menor cantidad de p
 - DEC-PORT-038 aprueba el principio de avance deportivo, no el algoritmo de formatos mixtos.
 
 ## Historial
+- 1.5 — 2026-11-02: incorpora DEC-PORT-045, que define el algoritmo base de avance deportivo para formatos mixtos.
 - 1.4 — 2026-11-02: incorpora DEC-PORT-044, que precisa el conteo de partidos para el tercer desempate del ranking general de goleadores.
 - 1.3 — 2026-11-02: consolidación de DEC-PORT-009 a 043, reglas transversales y pendientes. DEC-PORT-001 a 008 quedan expresamente pendientes de recuperación literal.
 - 1.2 — versión de trabajo conocida; pendiente comparar contenido histórico íntegro.
