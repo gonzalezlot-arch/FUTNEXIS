@@ -180,6 +180,18 @@ Cuando los dos equipos de un enfrentamiento eliminatorio estén retirados o desc
 - La decisión registra responsable, fecha, motivo y resolución.
 - No se generan estadísticas individuales ni efectos colectivos de resultado para ese encuentro.
 
+## DEC-PORT-049 — Doble exclusión en enfrentamiento eliminatorio
+[CONFIRMADO — aprobación expresa del propietario del producto, 2026-11-02]
+
+Cuando los dos equipos de un enfrentamiento eliminatorio estén retirados o descalificados antes de disputar el partido:
+- Ninguno avanza automáticamente.
+- El encuentro se registra como no disputado por exclusión de ambos equipos.
+- No se asignan puntos ni marcador administrativo.
+- FUTNEXIS no selecciona automáticamente un equipo sustituto.
+- El organizador decide cómo completar la plaza o resolver el cuadro.
+- La decisión registra responsable, fecha, motivo y resolución.
+- No se generan estadísticas individuales ni efectos colectivos de resultado para ese encuentro.
+
 ## Reglas transversales de privacidad y navegación
 - Cada organización configura nombre, logotipo, colores, descripción y contacto; FUTNEXIS conserva su identidad de plataforma.
 - Portal público desactivado por defecto y requiere publicación autorizada.
@@ -215,6 +227,7 @@ Cuando los dos equipos de un enfrentamiento eliminatorio estén retirados o desc
 
 ## Historial
 - 1.8 — 2026-11-02: incorpora DEC-PORT-049 sobre doble exclusión en enfrentamiento eliminatorio; se complementa DEC-PORT-048 con la resolución de encuentros entre dos equipos excluidos.
+- 1.8 — 2026-11-02: incorpora DEC-PORT-049 sobre doble exclusión en enfrentamiento eliminatorio.
 - 1.7 — 2026-11-02: incorpora DEC-PORT-047 y DEC-PORT-048, y precisa que las reclasificaciones que formen parte del camino al título cuentan para el avance deportivo.
 - 1.6 — 2026-11-02: incorpora DEC-PORT-046 para cuadros escalonados y comparación por partidos oficiales disputados; elimina duplicación de DEC-PORT-045.
 - 1.5 — 2026-11-02: incorpora DEC-PORT-045, que define el algoritmo base de avance deportivo para formatos mixtos.
