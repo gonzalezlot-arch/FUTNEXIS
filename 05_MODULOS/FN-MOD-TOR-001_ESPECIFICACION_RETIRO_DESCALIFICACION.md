@@ -1,6 +1,6 @@
 # FN-MOD-TOR-001 — Especificación funcional: retiro, descalificación y resolución administrativa de equipos
 
-- **Versión:** 1.9
+- **Versión:** 2.0
 - **Estado:** EN_REVISION
 - **Fecha:** 2026-11-02
 - **Tipo:** especificación funcional parcial
@@ -119,7 +119,10 @@ Si el retiro o descalificación se presenta respecto de un enfrentamiento ya dis
 ### RN-TOR-012 — Elegibilidad de equipos sustitutos
 Para ocupar una plaza vacante por doble exclusión, el equipo debe haber participado en el mismo torneo, haber sido eliminado en una instancia anterior, cumplir las condiciones deportivas y reglamentarias de la ronda y no tener una exclusión o sanción que le impida continuar. La selección corresponde al organizador autorizado y debe quedar auditada.
 
-### RN-TOR-015 — Avance del rival en fase eliminatoria\nCuando un equipo sea retirado o descalificado durante una fase eliminatoria, el rival contra el que se encontraba enfrentado en esa instancia avanzará a la siguiente fase. El torneo continuará con normalidad conforme al calendario y cuadro resultantes. Si ambos equipos del enfrentamiento están excluidos, no habrá avance automático y se aplicará el procedimiento de doble exclusión definido en DEC-PORT-049/051.\n\n### RN-TOR-017 — Declaración de campeón por retiro/descalificación en la final
+### RN-TOR-015 — Avance del rival en fase eliminatoria\nCuando un equipo sea retirado o descalificado durante una fase eliminatoria, el rival contra el que se encontraba enfrentado en esa instancia avanzará a la siguiente fase. El torneo continuará con normalidad conforme al calendario y cuadro resultantes. Si ambos equipos del enfrentamiento están excluidos, no habrá avance automático y se aplicará el procedimiento de doble exclusión definido en DEC-PORT-049/051.\n\n### RN-TOR-018 — Decisión posterior al cierre oficial del torneo
+Una vez que el torneo haya sido declarado oficialmente finalizado, FUTNEXIS no ejecutará automáticamente cambios deportivos, administrativos ni estadísticos por un retiro o descalificación posterior. Cualquier decisión o medida sobre esa situación queda exclusivamente a criterio del organizador del torneo; la plataforma no modificará automáticamente resultados, clasificación, estadísticas ni reconocimientos ya cerrados.
+
+### RN-TOR-017 — Declaración de campeón por retiro/descalificación en la final
 Si uno de los finalistas es retirado o descalificado y el rival permanece activo, el rival será declarado campeón del torneo. La final quedará registrada con el marcador administrativo común vigente, aplicado a favor del equipo campeón. Se actualizarán las métricas colectivas correspondientes y no se generarán estadísticas individuales. Si ambos finalistas están excluidos, no se declarará campeón automáticamente ni se asignará marcador; se aplicará el procedimiento de doble exclusión y la resolución corresponderá al organizador autorizado.
 
 ### RN-TOR-016 — Registro del marcador administrativo en avance eliminatorio\nEl enfrentamiento que habilita el avance del rival activo quedará registrado oficialmente con el marcador administrativo común vigente del torneo, aplicado a favor del equipo que avanza, independientemente de la localía. Se actualizarán las métricas colectivas correspondientes y no se generarán estadísticas individuales. Esta regla no aplica a enfrentamientos con doble exclusión.\n\n### RN-TOR-014 — Resolución de partidos futuros pendientes
@@ -165,6 +168,7 @@ El sistema deberá impedir:
 - **CA-TOR-011:** el sistema valida participación en el mismo torneo, eliminación en instancia anterior, compatibilidad reglamentaria/deportiva y ausencia de exclusión o sanción impeditiva antes de aceptar al sustituto.
 - **CA-TOR-012:** cuando la decisión de retiro/descalificación afecta un enfrentamiento ya disputado contra el rival correspondiente, únicamente ese partido sustituye su marcador oficial por el administrativo común a favor de ese rival; los demás partidos anteriores conservan sus resultados y el original afectado queda en auditoría.
 - **CA-TOR-013:** todos los partidos futuros pendientes contra equipos activos se resuelven con el marcador administrativo común vigente, a favor del equipo activo y con efectos colectivos; los pendientes contra equipos excluidos no reciben marcador ni efectos estadísticos.\n- **CA-TOR-014:** en fase eliminatoria, al excluirse uno de los dos equipos enfrentados, el rival activo avanza a la siguiente fase y el torneo continúa conforme al cuadro actualizado; la doble exclusión sigue el procedimiento especial sin avance automático.\n- **CA-TOR-015:** el enfrentamiento eliminatorio queda registrado con el marcador administrativo común a favor del rival que avanza; se actualizan métricas colectivas y no se generan estadísticas individuales. La doble exclusión no recibe marcador.\n- **CA-TOR-016:** si uno de los finalistas es retirado/descalificado y el otro permanece activo, el activo es declarado campeón; la final se registra con el marcador administrativo común a su favor, con efectos colectivos y sin estadísticas individuales. Si ambos están excluidos, no se declara campeón automáticamente ni se asigna marcador.
+- **CA-TOR-017:** después del cierre oficial del torneo, un retiro/descalificación posterior no provoca cambios automáticos en resultados, clasificación, estadísticas ni reconocimientos; cualquier medida queda a decisión del organizador.
 
 ## 9. Dependencias y riesgos
 
@@ -181,12 +185,14 @@ El sistema deberá impedir:
 3. [RESUELTO — DEC-TOR-003] Para ser elegible, el equipo debe haber participado en el mismo torneo, haber sido eliminado en una instancia anterior, cumplir las condiciones deportivas y reglamentarias de la ronda y no tener exclusión o sanción que le impida continuar.
 4. [RESUELTO — DEC-TOR-004] La sustitución por marcador administrativo se limita exclusivamente al partido que motivó la decisión. Los demás partidos disputados anteriormente conservan sus resultados y estadísticas originales.
 5. [RESUELTO — DEC-TOR-005] Todos los partidos futuros pendientes contra equipos activos se resuelven administrativamente con el marcador común; los partidos contra equipos excluidos no reciben marcador ni efectos estadísticos.\n6. [RESUELTO — DEC-TOR-006] En fase eliminatoria, el rival activo del equipo retirado/descalificado avanza a la siguiente fase y el torneo continúa normalmente. La doble exclusión conserva su tratamiento especial.\n7. [RESUELTO — DEC-TOR-007] El partido que habilita ese avance se registra con el marcador administrativo común a favor del rival activo, con efectos colectivos y sin estadísticas individuales.\n8. [RESUELTO — DEC-TOR-008] Si el retiro/descalificación ocurre en la final y el rival está activo, este es declarado campeón con el marcador administrativo común; se aplican efectos colectivos y no individuales.
+9. [RESUELTO — DEC-TOR-009] Después del cierre oficial, FUTNEXIS no realiza cambios automáticos; cualquier decisión corresponde al organizador.
 6. ¿Qué estados exactos tendrá un partido no disputado por doble exclusión y cómo se mostrará en calendario, actas e informes?
 7. ¿Cómo se recalculan o congelan las clasificaciones históricas al cierre del torneo?
 8. ¿Qué procedimiento autorizado permite corregir un retiro/descalificación registrado por error?
 
 ## 11. Historial de cambios
 
+- **2.0 — 2026-11-02:** incorpora DEC-TOR-009: después del cierre oficial, cualquier medida por retiro/descalificación queda a decisión del organizador y no genera cambios automáticos.
 - **1.9 — 2026-11-02:** incorpora DEC-TOR-008 sobre declaración de campeón cuando el rival de la final es retirado/descalificado.\n- **1.8 — 2026-11-02:** incorpora DEC-TOR-007 sobre registro del marcador administrativo en el avance eliminatorio.\n- **1.7 — 2026-11-02:** incorpora DEC-TOR-006 sobre avance del rival en fase eliminatoria y continuidad del torneo.\n- **1.6 — 2026-11-02:** incorpora DEC-TOR-005 sobre resolución de todos los partidos futuros pendientes contra equipos activos.
 - **1.5 — 2026-11-02:** precisa que DEC-TOR-004 afecta exclusivamente al partido que motivó la decisión; los demás encuentros anteriores conservan sus resultados y estadísticas.
 - **1.4 — 2026-11-02:** incorpora DEC-TOR-004 sobre el efecto de retiro/descalificación en el enfrentamiento ya disputado contra el rival correspondiente.
