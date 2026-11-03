@@ -1,6 +1,6 @@
 # FN-GOV-AUD-001 — Auditoría de consistencia documental
 
-- **Versión:** 1.4
+- **Versión:** 1.5
 - **Estado:** EN_REVISION
 - **Fecha:** 2026-11-02
 - **Alcance:** documentos de organizaciones y portal público disponibles en la rama main.
@@ -81,6 +81,7 @@ Ninguno de los documentos revisados debe cambiar a APROBADO ni utilizarse como i
 4. obtener aprobación expresa del propietario del producto.
 
 ## 6. Historial
+- 1.5 — 2026-11-02: incorpora DEC-PORT-050/051. El marcador administrativo común y sus efectos colectivos quedan definidos; el organizador selecciona equipos previamente eliminados ante doble exclusión. AUD-FN-006 permanece parcial por elegibilidad de sustitutos y traslado de reglas al módulo operativo.
 - 1.4 — 2026-11-02: incorpora DEC-PORT-049 y los casos CP-RET-001 a CP-RET-013; AUD-FN-006 permanece parcial por métricas colectivas e historial de equipos excluidos.
 - 1.3 — 2026-11-02: incorpora DEC-PORT-047/048; AUD-FN-006 sigue parcialmente resuelto y amplía pruebas a comparación entre grupos, reclasificación y retiro/descalificación.
 - 1.2 — 2026-11-02: actualiza AUD-FN-006 a parcialmente resuelto tras DEC-PORT-045/046; quedan pruebas de casos límite y estructuras especiales.
