@@ -1,6 +1,6 @@
 # FN-GOV-DEC-001 — Registro maestro de decisiones
 
-- Versión: 1.9
+- Versión: 2.0
 - Estado: EN_REVISION
 - Fecha de corte: 2026-11-02
 
@@ -73,12 +73,17 @@ Si un equipo es retirado o descalificado durante la final y su rival permanece a
 [CONFIRMADO — 2026-11-02]
 Una vez que el torneo haya sido declarado oficialmente finalizado, FUTNEXIS no aplicará automáticamente cambios deportivos, administrativos ni estadísticos por un retiro o descalificación posterior. Cualquier decisión o medida sobre esa situación corresponderá exclusivamente al organizador del torneo.
 
+### DEC-TOR-010 — No reincorporación de equipos retirados
+[CONFIRMADO — 2026-11-02]
+Un equipo que formalice su retiro voluntario no podrá reincorporarse a esa misma edición del torneo, aunque la competición continúe en curso. La exclusión será definitiva para esa edición.
+
 ## Pendientes
 1. Verificar el texto original de DEC-PORT-001 a 008 si aparece una fuente histórica.
 2. Armonizar especificaciones funcionales y UX con DEC-PORT-036 a 043.
 3. Actualizar este registro ante cada nueva decisión.
 
 ## Historial
+- 2.0 — 2026-11-02: incorpora DEC-TOR-010: el equipo que formaliza su retiro voluntario no puede reincorporarse a la misma edición.
 - 1.9 — 2026-11-02: incorpora DEC-TOR-009: después del cierre oficial del torneo, cualquier decisión por retiro/descalificación corresponde al organizador; FUTNEXIS no aplica cambios automáticos.
 - 1.8 — 2026-11-02: incorpora DEC-TOR-008: si el retiro/descalificación ocurre en la final, el rival activo es declarado campeón con el marcador administrativo común.\n- 1.7 — 2026-11-02: incorpora DEC-TOR-007: el avance del rival en fase eliminatoria queda registrado con el marcador administrativo común.\n- 1.6 — 2026-11-02: incorpora DEC-TOR-006 sobre avance del rival en fase eliminatoria y continuidad normal del torneo.\n- 1.5 — 2026-11-02: incorpora DEC-TOR-005 sobre partidos futuros pendientes tras retiro/descalificación.
 - 1.4 — 2026-11-02: incorpora DEC-TOR-004 y limita su efecto al partido que motivó la decisión.
