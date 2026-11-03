@@ -1,6 +1,6 @@
 # FN-GOV-TRZ-001 — Matriz de trazabilidad del portal público
 
-- **Versión:** 1.3
+- **Versión:** 1.4
 - **Estado:** EN_REVISION
 - **Fecha:** 2026-11-02
 - **Documentos relacionados:** FN-GOV-DEC-002 v1.6; FN-MOD-ORG-002 v1.8.
@@ -56,6 +56,8 @@
 | DEC-PORT-044 | Definición de partidos para tercer desempate de goleadores | RF-PORT-027 | RN-PORT-009: participación efectiva en partidos oficiales hasta alcanzar el total de goles; convocatoria sin ingreso no cuenta; titular/suplente sí; goles múltiples en un partido cuentan como un encuentro; anulados excluidos | CA-PORT-041 | Directa para el conteo |
 | DEC-PORT-045 | Algoritmo base de avance deportivo en formatos mixtos | RF-PORT-027 | RN-PORT-009: fase oficial más avanzada y posición reglamentaria | CA-PORT-013 | Directa para regla base |
 | DEC-PORT-046 | Cuadros escalonados y comparación por partidos disputados | RF-PORT-027 | RN-PORT-009: instancia más avanzada; a igual instancia, menor cantidad de partidos oficiales disputados en rondas eliminatorias, incluyendo rondas previas y todos los resultados; excluye fase inicial y anulados; desempate por posición oficial | CA-PORT-042 | Directa para regla base; estructuras especiales pendientes |
+| DEC-PORT-047 | Posición oficial de equipos eliminados en grupos y clasificación de mejores terceros | RF-PORT-027 | RN-PORT-021: posición oficial del grupo; entre grupos, mecanismo comparativo reglamentario; puesto de tercero deja de ser criterio tras clasificar | CA-PORT-043 | Pendiente de pruebas entre grupos y rondas |
+| DEC-PORT-048 | Retiro/descalificación, exclusión de tabla y resultados administrativos | RF-PORT-017, RF-PORT-016 | RN-PORT-022: excluye de tabla y recalcula equipos activos; conserva resultados previos; partidos pendientes adjudicados con marcador del organizador; solo efecto colectivo | CA-PORT-044 | Pendiente de pruebas de tabla, puntos y estadísticas individuales |
 
 ## 3. Hallazgos de trazabilidad
 
@@ -88,6 +90,7 @@ Esta matriz es una herramienta de análisis y control documental. No constituye 
 
 ## 6. Historial
 
+- 1.4 — 2026-11-02: incorpora DEC-PORT-047/048 y su trazabilidad mediante RN-PORT-021/022 y CA-PORT-043/044; refleja la inclusión de reclasificaciones que formen parte del camino al título.
 - 1.3 — 2026-11-02: incorpora DEC-PORT-045/046 y su trazabilidad mediante RN-PORT-009 y CA-PORT-042.
 - 1.2 — 2026-11-02: incorpora DEC-PORT-044 y su trazabilidad mediante RN-PORT-009 y CA-PORT-041.
 - 1.1 — 2026-11-02: actualiza la trazabilidad tras FN-MOD-ORG-002 v1.6; incorpora catálogo RN numerado y ampliación de criterios CA-PORT-025 a 040.
