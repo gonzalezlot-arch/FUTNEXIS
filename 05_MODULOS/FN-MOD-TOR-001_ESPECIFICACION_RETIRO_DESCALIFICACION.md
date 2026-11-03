@@ -1,6 +1,6 @@
 # FN-MOD-TOR-001 — Especificación funcional: retiro, descalificación y resolución administrativa de equipos
 
-- **Versión:** 1.3
+- **Versión:** 1.4
 - **Estado:** EN_REVISION
 - **Fecha:** 2026-11-02
 - **Tipo:** especificación funcional parcial
@@ -72,6 +72,9 @@ Cuando ambos equipos asignados a un partido pendiente estén excluidos, el encue
 ### RF-TOR-010 — Resolver doble exclusión eliminatoria
 Si ambos equipos de un enfrentamiento eliminatorio están excluidos antes de disputarlo, ninguno avanzará automáticamente. FUTNEXIS no seleccionará sustitutos por sí mismo. El organizador indicará qué equipo o equipos previamente eliminados ocuparán la instancia o plaza vacante.
 
+### RF-TOR-013 — Reemplazar resultado del enfrentamiento objeto de retiro/descalificación
+Cuando la decisión de retiro o descalificación se presente respecto de un enfrentamiento ya disputado entre el equipo excluido y su rival, el sistema reemplazará el resultado deportivo original por el resultado administrativo común del torneo, aplicado a favor del rival. Actualizará las métricas colectivas de ambos equipos conforme a ese marcador y conservará el resultado original en la auditoría histórica, sin generar ni conservar estadísticas individuales derivadas del encuentro como resultado oficial.
+
 ### RF-TOR-012 — Validar equipos sustitutos en plazas vacantes
 El sistema permitirá al organizador seleccionar equipos previamente eliminados para ocupar una instancia o plaza vacante por doble exclusión, validando que hayan participado en el mismo torneo, que hayan sido eliminados en una instancia anterior, que cumplan las condiciones deportivas y reglamentarias de la ronda y que no tengan una exclusión o sanción que les impida continuar.
 
@@ -109,6 +112,9 @@ No se asigna marcador ni efecto colectivo o individual a un partido pendiente en
 
 ### RN-TOR-011 — Autorización para retiro y descalificación
 Podrán ejecutar el retiro o descalificación del equipo: el propietario de la organización, un administrador de la organización que tenga permiso de gestión deportiva, y el organizador o director del torneo cuando tenga asignado el permiso específico para esa competición. Un operador de resultados podrá registrar una incidencia o reportar una solicitud, pero no ejecutar por sí mismo el retiro o la descalificación.
+
+### RN-TOR-013 — Efecto de la decisión sobre el enfrentamiento disputado
+Si el retiro o descalificación se presenta respecto de un enfrentamiento ya disputado contra el equipo que solicita o motiva la decisión, el resultado deportivo de ese encuentro se sustituye por el marcador administrativo común del torneo, siempre a favor del rival. Se recalculan las métricas colectivas conforme al nuevo resultado. El resultado deportivo original se conserva únicamente como antecedente de auditoría y no como resultado oficial vigente. No se generan estadísticas individuales a partir del resultado administrativo.
 
 ### RN-TOR-012 — Elegibilidad de equipos sustitutos
 Para ocupar una plaza vacante por doble exclusión, el equipo debe haber participado en el mismo torneo, haber sido eliminado en una instancia anterior, cumplir las condiciones deportivas y reglamentarias de la ronda y no tener una exclusión o sanción que le impida continuar. La selección corresponde al organizador autorizado y debe quedar auditada.
@@ -151,6 +157,7 @@ El sistema deberá impedir:
 - **CA-TOR-009:** ante doble exclusión eliminatoria, ninguno avanza automáticamente.
 - **CA-TOR-010:** el organizador puede seleccionar equipos previamente eliminados para ocupar la instancia vacante y la decisión queda auditada.
 - **CA-TOR-011:** el sistema valida participación en el mismo torneo, eliminación en instancia anterior, compatibilidad reglamentaria/deportiva y ausencia de exclusión o sanción impeditiva antes de aceptar al sustituto.
+- **CA-TOR-012:** cuando la decisión de retiro/descalificación afecta un enfrentamiento ya disputado contra el rival correspondiente, el marcador oficial se sustituye por el administrativo común a favor de ese rival, se recalculan las métricas colectivas y se conserva el resultado original en auditoría.
 
 ## 9. Dependencias y riesgos
 
@@ -165,13 +172,14 @@ El sistema deberá impedir:
 1. [RESUELTO — DEC-TOR-001] El marcador se configura al crear el torneo; puede modificarse durante la competición mediante acción autorizada y auditada. El cambio aplica a resoluciones futuras y no modifica resultados ya aplicados.
 2. ¿Qué roles pueden registrar un retiro/descalificación y confirmar la resolución administrativa?
 3. [RESUELTO — DEC-TOR-003] Para ser elegible, el equipo debe haber participado en el mismo torneo, haber sido eliminado en una instancia anterior, cumplir las condiciones deportivas y reglamentarias de la ronda y no tener exclusión o sanción que le impida continuar.
-5. ¿Cómo se trata una exclusión después de que ya se haya generado o confirmado el resultado de un partido, pero antes de cerrar la jornada/fase?
+4. [RESUELTO — DEC-TOR-004] Si la decisión de retiro/descalificación se presenta respecto de un enfrentamiento ya disputado entre el equipo excluido y su rival, se reemplaza el resultado original por el marcador administrativo común a favor del rival; se actualizan las métricas colectivas y el resultado original queda conservado en auditoría.
 6. ¿Qué estados exactos tendrá un partido no disputado por doble exclusión y cómo se mostrará en calendario, actas e informes?
 7. ¿Cómo se recalculan o congelan las clasificaciones históricas al cierre del torneo?
 8. ¿Qué procedimiento autorizado permite corregir un retiro/descalificación registrado por error?
 
 ## 11. Historial de cambios
 
+- **1.4 — 2026-11-02:** incorpora DEC-TOR-004 sobre el efecto de retiro/descalificación en el enfrentamiento ya disputado contra el rival correspondiente.
 - **1.3 — 2026-11-02:** incorpora DEC-TOR-003 sobre condiciones de elegibilidad de equipos sustitutos ante doble exclusión.
 - **1.2 — 2026-11-02:** incorpora DEC-TOR-002 sobre autorización de retiro/descalificación y alcance del operador de resultados.
 - **1.1 — 2026-11-02:** incorpora DEC-TOR-001 sobre configuración inicial, modificación auditada y no retroactividad del marcador administrativo.
