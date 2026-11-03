@@ -1,10 +1,10 @@
 # FN-MOD-TOR-001 — Especificación funcional: retiro, descalificación y resolución administrativa de equipos
 
-- **Versión:** 1.0
+- **Versión:** 1.1
 - **Estado:** EN_REVISION
 - **Fecha:** 2026-11-02
 - **Tipo:** especificación funcional parcial
-- **Decisiones relacionadas:** DEC-PORT-039, DEC-PORT-048, DEC-PORT-049, DEC-PORT-050 y DEC-PORT-051
+- **Decisiones relacionadas:** DEC-PORT-039, DEC-PORT-048, DEC-PORT-049, DEC-PORT-050, DEC-PORT-051 y DEC-TOR-001
 - **Casos de prueba relacionados:** FN-QA-RET-001 v1.1
 - **Nota de alcance:** este documento formaliza exclusivamente las reglas conocidas sobre retiro/descalificación y sus efectos. No constituye todavía la especificación integral del módulo de torneos, calendario, partidos, clasificación ni inscripciones.
 
@@ -104,6 +104,9 @@ Ante la doble exclusión, ningún equipo avanza automáticamente. La selección 
 ### RN-TOR-009 — Encuentro entre dos equipos excluidos
 No se asigna marcador ni efecto colectivo o individual a un partido pendiente entre dos equipos excluidos.
 
+### RN-TOR-010 — Configuración y modificación del marcador administrativo
+El organizador configura el marcador administrativo común al crear el torneo. Durante la competición podrá modificarlo mediante una acción autorizada y auditada. La modificación tendrá efecto únicamente sobre las resoluciones administrativas que se apliquen después del cambio; no alterará automáticamente resultados administrativos ya aplicados. Cualquier corrección de un resultado anterior requerirá un procedimiento explícito, autorizado y auditado.
+
 ## 6. Permisos y controles
 
 - La capacidad de registrar retiros/descalificaciones y resolver encuentros debe depender de permisos administrativos del torneo.
@@ -147,7 +150,7 @@ El sistema deberá impedir:
 
 ## 10. Pendientes de definición
 
-1. ¿El organizador configura el marcador administrativo al crear el torneo o puede modificarlo durante la competición? ¿Qué ocurre con resultados ya aplicados si lo modifica?
+1. [RESUELTO — DEC-TOR-001] El marcador se configura al crear el torneo; puede modificarse durante la competición mediante acción autorizada y auditada. El cambio aplica a resoluciones futuras y no modifica resultados ya aplicados.
 2. ¿Qué roles pueden registrar un retiro/descalificación y confirmar la resolución administrativa?
 3. ¿Qué condiciones hacen elegible a un equipo previamente eliminado para ocupar una plaza vacante y cómo se valida su compatibilidad con la ronda?
 4. ¿Cómo se trata una exclusión después de que ya se haya generado o confirmado el resultado de un partido, pero antes de cerrar la jornada/fase?
@@ -157,4 +160,5 @@ El sistema deberá impedir:
 
 ## 11. Historial de cambios
 
-- **1.0 — 2026-11-02:** primera formalización parcial de las reglas aprobadas en DEC-PORT-048 a DEC-PORT-051. Pendiente completar reglas operativas y validar criterios de aceptación.
+- **1.1 — 2026-11-02:** incorpora DEC-TOR-001 sobre configuración inicial, modificación auditada y no retroactividad del marcador administrativo.
+- **1.0 — 2026-11-02:** primera formalización parcial de las reglas aprobadas en DEC-PORT-048 a DEC-PORT-051.
