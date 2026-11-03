@@ -1,6 +1,6 @@
 # FN-MOD-ORG-002 — Especificación funcional: portal público
 
-- **Versión documental:** 1.6
+- **Versión documental:** 1.7
 - **Estado:** EN_REVISION
 - **Fecha de consolidación:** 2026-11-02
 - **Base conocida:** versión 1.4, WritingBlock de referencia 61482
@@ -132,7 +132,7 @@ Rutas generales conocidas: `/` para inicio, `/login` para autenticación, `/app`
 | RN-PORT-006 | El calendario ofrece vista por jornadas y lista cronológica, con filtros por equipo y estado. | [CONFIRMADO] — DEC-PORT-015 |
 | RN-PORT-007 | La clasificación pública presenta posición, equipo, PJ, PG, PE, PP, GF, GC, DG y PTS. | [CONFIRMADO] — DEC-PORT-016 |
 | RN-PORT-008 | Las estadísticas individuales incluyen goles, partidos jugados y tarjetas amarillas, rojas y azules; no incluyen asistencias en el alcance actual. | [CONFIRMADO] — DEC-PORT-017 |
-| RN-PORT-009 | El ranking general de goleadores aplica goles, avance deportivo, menor cantidad de partidos oficiales y empate compartido como criterios sucesivos. | [CONFIRMADO] — DEC-PORT-018 y DEC-PORT-038; definición algorítmica parcial |
+| RN-PORT-009 | El ranking general de goleadores aplica sucesivamente: mayor cantidad de goles; mayor avance deportivo del equipo; menor cantidad de partidos oficiales del jugador hasta alcanzar esa misma cantidad de goles; si persiste el empate, comparte posición. Para el tercer criterio solo cuentan partidos oficiales del torneo con participación efectiva en campo, desde el inicio del torneo hasta el partido en que alcanza el total de goles comparado. Convocado sin ingresar no cuenta; ingresar como titular o suplente sí; varios goles en un partido cuentan como un solo partido; partidos anulados se excluyen. | [CONFIRMADO] — DEC-PORT-018, DEC-PORT-038 y DEC-PORT-044; algoritmo de avance deportivo para formatos mixtos/especiales pendiente |
 | RN-PORT-010 | Los rankings disciplinarios se presentan separados por tipo de tarjeta y en orden descendente. | [CONFIRMADO] — DEC-PORT-019 |
 | RN-PORT-011 | Cada jugador dispone de ficha pública con identificador estable, nombre deportivo y datos deportivos autorizados. | [CONFIRMADO] — DEC-PORT-020 y reglas de privacidad |
 | RN-PORT-012 | El historial del jugador conserva la participación por torneo y equipo, sin sobrescribir el historial por cambios posteriores de equipo. | [CONFIRMADO] — DEC-PORT-021 y reglas transversales |
@@ -159,7 +159,7 @@ Rutas generales conocidas: `/` para inicio, `/login` para autenticación, `/app`
 Ranking general, en orden:
 1. Mayor cantidad de goles.
 2. Mayor avance deportivo del equipo con el que participa el jugador en el torneo.
-3. Menor cantidad de partidos oficiales jugados para alcanzar esa cantidad de goles.
+3. Menor cantidad de partidos oficiales jugados para alcanzar esa cantidad de goles. Se cuentan los partidos oficiales del torneo en los que el jugador haya ingresado efectivamente al campo, desde el inicio del torneo hasta el partido en que alcance el total de goles comparado. Una convocatoria sin ingreso no cuenta; la participación como titular o suplente sí. Varios goles en un mismo partido cuentan como un solo partido jugado. Los partidos anulados se excluyen.
 4. Si persiste el empate, comparten posición.
 
 En formatos eliminatorios se consideran campeón, subcampeón, semifinales, cuartos, octavos y fases anteriores/grupos. En formatos de liga sin eliminatorias se considera la posición final del equipo. Los formatos mixtos/especiales requieren definición algorítmica adicional.
@@ -250,6 +250,7 @@ Registrar publicaciones, despublicaciones, modificaciones y cambios de estado co
 | CA-PORT-038 | Al reactivar una organización, vuelven a estar disponibles únicamente los contenidos que continúen publicados. |
 | CA-PORT-039 | La retirada de publicación o suspensión genera una señal técnica de exclusión/retirada de indexación, sin revelar información privada. |
 | CA-PORT-040 | Los registros de auditoría contienen usuario, fecha, acción, entidad afectada y motivo cuando corresponda; solo usuarios autorizados pueden consultarlos. |
+| CA-PORT-041 | Para el tercer desempate del ranking general, solo cuentan partidos oficiales del torneo en los que el jugador ingresó al campo, como titular o suplente, hasta el partido en que alcanzó la cantidad de goles comparada. Una convocatoria sin ingreso no cuenta; varios goles en un encuentro cuentan como un solo partido; partidos anulados se excluyen. |
 
 ## 9. Dependencias
 
@@ -278,4 +279,5 @@ Registrar publicaciones, despublicaciones, modificaciones y cambios de estado co
 
 ## 11. Historial
 
+- 1.7 — 2026-11-02: incorpora DEC-PORT-044 en RN-PORT-009 y CA-PORT-041, precisando participación efectiva y conteo de partidos para el tercer desempate.
 - 1.6 — 2026-11-02: incorpora catálogo numerado RN-PORT-001 a 020, amplía CA-PORT-025 a 040 y corrige la referencia de CA-PORT-006. Se mantiene EN_REVISION y requiere comparación con versión original 1.4.
