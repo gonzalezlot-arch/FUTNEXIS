@@ -1,6 +1,6 @@
 # FN-GOV-DOC-001 — Inventario documental
 
-- Versión: 2.1
+- Versión: 2.2
 - Estado: EN_REVISION
 - Fecha de corte: 2026-11-02
 
@@ -22,6 +22,8 @@
 
 | FN-QA-RET-001 | Casos de prueba: retiro y descalificación de equipos | 08_CALIDAD/FN-QA-RET-001_CASOS_PRUEBA_RETIRO_DESCALIFICACION.md | 1.1 | EN_REVISION |
 
+| FN-MOD-TOR-001 | Especificación funcional: retiro, descalificación y resolución administrativa de equipos | 05_MODULOS/FN-MOD-TOR-001_ESPECIFICACION_RETIRO_DESCALIFICACION.md | 1.0 | EN_REVISION; especificación parcial |
+
 ## Versiones fuente conocidas pendientes de cotejo
 | Código | Versión fuente conocida | Estado conocido | Acción pendiente |
 |---|---:|---|---|
@@ -35,6 +37,7 @@
 No marcar APROBADO sin aprobación expresa. No declarar verificada una versión conocida solo por resumen. Conservar versiones obsoletas. Actualizar el inventario junto con cada cambio documental.
 
 ## Historial
+- 2.2 — 2026-11-02: incorpora FN-MOD-TOR-001 v1.0 como especificación operativa parcial para retiro/descalificación y resolución administrativa.
 - 2.1 — 2026-11-02: registra FN-GOV-AUD-001 v1.5 y consolida el seguimiento de DEC-PORT-050/051.
 - 2.0 — 2026-11-02: registra FN-GOV-DEC-002 v1.9, FN-GOV-TRZ-001 v1.6 y FN-QA-RET-001 v1.1; incorpora DEC-PORT-050/051 al seguimiento documental.
 - 1.8 — 2026-11-02: registra DEC-PORT-047/048 y las versiones FN-MOD-ORG-002 v1.9, FN-GOV-DEC-002 v1.7, FN-GOV-TRZ-001 v1.4 y FN-GOV-AUD-001 v1.3.
