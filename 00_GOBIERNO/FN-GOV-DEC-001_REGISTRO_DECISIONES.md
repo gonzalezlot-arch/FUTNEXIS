@@ -1,6 +1,6 @@
 # FN-GOV-DEC-001 — Registro maestro de decisiones
 
-- Versión: 2.0
+- Versión: 2.1
 - Estado: EN_REVISION
 - Fecha de corte: 2026-11-02
 
@@ -83,6 +83,7 @@ Todo equipo que se retire o abandone el torneo no podrá reincorporarse a esa mi
 3. Actualizar este registro ante cada nueva decisión.
 
 ## Historial
+- 2.1 — 2026-11-02: aclara DEC-TOR-010: la prohibición de reincorporación aplica a todo equipo retirado o que abandone el torneo.
 - 2.0 — 2026-11-02: incorpora DEC-TOR-010: todo equipo retirado o que abandone el torneo no puede reincorporarse a la misma edición.
 - 1.9 — 2026-11-02: incorpora DEC-TOR-009: después del cierre oficial del torneo, cualquier decisión por retiro/descalificación corresponde al organizador; FUTNEXIS no aplica cambios automáticos.
 - 1.8 — 2026-11-02: incorpora DEC-TOR-008: si el retiro/descalificación ocurre en la final, el rival activo es declarado campeón con el marcador administrativo común.\n- 1.7 — 2026-11-02: incorpora DEC-TOR-007: el avance del rival en fase eliminatoria queda registrado con el marcador administrativo común.\n- 1.6 — 2026-11-02: incorpora DEC-TOR-006 sobre avance del rival en fase eliminatoria y continuidad normal del torneo.\n- 1.5 — 2026-11-02: incorpora DEC-TOR-005 sobre partidos futuros pendientes tras retiro/descalificación.
