@@ -1,6 +1,6 @@
 # FN-GOV-AUD-001 — Auditoría de consistencia documental
 
-- **Versión:** 1.0
+- **Versión:** 1.1
 - **Estado:** EN_REVISION
 - **Fecha:** 2026-11-02
 - **Alcance:** documentos de organizaciones y portal público disponibles en la rama main.
@@ -20,14 +20,14 @@ No se modifican decisiones de negocio mediante esta auditoría. Las correcciones
 | AUD-FN-002 | Alta | FN-MOD-ORG-002 | La consolidación usa RF-PORT-001 a 047 y CA-PORT-001 a 024, mientras la versión de trabajo conocida se describía con 42 RF y 33 CA. No se ha verificado equivalencia uno a uno. | No tratar la numeración consolidada como continuidad literal. Preparar matriz de trazabilidad contra v1.4 original y recuperar requisitos/criterios faltantes. |
 | AUD-FN-003 | Alta | FN-GOV-DEC-002 / FN-MOD-ORG-002 | DEC-PORT-009 se usa en CA-PORT-006 para justificar el orden de grupos, pero el orden también está expresado en DEC-PORT-011; DEC-PORT-036 define los estados. | Corregir la referencia para apuntar a DEC-PORT-011 y DEC-PORT-036, según el aspecto verificado. |
 | AUD-FN-004 | Media | FN-MOD-ORG-002 | Se presenta RF-PORT-012 como propuesta pendiente, lo cual es correcto, pero la UX también debe mantener explícitamente el mismo estado en criterios de aceptación y futuras maquetas. | Mantener filtros fuera de los criterios aprobados hasta decisión expresa. |
-| AUD-FN-005 | Alta | FN-MOD-ORG-002 | La regla de ranking dice menor cantidad de partidos oficiales para alcanzar la cantidad de goles, pero no define si se contabilizan partidos del jugador, apariciones, titularidades ni cómo tratar goles múltiples en un mismo partido. | Precisar definición estadística antes de implementar el tercer desempate. |
+| AUD-FN-005 | Resuelto en definición funcional | FN-MOD-ORG-002 / DEC-PORT-044 | La definición del tercer desempate fue precisada y aprobada: participación efectiva en partidos oficiales, titular o suplente; convocatoria sin ingreso excluida; varios goles en un partido cuentan como un encuentro; partidos anulados excluidos. | Incorporado en RN-PORT-009 y CA-PORT-041. Mantener pruebas de aceptación y validar consistencia con el módulo operativo de partidos. |
 | AUD-FN-006 | Alta | DEC-PORT-038 | El principio de avance deportivo está aprobado, pero el orden de eliminación en formatos mixtos, grupos múltiples, repechajes y cruces no está algoritmizado. | Mantener como pendiente de especificación; construir casos de prueba por formato. |
 | AUD-FN-007 | Alta | FN-MOD-ORG-001 | Se indica un propietario principal activo único, pero falta especificar concurrencia y transacción para transferencias simultáneas, revocación del propietario y recuperación de cuenta. | Definir invariantes y escenarios de concurrencia en arquitectura y reglas de negocio. |
 | AUD-FN-008 | Media | FN-MOD-ORG-001 | Los estados de organización, membresía e invitación están enumerados, pero no existe matriz de transiciones ni reglas completas de quién puede ejecutarlas. | Incorporar diagramas/tablas de transición y permisos por estado. |
 | AUD-FN-009 | Media | FN-UX-ORG-001 | La codificación de pantallas es parcial y se advierte una posible colisión ORG-06/ORG-16 sin resolver. | Congelar inventario de pantallas y rutas antes de wireframes definitivos. |
 | AUD-FN-010 | Alta | FN-MOD-ORG-002 / DEC-PORT-039 | “Suspendido” depende de resolución oficial, pero no se define el estado final posible ni el efecto retroactivo sobre actas, goles, tarjetas y clasificación. | Definir resoluciones posibles y reglas de recálculo/auditoría en módulo de partidos. |
 | AUD-FN-011 | Media | FN-MOD-ORG-002 | El criterio “torneo más reciente” dentro de cada grupo no identifica el campo de orden (fecha de inicio, creación, temporada u otro). | Definir campo y desempate estable para el orden. |
-| AUD-FN-012 | Media | FN-MOD-ORG-002 | “Partidos oficiales jugados” y “avance deportivo” requieren reglas para jugadores que cambiaron de equipo entre torneos o tuvieron participación parcial. | Calcular por participación del jugador en el torneo y equipo asociado a esa participación; precisar casos especiales. |
+| AUD-FN-012 | Parcial | FN-MOD-ORG-002 | El conteo de partidos del tercer desempate ya define participación efectiva dentro del torneo. La integración con cambios de equipo, participaciones parciales y la atribución del avance deportivo sigue dependiendo de las reglas de inscripción y del algoritmo de formatos mixtos. | Mantener cálculo ligado a la participación del jugador en el torneo; completar casos especiales y coordinación con módulo operativo/de inscripciones. |
 | AUD-FN-013 | Media | FN-MOD-ORG-002 / FN-UX-ORG-002 | Se habla de páginas privadas, despublicadas, suspendidas y no disponibles, pero no hay catálogo único de respuestas HTTP, redirecciones, robots/noindex y caché. | Definir contrato técnico SEO/HTTP sin revelar existencia de datos privados. |
 | AUD-FN-014 | Media | FN-MOD-ORG-002 | Se permite mostrar temporada/año, categoría y escenario, pero no hay catálogo de campos públicos por entidad ni reglas de obligatoriedad/visibilidad. | Definir matriz de campos públicos y permisos por entidad. |
 | AUD-FN-015 | Media | FN-MOD-ORG-001 | La invitación vence a los siete días, pero no se define el instante exacto de vencimiento, zona horaria, reenvío, duplicados ni revocación después de aceptación. | Precisar política temporal y ciclo de vida de invitaciones. |
@@ -76,4 +76,5 @@ Ninguno de los documentos revisados debe cambiar a APROBADO ni utilizarse como i
 4. obtener aprobación expresa del propietario del producto.
 
 ## 6. Historial
+- 1.1 — 2026-11-02: actualiza AUD-FN-005 tras DEC-PORT-044; AUD-FN-012 permanece parcialmente abierto por dependencias deportivas y de inscripción.
 - 1.0 — 2026-11-02: primera auditoría transversal de consistencia documental.
