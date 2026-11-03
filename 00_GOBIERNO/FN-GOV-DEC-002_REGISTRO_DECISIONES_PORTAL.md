@@ -1,11 +1,11 @@
 # FN-GOV-DEC-002 — Registro de decisiones del portal público
 
-- Versión: 1.3
+- Versión: 1.4
 - Estado: EN_REVISION
 - Fecha: 2026-11-02
 
 ## Propósito y trazabilidad
-Consolida las decisiones conocidas del portal público de FUTNEXIS. DEC-PORT-001 a 008 existían en un registro anterior, pero su redacción literal no está disponible para verificación y no se reconstruye ni inventa. DEC-PORT-009 a 043 se registran como síntesis de las definiciones disponibles. DEC-PORT-036 a 043 fueron aprobadas expresamente el 2026-11-02.
+Consolida las decisiones conocidas del portal público de FUTNEXIS. DEC-PORT-001 a 008 existían en un registro anterior, pero su redacción literal no está disponible para verificación y no se reconstruye ni inventa. DEC-PORT-009 a 043 se registran como síntesis de las definiciones disponibles. DEC-PORT-036 a 044 fueron aprobadas expresamente el 2026-11-02.
 
 ## DEC-PORT-001 a 008
 [PENDIENTE] Recuperar el texto literal desde la versión histórica original antes de declararlas consolidadas.
@@ -107,6 +107,17 @@ Ranking general de goleadores, en orden: (1) mayor cantidad de goles; (2) mayor 
 - Acceso a auditoría restringido a autorizados.
 - Plazos de conservación conforme a política de privacidad/protección de datos, aún por definir.
 
+## DEC-PORT-044 — Definición de partidos jugados para el tercer desempate de goleadores
+[CONFIRMADO — aprobación expresa del propietario del producto, 2026-11-02]
+
+Para el tercer criterio del ranking general de goleadores —menor cantidad de partidos oficiales jugados para alcanzar la misma cantidad de goles— se aplican estas reglas:
+- Se cuentan los partidos oficiales del torneo en los que el jugador haya ingresado efectivamente al campo, desde el inicio del torneo hasta el partido en el que alcance la cantidad de goles que se está comparando.
+- Una convocatoria sin ingreso al campo no cuenta como partido jugado.
+- La participación como titular o suplente cuenta como un partido jugado.
+- Varios goles anotados por el jugador en un mismo partido cuentan dentro de su total de goles, pero ese encuentro cuenta como un solo partido jugado.
+- Solo se consideran partidos oficiales del torneo.
+- Los partidos anulados quedan excluidos del conteo.
+
 ## Reglas transversales de privacidad y navegación
 - Cada organización configura nombre, logotipo, colores, descripción y contacto; FUTNEXIS conserva su identidad de plataforma.
 - Portal público desactivado por defecto y requiere publicación autorizada.
@@ -141,5 +152,6 @@ Ranking general de goleadores, en orden: (1) mayor cantidad de goles; (2) mayor 
 - DEC-PORT-038 aprueba el principio de avance deportivo, no el algoritmo de formatos mixtos.
 
 ## Historial
+- 1.4 — 2026-11-02: incorpora DEC-PORT-044, que precisa el conteo de partidos para el tercer desempate del ranking general de goleadores.
 - 1.3 — 2026-11-02: consolidación de DEC-PORT-009 a 043, reglas transversales y pendientes. DEC-PORT-001 a 008 quedan expresamente pendientes de recuperación literal.
 - 1.2 — versión de trabajo conocida; pendiente comparar contenido histórico íntegro.
