@@ -1,6 +1,6 @@
 # FN-MOD-TOR-001 — Especificación funcional: retiro, descalificación y resolución administrativa de equipos
 
-- **Versión:** 2.4
+- **Versión:** 2.5
 - **Estado:** EN_REVISION
 - **Fecha:** 2026-11-02
 - **Tipo:** especificación funcional parcial
@@ -69,6 +69,9 @@ Los resultados administrativos no asignarán goles, asistencias, partidos jugado
 ### RF-TOR-009 — Resolver partido entre dos equipos dados de baja
 Cuando ambos equipos asignados a un partido pendiente estén dados de baja, el encuentro quedará registrado con el estado «No disputado por doble baja». No se asignará ganador, marcador, puntos ni efectos estadísticos colectivos o individuales. En fase eliminatoria, la plaza se resolverá por separado conforme al procedimiento de doble exclusión, sin avance automático.
 
+### RF-TOR-014 — Mostrar y conservar el partido no disputado por doble baja
+El calendario mantendrá visible el encuentro dentro de su jornada, mostrando nombres y escudos de ambos equipos, sin marcador y con el estado «No disputado por doble baja». El historial conservará el partido y el motivo de no disputa. No se generará acta deportiva; se conservará un registro administrativo de la situación.
+
 ### RF-TOR-010 — Resolver doble exclusión eliminatoria
 Si ambos equipos de un enfrentamiento eliminatorio están excluidos antes de disputarlo, ninguno avanzará automáticamente. FUTNEXIS no seleccionará sustitutos por sí mismo. El organizador indicará qué equipo o equipos previamente eliminados ocuparán la instancia o plaza vacante.
 
@@ -109,6 +112,9 @@ Ante la doble exclusión, ningún equipo avanza automáticamente. La selección 
 
 ### RN-TOR-009 — Encuentro entre dos equipos dados de baja
 Un partido pendiente entre dos equipos dados de baja se registra como «No disputado por doble baja». No tendrá ganador ni marcador y no generará puntos ni efectos estadísticos colectivos o individuales. En fase eliminatoria, la plaza se resolverá por separado conforme al procedimiento de doble exclusión, sin avance automático.
+
+### RN-TOR-021 — Presentación e historial del partido no disputado por doble baja
+El encuentro permanecerá visible en el calendario y en el historial con sus dos equipos, sin marcador y con el estado «No disputado por doble baja». Se conservará el motivo en un registro administrativo, no en un acta deportiva. No contará como partido jugado, no otorgará puntos ni goles y no producirá estadísticas colectivas ni individuales para ninguno de los equipos.
 
 ### RN-TOR-011 — Autorización para retiro y descalificación
 Podrán ejecutar el retiro o descalificación del equipo: el propietario de la organización, un administrador de la organización que tenga permiso de gestión deportiva, y el organizador o director del torneo cuando tenga asignado el permiso específico para esa competición. Un operador de resultados podrá registrar una incidencia o reportar una solicitud, pero no ejecutar por sí mismo el retiro o la descalificación.
@@ -173,6 +179,7 @@ El sistema deberá impedir:
 - **CA-TOR-013:** todos los partidos futuros pendientes contra equipos activos se resuelven con el marcador administrativo común vigente, a favor del equipo activo y con efectos colectivos; los pendientes contra equipos excluidos no reciben marcador ni efectos estadísticos.\n- **CA-TOR-014:** en fase eliminatoria, al excluirse uno de los dos equipos enfrentados, el rival activo avanza a la siguiente fase y el torneo continúa conforme al cuadro actualizado; la doble exclusión sigue el procedimiento especial sin avance automático.\n- **CA-TOR-015:** el enfrentamiento eliminatorio queda registrado con el marcador administrativo común a favor del rival que avanza; se actualizan métricas colectivas y no se generan estadísticas individuales. La doble exclusión no recibe marcador.\n- **CA-TOR-016:** si uno de los finalistas es retirado/descalificado y el otro permanece activo, el activo es declarado campeón; la final se registra con el marcador administrativo común a su favor, con efectos colectivos y sin estadísticas individuales. Si ambos están excluidos, no se declara campeón automáticamente ni se asigna marcador.
 - **CA-TOR-017:** después del cierre oficial del torneo, un retiro/descalificación posterior no provoca cambios automáticos en resultados, clasificación, estadísticas ni reconocimientos; cualquier medida queda a decisión del organizador.
 - **CA-TOR-018:** todo equipo retirado o que haya abandonado el torneo no puede reincorporarse a la misma edición, incluso si sigue en curso; el intento debe rechazarse y conservarse su estado e historial.
+- **CA-TOR-019:** el partido entre dos equipos dados de baja permanece visible en calendario e historial sin marcador, muestra «No disputado por doble baja», conserva un registro administrativo del motivo, no genera acta deportiva y no computa PJ, puntos, goles ni estadísticas para ninguno.
 
 ## 9. Dependencias y riesgos
 
@@ -197,6 +204,7 @@ El sistema deberá impedir:
 
 ## 11. Historial de cambios
 
+- **2.5 — 2026-11-02:** incorpora DEC-TOR-012: visualización en calendario e historial, registro administrativo sin acta deportiva y ausencia de efectos estadísticos del partido no disputado por doble baja.
 - **2.4 — 2026-11-02:** incorpora DEC-TOR-011 y define el estado «No disputado por doble baja» para partidos pendientes entre dos equipos dados de baja.
 - **2.3 — 2026-11-02:** amplía la prohibición de reintegro a cualquier baja, sin importar su motivo.
 - **2.2 — 2026-11-02:** precisa que la no reincorporación aplica a cualquier equipo retirado o que abandone el torneo.
