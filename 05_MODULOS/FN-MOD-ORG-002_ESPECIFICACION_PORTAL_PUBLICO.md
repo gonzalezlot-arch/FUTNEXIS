@@ -158,6 +158,15 @@ Rutas generales conocidas: `/` para inicio, `/login` para autenticación, `/app`
 - Los resultados administrativos solo afectan información colectiva; no generan estadísticas individuales.
 - La decisión de exclusión y las resoluciones asociadas deben conservar trazabilidad.
 
+### 6.0.1 Retiro/descalificación y resultados administrativos
+
+- Los partidos pendientes entre un equipo excluido y un equipo activo se resuelven a favor del equipo activo mediante resultado administrativo; el marcador lo establece el organizador.
+- Los partidos pendientes entre dos equipos excluidos no otorgan puntos ni marcador administrativo y no producen efectos estadísticos colectivos ni individuales.
+- En fase eliminatoria, si un equipo está excluido y su rival permanece activo, el rival avanza mediante victoria administrativa con marcador definido por el organizador.
+- Si ambos equipos de un enfrentamiento eliminatorio están excluidos, ninguno avanza automáticamente. La plaza queda pendiente de resolución del organizador; FUTNEXIS no elige sustituto.
+- Los resultados administrativos solo afectan información colectiva; no generan estadísticas individuales.
+- La decisión de exclusión y las resoluciones asociadas deben conservar trazabilidad.
+
 ### 6.1 Publicación y estados
 - Estado de publicación y estado deportivo son independientes.
 - Próximos: publicado y la competición no ha comenzado.
@@ -272,6 +281,10 @@ Registrar publicaciones, despublicaciones, modificaciones y cambios de estado co
 | CA-PORT-046 | En fase eliminatoria, si un equipo está retirado/descalificado y el rival permanece activo, el rival avanza mediante victoria administrativa con marcador definido por el organizador; no se generan estadísticas individuales. |
 | CA-PORT-047 | Si ambos equipos de un enfrentamiento eliminatorio están retirados/descalificados, ninguno avanza automáticamente ni se selecciona sustituto. La plaza queda pendiente de decisión del organizador, cuya resolución se registra con responsable, fecha y motivo. |
 
+| CA-PORT-045 | Si ambos equipos de un partido pendiente están retirados o descalificados, el sistema no asigna puntos ni marcador administrativo y no modifica estadísticas colectivas ni individuales; conserva el encuentro como no disputado por doble exclusión. |
+| CA-PORT-046 | En fase eliminatoria, si un equipo está retirado/descalificado y el rival está activo, el rival avanza mediante victoria administrativa con marcador definido por el organizador; no se generan estadísticas individuales. |
+| CA-PORT-047 | Si ambos equipos de un enfrentamiento eliminatorio están retirados/descalificados, ninguno avanza automáticamente ni se selecciona sustituto. La plaza queda pendiente de decisión del organizador, cuya resolución se registra con responsable, fecha y motivo. |
+
 ## 9. Dependencias
 
 - Módulo de organizaciones y membresías.
@@ -283,6 +296,12 @@ Registrar publicaciones, despublicaciones, modificaciones y cambios de estado co
 - Política de privacidad y protección de datos.
 
 ## 10. Pendientes
+
+13. Precisar si los marcadores administrativos se configuran por encuentro o mediante un valor común.
+14. Definir cómo se representa el historial de equipos retirados/descalificados frente a la clasificación vigente, sin alterar resultados previos.
+15. Precisar el efecto de resultados administrativos sobre PJ, PG, PE, PP y métricas colectivas.
+16. Definir reglas de continuidad de plazas cuando el organizador resuelva una doble exclusión en un cuadro eliminatorio.
+17. Precisar el tratamiento de un partido pendiente entre dos equipos excluidos en fase de liga.
 
 13. Precisar si los marcadores administrativos se configuran de forma individual por encuentro o mediante un valor común configurable.
 14. Definir cómo se representa el historial de equipos retirados/descalificados frente a la clasificación vigente, sin alterar resultados previos.
@@ -306,6 +325,7 @@ Registrar publicaciones, despublicaciones, modificaciones y cambios de estado co
 ## 11. Historial
 
 - 2.0 — 2026-11-02: incorpora DEC-PORT-049, RN-PORT-023 y CA-PORT-045 a 047; precisa doble exclusión, avance administrativo en eliminatorias y resolución de plaza por el organizador. Mantiene pendientes los detalles de cómputo colectivo.
+- 2.0 — 2026-11-02: incorpora DEC-PORT-049, RN-PORT-023 y CA-PORT-045 a 047; precisa doble exclusión y avance administrativo eliminatorio. Mantiene pendientes los detalles de cómputo colectivo.
 - 1.9 — 2026-11-02: incorpora DEC-PORT-047 y DEC-PORT-048, RN-PORT-021/022 y CA-PORT-043/044; precisa reclasificación como parte del camino al título cuando corresponda.
 - 1.8 — 2026-11-02: incorpora DEC-PORT-045 y DEC-PORT-046 en las reglas de avance deportivo y añade CA-PORT-042 para cuadros escalonados.
 - 1.7 — 2026-11-02: incorpora DEC-PORT-044 en RN-PORT-009 y CA-PORT-041, precisando participación efectiva y conteo de partidos para el tercer desempate.
