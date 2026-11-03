@@ -1,6 +1,6 @@
 # FN-GOV-DEC-001 — Registro maestro de decisiones
 
-- Versión: 2.1
+- Versión: 2.2
 - Estado: EN_REVISION
 - Fecha de corte: 2026-11-02
 
@@ -75,7 +75,7 @@ Una vez que el torneo haya sido declarado oficialmente finalizado, FUTNEXIS no a
 
 ### DEC-TOR-010 — No reincorporación de equipos retirados
 [CONFIRMADO — 2026-11-02]
-Todo equipo que se retire o abandone el torneo no podrá reincorporarse a esa misma edición, aunque la competición continúe en curso. La salida será definitiva para esa edición.
+Ningún equipo que sea dado de baja del torneo, cualquiera que sea el motivo (retiro voluntario, abandono, descalificación u otra causa), podrá reintegrarse a esa misma edición, aunque la competición continúe en curso. La baja será definitiva para esa edición.
 
 ## Pendientes
 1. Verificar el texto original de DEC-PORT-001 a 008 si aparece una fuente histórica.
@@ -83,6 +83,7 @@ Todo equipo que se retire o abandone el torneo no podrá reincorporarse a esa mi
 3. Actualizar este registro ante cada nueva decisión.
 
 ## Historial
+- 2.2 — 2026-11-02: amplía DEC-TOR-010: ningún equipo dado de baja puede reintegrarse, cualquiera que sea el motivo.
 - 2.1 — 2026-11-02: aclara DEC-TOR-010: la prohibición de reincorporación aplica a todo equipo retirado o que abandone el torneo.
 - 2.0 — 2026-11-02: incorpora DEC-TOR-010: todo equipo retirado o que abandone el torneo no puede reincorporarse a la misma edición.
 - 1.9 — 2026-11-02: incorpora DEC-TOR-009: después del cierre oficial del torneo, cualquier decisión por retiro/descalificación corresponde al organizador; FUTNEXIS no aplica cambios automáticos.
