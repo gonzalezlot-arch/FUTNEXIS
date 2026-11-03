@@ -1,9 +1,9 @@
 # FN-GOV-TRZ-001 — Matriz de trazabilidad del portal público
 
-- **Versión:** 1.5
+- **Versión:** 1.6
 - **Estado:** EN_REVISION
 - **Fecha:** 2026-11-02
-- **Documentos relacionados:** FN-GOV-DEC-002 v1.8; FN-MOD-ORG-002 v2.0.
+- **Documentos relacionados:** FN-GOV-DEC-002 v1.9; FN-MOD-ORG-002 v2.0.
 - **Propósito:** relacionar decisiones confirmadas con requisitos funcionales, reglas de negocio y criterios de aceptación, identificando vacíos sin inventar aprobaciones.
 
 ## 1. Convenciones
@@ -60,6 +60,9 @@
 | DEC-PORT-048 | Retiro/descalificación, exclusión de tabla y resultados administrativos | RF-PORT-017, RF-PORT-016 | RN-PORT-022: excluye de tabla y recalcula equipos activos; conserva resultados previos; partidos pendientes contra equipos activos adjudicados con marcador del organizador; solo efecto colectivo | CA-PORT-044 a 046 | Parcial: falta precisar métricas colectivas e historial de excluidos |
 | DEC-PORT-049 | Doble exclusión en enfrentamiento eliminatorio | RF-PORT-017, RF-PORT-016 | RN-PORT-023: no hay avance automático ni sustituto; el organizador resuelve la plaza y se audita | CA-PORT-047 | Directa para la regla de resolución; falta definir escenarios de continuidad del cuadro |
 
+| DEC-PORT-050 | Marcador administrativo común y efectos colectivos; historial del excluido | RN-PORT-022 (ampliar) | Marcador único orientado a favor del equipo activo; PJ/PG/GF/GC/PTS y recálculo colectivo; equipo excluido visible en historial, fuera de clasificación vigente | CP-RET-002/003/007/008 | Parcial: trasladar regla al módulo operativo y completar pruebas de métricas y localía |
+| DEC-PORT-051 | Resolución de plaza por doble exclusión eliminatoria | RN-PORT-023 (ampliar) | Organizador selecciona equipo(s) previamente eliminados; decisión auditada; sin avance automático | CP-RET-013 | Parcial: definir elegibilidad, cantidad de plazas y validaciones del cuadro |
+
 ## 3. Hallazgos de trazabilidad
 
 9. **DEC-PORT-048/049:** se agregaron reglas y criterios para doble exclusión y avance administrativo eliminatorio. Continúan pendientes el cómputo detallado de métricas colectivas, la representación histórica de equipos excluidos y el alcance de la resolución de plazas por el organizador.
@@ -93,6 +96,7 @@ Esta matriz es una herramienta de análisis y control documental. No constituye 
 
 ## 6. Historial
 
+- 1.6 — 2026-11-02: incorpora DEC-PORT-050/051 y traza marcador administrativo común, cómputo colectivo, historial de excluidos y selección del organizador; quedan pendientes elegibilidad y traslado al módulo operativo.
 - 1.5 — 2026-11-02: incorpora DEC-PORT-049 y amplía la trazabilidad de DEC-PORT-048/049 mediante RN-PORT-022/023 y CA-PORT-044 a 047; mantiene pendientes métricas colectivas y escenarios de cuadro.
 - 1.4 — 2026-11-02: incorpora DEC-PORT-047/048 y su trazabilidad mediante RN-PORT-021/022 y CA-PORT-043/044; refleja la inclusión de reclasificaciones que formen parte del camino al título.
 - 1.3 — 2026-11-02: incorpora DEC-PORT-045/046 y su trazabilidad mediante RN-PORT-009 y CA-PORT-042.
