@@ -1,9 +1,9 @@
 # FN-GOV-TRZ-001 — Matriz de trazabilidad del portal público
 
-- **Versión:** 1.4
+- **Versión:** 1.5
 - **Estado:** EN_REVISION
 - **Fecha:** 2026-11-02
-- **Documentos relacionados:** FN-GOV-DEC-002 v1.6; FN-MOD-ORG-002 v1.8.
+- **Documentos relacionados:** FN-GOV-DEC-002 v1.8; FN-MOD-ORG-002 v2.0.
 - **Propósito:** relacionar decisiones confirmadas con requisitos funcionales, reglas de negocio y criterios de aceptación, identificando vacíos sin inventar aprobaciones.
 
 ## 1. Convenciones
@@ -57,9 +57,12 @@
 | DEC-PORT-045 | Algoritmo base de avance deportivo en formatos mixtos | RF-PORT-027 | RN-PORT-009: fase oficial más avanzada y posición reglamentaria | CA-PORT-013 | Directa para regla base |
 | DEC-PORT-046 | Cuadros escalonados y comparación por partidos disputados | RF-PORT-027 | RN-PORT-009: instancia más avanzada; a igual instancia, menor cantidad de partidos oficiales disputados en rondas eliminatorias, incluyendo rondas previas y todos los resultados; excluye fase inicial y anulados; desempate por posición oficial | CA-PORT-042 | Directa para regla base; estructuras especiales pendientes |
 | DEC-PORT-047 | Posición oficial de equipos eliminados en grupos y clasificación de mejores terceros | RF-PORT-027 | RN-PORT-021: posición oficial del grupo; entre grupos, mecanismo comparativo reglamentario; puesto de tercero deja de ser criterio tras clasificar | CA-PORT-043 | Pendiente de pruebas entre grupos y rondas |
-| DEC-PORT-048 | Retiro/descalificación, exclusión de tabla y resultados administrativos | RF-PORT-017, RF-PORT-016 | RN-PORT-022: excluye de tabla y recalcula equipos activos; conserva resultados previos; partidos pendientes adjudicados con marcador del organizador; solo efecto colectivo | CA-PORT-044 | Pendiente de pruebas de tabla, puntos y estadísticas individuales |
+| DEC-PORT-048 | Retiro/descalificación, exclusión de tabla y resultados administrativos | RF-PORT-017, RF-PORT-016 | RN-PORT-022: excluye de tabla y recalcula equipos activos; conserva resultados previos; partidos pendientes contra equipos activos adjudicados con marcador del organizador; solo efecto colectivo | CA-PORT-044 a 046 | Parcial: falta precisar métricas colectivas e historial de excluidos |
+| DEC-PORT-049 | Doble exclusión en enfrentamiento eliminatorio | RF-PORT-017, RF-PORT-016 | RN-PORT-023: no hay avance automático ni sustituto; el organizador resuelve la plaza y se audita | CA-PORT-047 | Directa para la regla de resolución; falta definir escenarios de continuidad del cuadro |
 
 ## 3. Hallazgos de trazabilidad
+
+9. **DEC-PORT-048/049:** se agregaron reglas y criterios para doble exclusión y avance administrativo eliminatorio. Continúan pendientes el cómputo detallado de métricas colectivas, la representación histórica de equipos excluidos y el alcance de la resolución de plazas por el organizador.
 
 1. **No hay sección formal de reglas de negocio numeradas** en FN-MOD-ORG-002 v1.5. Las reglas aparecen en prosa. La especificación v1.6 incorpora RN-PORT-001 a RN-PORT-020 como catálogo numerado en revisión.
 2. **Los criterios de aceptación son insuficientes** para verificar varias decisiones de presentación, moderación, historial, accesibilidad, SEO y estados de partidos.
@@ -90,6 +93,7 @@ Esta matriz es una herramienta de análisis y control documental. No constituye 
 
 ## 6. Historial
 
+- 1.5 — 2026-11-02: incorpora DEC-PORT-049 y amplía la trazabilidad de DEC-PORT-048/049 mediante RN-PORT-022/023 y CA-PORT-044 a 047; mantiene pendientes métricas colectivas y escenarios de cuadro.
 - 1.4 — 2026-11-02: incorpora DEC-PORT-047/048 y su trazabilidad mediante RN-PORT-021/022 y CA-PORT-043/044; refleja la inclusión de reclasificaciones que formen parte del camino al título.
 - 1.3 — 2026-11-02: incorpora DEC-PORT-045/046 y su trazabilidad mediante RN-PORT-009 y CA-PORT-042.
 - 1.2 — 2026-11-02: incorpora DEC-PORT-044 y su trazabilidad mediante RN-PORT-009 y CA-PORT-041.
