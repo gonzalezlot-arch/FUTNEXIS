@@ -1,6 +1,6 @@
 # FN-GOV-AUD-001 — Auditoría de consistencia documental
 
-- **Versión:** 1.3
+- **Versión:** 1.4
 - **Estado:** EN_REVISION
 - **Fecha:** 2026-11-02
 - **Alcance:** documentos de organizaciones y portal público disponibles en la rama main.
@@ -21,7 +21,7 @@ No se modifican decisiones de negocio mediante esta auditoría. Las correcciones
 | AUD-FN-003 | Alta | FN-GOV-DEC-002 / FN-MOD-ORG-002 | DEC-PORT-009 se usa en CA-PORT-006 para justificar el orden de grupos, pero el orden también está expresado en DEC-PORT-011; DEC-PORT-036 define los estados. | Corregir la referencia para apuntar a DEC-PORT-011 y DEC-PORT-036, según el aspecto verificado. |
 | AUD-FN-004 | Media | FN-MOD-ORG-002 | Se presenta RF-PORT-012 como propuesta pendiente, lo cual es correcto, pero la UX también debe mantener explícitamente el mismo estado en criterios de aceptación y futuras maquetas. | Mantener filtros fuera de los criterios aprobados hasta decisión expresa. |
 | AUD-FN-005 | Resuelto en definición funcional | FN-MOD-ORG-002 / DEC-PORT-044 | La definición del tercer desempate fue precisada y aprobada: participación efectiva en partidos oficiales, titular o suplente; convocatoria sin ingreso excluida; varios goles en un partido cuentan como un encuentro; partidos anulados excluidos. | Incorporado en RN-PORT-009 y CA-PORT-041. Mantener pruebas de aceptación y validar consistencia con el módulo operativo de partidos. |
-| AUD-FN-006 | Parcial | DEC-PORT-038 y DEC-PORT-045 a DEC-PORT-048 | El algoritmo base contempla formatos mixtos, grupos, rondas previas y cuadros escalonados: se compara la instancia alcanzada y, a igual instancia, la menor cantidad de partidos oficiales disputados en rondas eliminatorias. | Validar casos límite: estructuras especiales; reclasificaciones que formen parte del camino al título; comparación de mejores terceros entre grupos; retiro/descalificación con partidos pendientes; reajuste de tabla; y exclusión de estadísticas individuales en resultados administrativos. |
+| AUD-FN-006 | Parcial | DEC-PORT-038 y DEC-PORT-045 a DEC-PORT-049 | El algoritmo contempla formatos mixtos y escalonados. Las reglas de retiro/descalificación cubren doble exclusión, avance administrativo en eliminatorias y decisión del organizador sobre plazas sin ganador automático. | Validar casos límite: estructuras especiales; métricas colectivas de resultados administrativos; representación histórica de equipos excluidos; y resolución de plazas por el organizador. |
 | AUD-FN-007 | Alta | FN-MOD-ORG-001 | Se indica un propietario principal activo único, pero falta especificar concurrencia y transacción para transferencias simultáneas, revocación del propietario y recuperación de cuenta. | Definir invariantes y escenarios de concurrencia en arquitectura y reglas de negocio. |
 | AUD-FN-008 | Media | FN-MOD-ORG-001 | Los estados de organización, membresía e invitación están enumerados, pero no existe matriz de transiciones ni reglas completas de quién puede ejecutarlas. | Incorporar diagramas/tablas de transición y permisos por estado. |
 | AUD-FN-009 | Media | FN-UX-ORG-001 | La codificación de pantallas es parcial y se advierte una posible colisión ORG-06/ORG-16 sin resolver. | Congelar inventario de pantallas y rutas antes de wireframes definitivos. |
@@ -33,6 +33,10 @@ No se modifican decisiones de negocio mediante esta auditoría. Las correcciones
 | AUD-FN-015 | Media | FN-MOD-ORG-001 | La invitación vence a los siete días, pero no se define el instante exacto de vencimiento, zona horaria, reenvío, duplicados ni revocación después de aceptación. | Precisar política temporal y ciclo de vida de invitaciones. |
 | AUD-FN-016 | Media | FN-MOD-ORG-002 | DEC-PORT-040 establece moderación y retirada, pero no define flujo de revisión, responsable, apelación, plazos ni tratamiento de contenido reportado. | Definir flujo operativo y permisos de moderación. |
 | AUD-FN-017 | Alta | Todos | Los documentos son consolidaciones basadas en contexto y no transcripciones verificadas de las versiones históricas. | Mantener EN_REVISION y realizar comparación literal cuando se disponga de los documentos fuente. |
+
+### Actualización de hallazgos — retiro/descalificación
+
+La definición funcional incorpora CP-RET-001 a CP-RET-013 y DEC-PORT-049. La cobertura de doble exclusión y avance administrativo eliminatorio está definida a nivel de negocio. No se considera cerrado el cálculo de PJ/PG/PE/PP y demás métricas colectivas de resultados administrativos ni la representación histórica de equipos excluidos.
 
 ## 3. Alineaciones confirmadas
 
@@ -77,6 +81,7 @@ Ninguno de los documentos revisados debe cambiar a APROBADO ni utilizarse como i
 4. obtener aprobación expresa del propietario del producto.
 
 ## 6. Historial
+- 1.4 — 2026-11-02: incorpora DEC-PORT-049 y los casos CP-RET-001 a CP-RET-013; AUD-FN-006 permanece parcial por métricas colectivas e historial de equipos excluidos.
 - 1.3 — 2026-11-02: incorpora DEC-PORT-047/048; AUD-FN-006 sigue parcialmente resuelto y amplía pruebas a comparación entre grupos, reclasificación y retiro/descalificación.
 - 1.2 — 2026-11-02: actualiza AUD-FN-006 a parcialmente resuelto tras DEC-PORT-045/046; quedan pruebas de casos límite y estructuras especiales.
 - 1.1 — 2026-11-02: actualiza AUD-FN-005 tras DEC-PORT-044; AUD-FN-012 permanece parcialmente abierto por dependencias deportivas y de inscripción.
