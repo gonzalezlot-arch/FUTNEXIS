@@ -1,11 +1,11 @@
 # FN-GOV-DEC-002 — Registro de decisiones del portal público
 
-- Versión: 1.5
+- Versión: 1.6
 - Estado: EN_REVISION
 - Fecha: 2026-11-02
 
 ## Propósito y trazabilidad
-Consolida las decisiones conocidas del portal público de FUTNEXIS. DEC-PORT-001 a 008 existían en un registro anterior, pero su redacción literal no está disponible para verificación y no se reconstruye ni inventa. DEC-PORT-009 a 043 se registran como síntesis de las definiciones disponibles. DEC-PORT-036 a 045 fueron aprobadas expresamente el 2026-11-02.
+Consolida las decisiones conocidas del portal público de FUTNEXIS. DEC-PORT-001 a 008 existían en un registro anterior, pero su redacción literal no está disponible para verificación y no se reconstruye ni inventa. DEC-PORT-009 a 043 se registran como síntesis de las definiciones disponibles. DEC-PORT-036 a 046 fueron aprobadas expresamente el 2026-11-02.
 
 ## DEC-PORT-001 a 008
 [PENDIENTE] Recuperar el texto literal desde la versión histórica original antes de declararlas consolidadas.
@@ -131,16 +131,20 @@ El segundo criterio de desempate del ranking general de goleadores se determina 
 - En torneos de liga sin eliminación directa, se utiliza la posición final oficial de la clasificación.
 - Las estructuras especiales no clasificables con estas reglas requieren definición específica antes de calcular el ranking.
 
-## DEC-PORT-045 — Algoritmo base de avance deportivo para formatos mixtos
+## DEC-PORT-046 — Avance deportivo en cuadros escalonados y comparación por partidos disputados
 [CONFIRMADO — aprobación expresa del propietario del producto, 2026-11-02]
 
-El segundo criterio de desempate del ranking general de goleadores se determina por el avance deportivo del equipo del jugador en el torneo:
-- Se considera la fase más avanzada alcanzada oficialmente por el equipo, incluso si el torneo combina grupos y eliminación directa.
-- La jerarquía base es: campeón, subcampeón, eliminado en semifinales, cuartos de final, octavos de final, rondas eliminatorias anteriores y fase de grupos.
-- Alcanzar una fase eliminatoria prevalece sobre quedar eliminado en fase de grupos.
-- Entre equipos eliminados en la misma fase, se utiliza la posición final oficial que establezca el reglamento. Si no hay posiciones diferenciadas, comparten nivel de avance.
-- En torneos de liga sin eliminación directa, se utiliza la posición final oficial de la clasificación.
-- Las estructuras especiales no clasificables con estas reglas requieren definición específica antes de calcular el ranking.
+Esta decisión complementa DEC-PORT-045 para torneos donde los equipos ingresan a distintas rondas de eliminación según su posición en una fase inicial de liga o grupos. El organizador configura clasificados, ingresos directos, rondas previas, cruces y condiciones de avance.
+
+- La estructura puede combinar liga o grupos con rondas previas y rondas eliminatorias escalonadas; no se fija cantidad de grupos, equipos clasificados ni rondas.
+- El avance se determina por la instancia oficial más avanzada alcanzada dentro del camino hacia el campeonato. La clasificación directa no constituye por sí sola una instancia superior.
+- Cuando dos equipos alcanzan la misma instancia, tiene prioridad el que haya disputado menor cantidad de partidos oficiales en las rondas eliminatorias necesarias para alcanzarla.
+- Se cuentan todos los partidos oficiales disputados en esas rondas, ganados, empatados o perdidos. Se incluyen rondas previas y eliminatorias del recorrido.
+- No se incluyen partidos de la fase inicial de liga o grupos.
+- Los partidos anulados se excluyen; los suspendidos se consideran según su resolución oficial.
+- Si persiste el empate, se utiliza la posición final oficial del reglamento. Si no hay diferencia oficial, comparten nivel de avance.
+- Las rondas de reclasificación que no formen parte del camino hacia el campeonato no aumentan la instancia de avance; pueden determinar la posición final cuando el reglamento así lo establezca.
+- La estructura y las reglas configuradas para cada torneo gobiernan el cálculo; FUTNEXIS no impone formatos ni criterios universales de clasificación.
 
 ## Reglas transversales de privacidad y navegación
 - Cada organización configura nombre, logotipo, colores, descripción y contacto; FUTNEXIS conserva su identidad de plataforma.
@@ -161,7 +165,7 @@ El segundo criterio de desempate del ranking general de goleadores se determina 
 ## Pendientes
 1. Recuperar DEC-PORT-001 a 008 literalmente.
 2. Confirmar filtros por estado y modalidad en portada; por ahora [PROPUESTA]/[PENDIENTE].
-3. Precisar únicamente estructuras especiales no cubiertas por DEC-PORT-045.
+3. Precisar únicamente estructuras especiales no cubiertas por DEC-PORT-045 y DEC-PORT-046.
 4. Definir plazos de conservación de auditoría y política de privacidad.
 5. Definir responsables, tiempos y apelaciones de moderación.
 6. Definir estados completos de publicación y transiciones.
@@ -176,7 +180,7 @@ El segundo criterio de desempate del ranking general de goleadores se determina 
 - DEC-PORT-038 aprueba el principio de avance deportivo, no el algoritmo de formatos mixtos.
 
 ## Historial
-- 1.5 — 2026-11-02: incorpora DEC-PORT-045, que define el algoritmo base de avance deportivo para formatos mixtos.
+- 1.6 — 2026-11-02: incorpora DEC-PORT-046 para cuadros escalonados y comparación por partidos oficiales disputados; elimina duplicación de DEC-PORT-045.
 - 1.5 — 2026-11-02: incorpora DEC-PORT-045, que define el algoritmo base de avance deportivo para formatos mixtos.
 - 1.4 — 2026-11-02: incorpora DEC-PORT-044, que precisa el conteo de partidos para el tercer desempate del ranking general de goleadores.
 - 1.3 — 2026-11-02: consolidación de DEC-PORT-009 a 043, reglas transversales y pendientes. DEC-PORT-001 a 008 quedan expresamente pendientes de recuperación literal.
