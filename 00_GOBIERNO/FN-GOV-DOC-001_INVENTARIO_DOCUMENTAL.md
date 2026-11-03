@@ -1,6 +1,6 @@
 # FN-GOV-DOC-001 — Inventario documental
 
-- Versión: 3.6
+- Versión: 3.7
 - Estado: EN_REVISION
 - Fecha de corte: 2026-11-02
 
@@ -8,7 +8,7 @@
 | Código | Documento | Ruta | Versión | Estado |
 |---|---|---|---|---|
 | FN-GOV-MET-001 | Metodología de gobierno documental | 00_GOBIERNO/FN-GOV-MET-001_METODOLOGIA.md | 1.0 | BORRADOR |
-| FN-GOV-DEC-001 | Registro maestro de decisiones | 00_GOBIERNO/FN-GOV-DEC-001_REGISTRO_DECISIONES.md | 2.4 | EN_REVISION |
+| FN-GOV-DEC-001 | Registro maestro de decisiones | 00_GOBIERNO/FN-GOV-DEC-001_REGISTRO_DECISIONES.md | 2.5 | EN_REVISION |
 | FN-GOV-GLO-001 | Glosario maestro | 00_GOBIERNO/FN-GOV-GLO-001_GLOSARIO.md | 1.0 | BORRADOR |
 | FN-GOV-DOC-001 | Inventario documental | 00_GOBIERNO/FN-GOV-DOC-001_INVENTARIO_DOCUMENTAL.md | 1.8 | EN_REVISION |
 | FN-MOD-ORG-001 | Especificación funcional organizaciones | 05_MODULOS/FN-MOD-ORG-001_ESPECIFICACION_ORGANIZACIONES.md | 1.2 | EN_REVISION; consolidación por verificar contra original |
@@ -20,9 +20,9 @@
 | FN-GOV-TRZ-001 | Matriz de trazabilidad del portal público | 00_GOBIERNO/FN-GOV-TRZ-001_MATRIZ_TRAZABILIDAD_PORTAL.md | 1.6 | EN_REVISION |
 
 
-| FN-QA-RET-001 | Casos de prueba: retiro y descalificación de equipos | 08_CALIDAD/FN-QA-RET-001_CASOS_PRUEBA_RETIRO_DESCALIFICACION.md | 2.0 | EN_REVISION |
+| FN-QA-RET-001 | Casos de prueba: retiro y descalificación de equipos | 08_CALIDAD/FN-QA-RET-001_CASOS_PRUEBA_RETIRO_DESCALIFICACION.md | 2.1 | EN_REVISION |
 
-| FN-MOD-TOR-001 | Especificación funcional: retiro, descalificación y resolución administrativa de equipos | 05_MODULOS/FN-MOD-TOR-001_ESPECIFICACION_RETIRO_DESCALIFICACION.md | 2.5 | EN_REVISION; especificación parcial |
+| FN-MOD-TOR-001 | Especificación funcional: retiro, descalificación y resolución administrativa de equipos | 05_MODULOS/FN-MOD-TOR-001_ESPECIFICACION_RETIRO_DESCALIFICACION.md | 2.6 | EN_REVISION; especificación parcial |
 
 ## Versiones fuente conocidas pendientes de cotejo
 | Código | Versión fuente conocida | Estado conocido | Acción pendiente |
@@ -37,6 +37,7 @@
 No marcar APROBADO sin aprobación expresa. No declarar verificada una versión conocida solo por resumen. Conservar versiones obsoletas. Actualizar el inventario junto con cada cambio documental.
 
 ## Historial
+- 3.7 — 2026-11-02: actualiza FN-GOV-DEC-001 a v2.5, FN-MOD-TOR-001 a v2.6 y FN-QA-RET-001 a v2.1 por DEC-TOR-013; los informes y reportes descargables identifican individualmente el estado de baja de cada equipo.
 - 3.6 — 2026-11-02: actualiza FN-GOV-DEC-001 a v2.4, FN-MOD-TOR-001 a v2.5 y FN-QA-RET-001 a v2.0 por DEC-TOR-012; define presentación del partido no disputado por doble baja en calendario e historial, registro administrativo sin acta deportiva y sin efectos estadísticos.
 - 3.5 — 2026-11-02: sincroniza FN-MOD-TOR-001 v2.4 con DEC-TOR-011 y registra el estado «No disputado por doble baja»; el registro maestro está en v2.3 y los casos de prueba en v1.9.
 - 3.3 — 2026-11-02: actualiza el registro de decisiones a v2.2, la especificación a v2.3 y los casos de prueba a v1.8; ningún equipo dado de baja puede reintegrarse, cualquiera que sea el motivo.
