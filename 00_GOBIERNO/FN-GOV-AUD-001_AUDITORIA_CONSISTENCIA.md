@@ -1,6 +1,6 @@
 # FN-GOV-AUD-001 — Auditoría de consistencia documental
 
-- **Versión:** 1.2
+- **Versión:** 1.3
 - **Estado:** EN_REVISION
 - **Fecha:** 2026-11-02
 - **Alcance:** documentos de organizaciones y portal público disponibles en la rama main.
@@ -21,7 +21,7 @@ No se modifican decisiones de negocio mediante esta auditoría. Las correcciones
 | AUD-FN-003 | Alta | FN-GOV-DEC-002 / FN-MOD-ORG-002 | DEC-PORT-009 se usa en CA-PORT-006 para justificar el orden de grupos, pero el orden también está expresado en DEC-PORT-011; DEC-PORT-036 define los estados. | Corregir la referencia para apuntar a DEC-PORT-011 y DEC-PORT-036, según el aspecto verificado. |
 | AUD-FN-004 | Media | FN-MOD-ORG-002 | Se presenta RF-PORT-012 como propuesta pendiente, lo cual es correcto, pero la UX también debe mantener explícitamente el mismo estado en criterios de aceptación y futuras maquetas. | Mantener filtros fuera de los criterios aprobados hasta decisión expresa. |
 | AUD-FN-005 | Resuelto en definición funcional | FN-MOD-ORG-002 / DEC-PORT-044 | La definición del tercer desempate fue precisada y aprobada: participación efectiva en partidos oficiales, titular o suplente; convocatoria sin ingreso excluida; varios goles en un partido cuentan como un encuentro; partidos anulados excluidos. | Incorporado en RN-PORT-009 y CA-PORT-041. Mantener pruebas de aceptación y validar consistencia con el módulo operativo de partidos. |
-| AUD-FN-006 | Parcial | DEC-PORT-038, DEC-PORT-045 y DEC-PORT-046 | El algoritmo base contempla formatos mixtos, grupos, rondas previas y cuadros escalonados: se compara la instancia alcanzada y, a igual instancia, la menor cantidad de partidos oficiales disputados en rondas eliminatorias. | Validar casos límite: estructuras especiales, reclasificaciones, reglamentos sin posiciones diferenciadas y pruebas de aceptación. |
+| AUD-FN-006 | Parcial | DEC-PORT-038 y DEC-PORT-045 a DEC-PORT-048 | El algoritmo base contempla formatos mixtos, grupos, rondas previas y cuadros escalonados: se compara la instancia alcanzada y, a igual instancia, la menor cantidad de partidos oficiales disputados en rondas eliminatorias. | Validar casos límite: estructuras especiales; reclasificaciones que formen parte del camino al título; comparación de mejores terceros entre grupos; retiro/descalificación con partidos pendientes; reajuste de tabla; y exclusión de estadísticas individuales en resultados administrativos. |
 | AUD-FN-007 | Alta | FN-MOD-ORG-001 | Se indica un propietario principal activo único, pero falta especificar concurrencia y transacción para transferencias simultáneas, revocación del propietario y recuperación de cuenta. | Definir invariantes y escenarios de concurrencia en arquitectura y reglas de negocio. |
 | AUD-FN-008 | Media | FN-MOD-ORG-001 | Los estados de organización, membresía e invitación están enumerados, pero no existe matriz de transiciones ni reglas completas de quién puede ejecutarlas. | Incorporar diagramas/tablas de transición y permisos por estado. |
 | AUD-FN-009 | Media | FN-UX-ORG-001 | La codificación de pantallas es parcial y se advierte una posible colisión ORG-06/ORG-16 sin resolver. | Congelar inventario de pantallas y rutas antes de wireframes definitivos. |
@@ -56,7 +56,8 @@ No se modifican decisiones de negocio mediante esta auditoría. Las correcciones
 - Recuperar texto histórico de DEC-PORT-001 a 008 y versiones fuente de los cuatro documentos de módulo/UX.
 
 ### Prioridad 2 — Cierre funcional
-- Completar pruebas de aceptación de desempates estadísticos, especialmente reclasificaciones y estructuras especiales.
+- Completar pruebas de aceptación de avance deportivo: reclasificaciones que integren el camino al título, comparación de mejores terceros y estructuras especiales.
+- Validar retiro/descalificación, adjudicación de partidos pendientes, reajuste de posiciones y exclusión de estadísticas individuales en resultados administrativos.
 - Definir estados y transiciones de partido.
 - Definir estados y transiciones de organización, membresía e invitación.
 - Definir campos y visibilidad pública por entidad.
@@ -76,6 +77,7 @@ Ninguno de los documentos revisados debe cambiar a APROBADO ni utilizarse como i
 4. obtener aprobación expresa del propietario del producto.
 
 ## 6. Historial
+- 1.3 — 2026-11-02: incorpora DEC-PORT-047/048; AUD-FN-006 sigue parcialmente resuelto y amplía pruebas a comparación entre grupos, reclasificación y retiro/descalificación.
 - 1.2 — 2026-11-02: actualiza AUD-FN-006 a parcialmente resuelto tras DEC-PORT-045/046; quedan pruebas de casos límite y estructuras especiales.
 - 1.1 — 2026-11-02: actualiza AUD-FN-005 tras DEC-PORT-044; AUD-FN-012 permanece parcialmente abierto por dependencias deportivas y de inscripción.
 - 1.0 — 2026-11-02: primera auditoría transversal de consistencia documental.
