@@ -25,3 +25,61 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Environment files and their backups
+.env.*
+.env-*
+.env_*
+.env~
+*.env
+!.env.example
+
+# Certificates, private keys and credentials
+*.key
+*.p12
+*.pem
+*.pfx
+*.ppk
+.git-credentials
+.netrc
+id_dsa
+id_ecdsa
+id_ed25519
+id_rsa
+
+# Local tool settings
+.claude/settings.local.json
+CLAUDE.local.md
+
+# Temporary files and caches
+*.bak
+*.backup
+*.orig
+*.rej
+*.swo
+*.swp
+*.temp
+*.tmp
+*~
+.cache/
+.eslintcache
+~$*
+
+# Logs and diagnostics
+*.cpuprofile
+*.dmp
+*.heapsnapshot
+*.stackdump
+npm-debug.log*
+pnpm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Locally generated files
+/*.dump
+/*.sql
+/coverage/
+*.sql.gz
+.phpstorm.meta.php
+_ide_helper_models.php
+[Dd]esktop.ini
