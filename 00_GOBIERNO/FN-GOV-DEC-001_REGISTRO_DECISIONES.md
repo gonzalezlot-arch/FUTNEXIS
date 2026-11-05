@@ -1,8 +1,8 @@
 # FN-GOV-DEC-001 — Registro maestro de decisiones
 
-- Versión: 2.5
+- Versión: 2.6
 - Estado: EN_REVISION
-- Fecha de corte: 2026-11-02
+- Fecha de corte: 2026-11-04
 
 ## Decisiones generales
 
@@ -16,6 +16,20 @@
 | GOV-001 | Desarrollo modular con aprobación individual. | [CONFIRMADO] |
 | GOV-002 | No iniciar un módulo sin especificación y criterios de aceptación aprobados. | [CONFIRMADO] |
 | GOV-003 | GitHub es la fuente maestra documental. | [CONFIRMADO] |
+
+## Decisiones de arquitectura
+
+### DEC-ARC-CORE-001 — Arquitectura de identidad, autenticación y contexto de organización
+[APROBADO — 2026-11-04]
+- Se adopta una arquitectura de monolito modular con Laravel 13, PHP y MariaDB, frontend Blade, Tailwind CSS y JavaScript, con aplicación web adaptable y PWA.
+- La autenticación se implementará con mecanismos nativos de Laravel y flujos personalizados; no se utilizará Laravel Fortify.
+- Se aplicarán las reglas CORE de verificación obligatoria del correo, enlaces y códigos de un solo uso, recuperación, sesiones con 30 minutos de inactividad, sin «Recordarme» y controles de intentos fallidos.
+- La autorización será multiorganización, basada en membresías, rol y contexto activo, con validación en backend en cada petición protegida.
+- El despliegue inicial será manual mediante cPanel, FTP/Administrador de archivos y phpMyAdmin. Las migraciones Laravel serán la fuente de verdad y se aplicarán mediante SQL revisado en producción.
+- Se utilizará la base exclusiva de producción `gltechso_futnexis`, MariaDB 11.4.13 y cotejamiento `utf8mb4_unicode_ci`; el entorno local conservará su base independiente.
+- El correo utilizará el SMTP del hosting; la configuración está definida, pero el envío y recepción siguen pendientes de prueba operativa.
+- Sesiones en base de datos, caché en archivos y colas síncronas son configuraciones iniciales sujetas a validación de capacidades del hosting.
+- La especificación completa y sus validaciones pendientes se documentan en `FN-ARC-CORE-001` versión 0.3.
 
 ## Decisiones del portal público
 El detalle se mantiene en FN-GOV-DEC-002.
@@ -102,6 +116,7 @@ Cuando ambos equipos de un partido pendiente estén dados de baja, el encuentro 
 3. Actualizar este registro ante cada nueva decisión.
 
 ## Historial
+- 2.6 — 2026-11-04: incorpora DEC-ARC-CORE-001, aprobada junto con FN-ARC-CORE-001 v0.3, sobre arquitectura técnica del módulo CORE.
 - 2.5 — 2026-11-02: incorpora DEC-TOR-013 sobre identificación individual del estado de baja de cada equipo en informes administrativos y reportes descargables.
 - 2.4 — 2026-11-02: incorpora DEC-TOR-012 sobre visualización en calendario e historial y registro administrativo del partido no disputado por doble baja.
 - 2.3 — 2026-11-02: incorpora DEC-TOR-011: partidos pendientes entre dos equipos dados de baja quedan «No disputado por doble baja», sin marcador ni efectos estadísticos.
