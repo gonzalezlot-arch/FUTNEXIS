@@ -115,8 +115,6 @@ Cuando ambos equipos de un partido pendiente estén dados de baja, el encuentro 
 2. Armonizar especificaciones funcionales y UX con DEC-PORT-036 a 043.
 3. Actualizar este registro ante cada nueva decisión.
 
-## Historial
-- 2.7 — 2026-11-04: incorpora DEC-CORE-001 a DEC-CORE-008, aprobadas para cerrar Etapa 0: estructura modular, nombre nullable, aprobación de cambio de correo sin organización, selección de organización en etapa posterior, controles IP/dispositivo, primer superadministrador, demo solo local y correos con acentos diferentes.
 ### DEC-CORE-001 — Estructura modular del núcleo
 [APROBADO — 2026-11-04]
 El módulo CORE se organizará progresivamente bajo `app/Modules/Core`. La adopción no implica mover de inmediato modelos, migraciones, factories ni otros componentes cuya ubicación se haya definido mantener en sus directorios Laravel convencionales.
@@ -151,6 +149,9 @@ Los correos que difieran por caracteres acentuados se considerarán diferentes. 
 
 ## Decisiones de arquitectura
 
+## Historial
+- 2.6 — 2026-11-04: incorpora FN-ARC-CORE-001 v0.3 APROBADO y registra DEC-ARC-CORE-001 sobre arquitectura técnica del módulo CORE.
+- 2.7 — 2026-11-04: incorpora DEC-CORE-001 a DEC-CORE-008 aprobadas para cierre de Etapa 0.
 ### DEC-ARC-CORE-001 — Arquitectura de identidad, autenticación y contexto de organización
 [APROBADO — 2026-11-04]
 - Se adopta una arquitectura de monolito modular con Laravel 13, PHP y MariaDB, frontend Blade, Tailwind CSS y JavaScript, con aplicación web adaptable y PWA.
