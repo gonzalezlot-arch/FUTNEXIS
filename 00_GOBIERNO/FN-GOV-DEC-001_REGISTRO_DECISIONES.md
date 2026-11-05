@@ -1,6 +1,6 @@
 # FN-GOV-DEC-001 — Registro maestro de decisiones
 
-- Versión: 2.7
+- Versión: 2.8
 - Estado: EN_REVISION
 - Fecha de corte: 2026-11-04
 
@@ -147,9 +147,14 @@ La demostración interna estará disponible únicamente en entorno local. En cua
 [APROBADO — 2026-11-04]
 Los correos que difieran por caracteres acentuados se considerarán diferentes. Por tanto, `josé@example.com` y `jose@example.com` serán identificadores distintos. La normalización y comparación deberá ser coherente en validaciones de aplicación, índices y cotejamiento de base de datos.
 
+### DEC-CORE-009 — Cotejamiento específico para correo electrónico
+[APROBADO PARA DOCUMENTACIÓN — 2026-11-05]
+Se aprueba `utf8mb4_uca1400_as_ci` exclusivamente para `users.email`, manteniendo `utf8mb4_unicode_ci` como cotejamiento general. La finalidad es considerar diferentes los correos que difieran por acentos y mantener la comparación insensible a mayúsculas/minúsculas. La implementación queda condicionada a comprobar disponibilidad y comportamiento en MariaDB 11.4.13 del hosting. Esta decisión no autoriza todavía migraciones, cambios de esquema ni SQL de producción.
+
 ## Decisiones de arquitectura
 
 ## Historial
+- 2.8 — 2026-11-05: incorpora DEC-CORE-009 y aprueba documentar el cotejamiento específico para `users.email`, sujeto a validación en hosting; no autoriza implementación del esquema.
 - 2.6 — 2026-11-04: incorpora FN-ARC-CORE-001 v0.3 APROBADO y registra DEC-ARC-CORE-001 sobre arquitectura técnica del módulo CORE.
 - 2.7 — 2026-11-04: incorpora DEC-CORE-001 a DEC-CORE-008 aprobadas para cierre de Etapa 0.
 ### DEC-ARC-CORE-001 — Arquitectura de identidad, autenticación y contexto de organización
