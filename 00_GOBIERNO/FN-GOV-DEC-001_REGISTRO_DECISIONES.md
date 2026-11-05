@@ -1,6 +1,6 @@
 # FN-GOV-DEC-001 — Registro maestro de decisiones
 
-- Versión: 2.6
+- Versión: 2.7
 - Estado: EN_REVISION
 - Fecha de corte: 2026-11-04
 
