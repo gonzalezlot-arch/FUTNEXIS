@@ -116,7 +116,54 @@ Cuando ambos equipos de un partido pendiente estén dados de baja, el encuentro 
 3. Actualizar este registro ante cada nueva decisión.
 
 ## Historial
-- 2.6 — 2026-11-04: incorpora DEC-ARC-CORE-001, aprobada junto con FN-ARC-CORE-001 v0.3, sobre arquitectura técnica del módulo CORE.
+- 2.7 — 2026-11-04: incorpora DEC-CORE-001 a DEC-CORE-008, aprobadas para cerrar Etapa 0: estructura modular, nombre nullable, aprobación de cambio de correo sin organización, selección de organización en etapa posterior, controles IP/dispositivo, primer superadministrador, demo solo local y correos con acentos diferentes.
+### DEC-CORE-001 — Estructura modular del núcleo
+[APROBADO — 2026-11-04]
+El módulo CORE se organizará progresivamente bajo `app/Modules/Core`. La adopción no implica mover de inmediato modelos, migraciones, factories ni otros componentes cuya ubicación se haya definido mantener en sus directorios Laravel convencionales.
+
+### DEC-CORE-002 — Nombre opcional del usuario
+[APROBADO — 2026-11-04]
+El campo `users.name` será nullable. La identidad principal de acceso será el correo electrónico; el nombre podrá completarse posteriormente conforme al flujo funcional.
+
+### DEC-CORE-003 — Cambio de correo sin organización asociada
+[APROBADO — 2026-11-04]
+Cuando un usuario sin organización asociada solicite cambiar su correo, la aprobación corresponderá a soporte/superadmin. Se aplicará el flujo de verificación del nuevo correo y auditoría definido para el cambio.
+
+### DEC-CORE-004 — Selección de organización activa
+[APROBADO — 2026-11-04]
+La resolución y selección de organización activa se definirá e implementará en la etapa del módulo de organizaciones; no se anticipará una regla adicional en la etapa CORE.
+
+### DEC-CORE-005 — Controles de acceso por IP y dispositivo
+[APROBADO — 2026-11-04]
+Los controles adicionales por IP se definirán dentro de la implementación del inicio de sesión. La información del dispositivo se conservará como dato de auditoría; no se establece en esta decisión un mecanismo de bloqueo por dispositivo.
+
+### DEC-CORE-006 — Creación del primer superadministrador
+[APROBADO — 2026-11-04]
+El primer superadministrador no se creará mediante registro público. Se establecerá mediante procedimiento SQL controlado, restringido y auditado. El procedimiento deberá documentarse antes del primer despliegue que lo requiera; el hash de contraseña se generará localmente y nunca se almacenará en Git.
+
+### DEC-CORE-007 — Acceso a la demostración interna
+[APROBADO — 2026-11-04]
+La demostración interna estará disponible únicamente en entorno local. En cualquier otro entorno, la ruta responderá como no encontrada (404), incluso si el archivo de la demostración se encuentra desplegado.
+
+### DEC-CORE-008 — Comparación de correos con caracteres acentuados
+[APROBADO — 2026-11-04]
+Los correos que difieran por caracteres acentuados se considerarán diferentes. Por tanto, `josé@example.com` y `jose@example.com` serán identificadores distintos. La normalización y comparación deberá ser coherente en validaciones de aplicación, índices y cotejamiento de base de datos.
+
+## Decisiones de arquitectura
+
+### DEC-ARC-CORE-001 — Arquitectura de identidad, autenticación y contexto de organización
+[APROBADO — 2026-11-04]
+- Se adopta una arquitectura de monolito modular con Laravel 13, PHP y MariaDB, frontend Blade, Tailwind CSS y JavaScript, con aplicación web adaptable y PWA.
+- La autenticación se implementará con mecanismos nativos de Laravel y flujos personalizados; no se utilizará Laravel Fortify.
+- Se aplicarán las reglas CORE de verificación obligatoria del correo, enlaces y códigos de un solo uso, recuperación, sesiones con 30 minutos de inactividad, sin «Recordarme» y controles de intentos fallidos.
+- La autorización será multiorganización, basada en membresías, rol y contexto activo, con validación en backend en cada petición protegida.
+- El despliegue inicial será manual mediante cPanel, FTP/Administrador de archivos y phpMyAdmin. Las migraciones Laravel serán la fuente de verdad y se aplicarán mediante SQL revisado en producción.
+- Se utilizará la base exclusiva de producción `gltechso_futnexis`, MariaDB 11.4.13 y cotejamiento `utf8mb4_unicode_ci`; el entorno local conservará su base independiente.
+- El correo utilizará el SMTP del hosting; la configuración está definida, pero el envío y recepción siguen pendientes de prueba operativa.
+- Sesiones en base de datos, caché en archivos y colas síncronas son configuraciones iniciales sujetas a validación de capacidades del hosting.
+- La especificación completa y sus validaciones pendientes se documentan en `FN-ARC-CORE-001` versión 0.3.
+
+## Decisiones del portal público
 - 2.5 — 2026-11-02: incorpora DEC-TOR-013 sobre identificación individual del estado de baja de cada equipo en informes administrativos y reportes descargables.
 - 2.4 — 2026-11-02: incorpora DEC-TOR-012 sobre visualización en calendario e historial y registro administrativo del partido no disputado por doble baja.
 - 2.3 — 2026-11-02: incorpora DEC-TOR-011: partidos pendientes entre dos equipos dados de baja quedan «No disputado por doble baja», sin marcador ni efectos estadísticos.
