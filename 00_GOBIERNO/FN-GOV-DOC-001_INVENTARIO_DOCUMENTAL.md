@@ -1,6 +1,6 @@
 # FN-GOV-DOC-001 — Inventario documental
 
-- Versión: 4.1
+- Versión: 4.2
 - Estado: EN_REVISION
 - Fecha de corte: 2026-11-04
 
@@ -38,7 +38,7 @@
 No marcar APROBADO sin aprobación expresa. No declarar verificada una versión conocida solo por resumen. Conservar versiones obsoletas. Actualizar el inventario junto con cada cambio documental.
 
 ## Historial
-- 4.1 — 2026-11-04: corrige la ubicación de DEC-CORE-001 a 008 en FN-GOV-DEC-001, restaura las entradas de historial 2.6 y 2.7 y actualiza la versión del inventario a 4.1.
+- 4.2 — 2026-11-05: registra FN-ARC-CORE-001 v0.4 y FN-GOV-DEC-001 v2.8 por DEC-CORE-009; el cotejamiento específico de `users.email` queda aprobado documentalmente, pendiente de validación en MariaDB 11.4.13 antes de cualquier implementación.
 - 3.7 — 2026-11-02: actualiza FN-GOV-DEC-001 a v2.5, FN-MOD-TOR-001 a v2.6 y FN-QA-RET-001 a v2.1 por DEC-TOR-013; los informes y reportes descargables identifican individualmente el estado de baja de cada equipo.
 - 3.6 — 2026-11-02: actualiza FN-GOV-DEC-001 a v2.4, FN-MOD-TOR-001 a v2.5 y FN-QA-RET-001 a v2.0 por DEC-TOR-012; define presentación del partido no disputado por doble baja en calendario e historial, registro administrativo sin acta deportiva y sin efectos estadísticos.
 - 3.5 — 2026-11-02: sincroniza FN-MOD-TOR-001 v2.4 con DEC-TOR-011 y registra el estado «No disputado por doble baja»; el registro maestro está en v2.3 y los casos de prueba en v1.9.
