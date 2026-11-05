@@ -1,6 +1,6 @@
 # FN-GOV-DOC-001 — Inventario documental
 
-- Versión: 4.0
+- Versión: 4.1
 - Estado: EN_REVISION
 - Fecha de corte: 2026-11-04
 
@@ -10,7 +10,7 @@
 | FN-GOV-MET-001 | Metodología de gobierno documental | 00_GOBIERNO/FN-GOV-MET-001_METODOLOGIA.md | 1.0 | BORRADOR |
 | FN-GOV-DEC-001 | Registro maestro de decisiones | 00_GOBIERNO/FN-GOV-DEC-001_REGISTRO_DECISIONES.md | 2.7 | EN_REVISION |
 | FN-GOV-GLO-001 | Glosario maestro | 00_GOBIERNO/FN-GOV-GLO-001_GLOSARIO.md | 1.0 | BORRADOR |
-| FN-GOV-DOC-001 | Inventario documental | 00_GOBIERNO/FN-GOV-DOC-001_INVENTARIO_DOCUMENTAL.md | 1.8 | EN_REVISION |
+| FN-GOV-DOC-001 | Inventario documental | 00_GOBIERNO/FN-GOV-DOC-001_INVENTARIO_DOCUMENTAL.md | 4.1 | EN_REVISION |
 | FN-MOD-ORG-001 | Especificación funcional organizaciones | 05_MODULOS/FN-MOD-ORG-001_ESPECIFICACION_ORGANIZACIONES.md | 1.2 | EN_REVISION; consolidación por verificar contra original |\n| FN-MOD-CORE-001 | Especificación funcional usuarios, autenticación y organizaciones | 05_MODULOS/FN-MOD-CORE-001_ESPECIFICACION_USUARIOS_AUTENTICACION_ORGANIZACIONES.md | 1.0 | APROBADO |
 | FN-ARC-CORE-001 | Decisiones de arquitectura: identidad, autenticación y contexto de organización | 04_ARQUITECTURA/FN-ARC-CORE-001_DECISIONES_IDENTIDAD_AUTENTICACION_CONTEXTO_ORGANIZACION.md | 0.3 | APROBADO |
 | FN-UX-ORG-001 | UX/UI organizaciones | 03_UX_UI/FN-UX-ORG-001_UX_ORGANIZACIONES.md | 1.1 | EN_REVISION; consolidación por verificar contra original |
@@ -38,7 +38,7 @@
 No marcar APROBADO sin aprobación expresa. No declarar verificada una versión conocida solo por resumen. Conservar versiones obsoletas. Actualizar el inventario junto con cada cambio documental.
 
 ## Historial
-- 4.0 — 2026-11-04: registra FN-GOV-DEC-001 v2.7 con DEC-CORE-001 a 008 aprobadas para cierre de Etapa 0; se documentan las decisiones de estructura modular, nombre opcional, flujo de cambio de correo, selección de organización, controles IP/dispositivo, primer superadministrador, demo solo local y comparación de correos con acentos.
+- 4.1 — 2026-11-04: corrige la ubicación de DEC-CORE-001 a 008 en FN-GOV-DEC-001, restaura las entradas de historial 2.6 y 2.7 y actualiza la versión del inventario a 4.1.
 - 3.7 — 2026-11-02: actualiza FN-GOV-DEC-001 a v2.5, FN-MOD-TOR-001 a v2.6 y FN-QA-RET-001 a v2.1 por DEC-TOR-013; los informes y reportes descargables identifican individualmente el estado de baja de cada equipo.
 - 3.6 — 2026-11-02: actualiza FN-GOV-DEC-001 a v2.4, FN-MOD-TOR-001 a v2.5 y FN-QA-RET-001 a v2.0 por DEC-TOR-012; define presentación del partido no disputado por doble baja en calendario e historial, registro administrativo sin acta deportiva y sin efectos estadísticos.
 - 3.5 — 2026-11-02: sincroniza FN-MOD-TOR-001 v2.4 con DEC-TOR-011 y registra el estado «No disputado por doble baja»; el registro maestro está en v2.3 y los casos de prueba en v1.9.
