@@ -2,7 +2,7 @@
 
 - **Proyecto:** FUTNEXIS
 - **Código:** FN-ARC-CORE-001
-- **Versión:** 0.3
+- **Versión:** 0.4
 - **Estado:** APROBADO
 - **Módulo:** CORE
 - **Fecha:** 2026-11-04
@@ -118,13 +118,18 @@ Se utilizará una base de datos exclusiva para FUTNEXIS.
 **Producción:**
 - Base de datos: `gltechso_futnexis`
 - Motor: MariaDB 11.4.13
-- Cotejamiento: `utf8mb4_unicode_ci`
+- Cotejamiento general: `utf8mb4_unicode_ci`
+- Cotejamiento aprobado para la columna `users.email`: `utf8mb4_uca1400_as_ci`, sujeto a validar su disponibilidad y comportamiento en MariaDB 11.4.13 del hosting antes de implementarlo.
 
 **Desarrollo local:**
 - Base de datos independiente: `futnexis`
 - Motor local: MariaDB 10.11.16
 
 Los entornos mantendrán bases independientes.
+
+La decisión de cotejamiento específico para `users.email` responde a DEC-CORE-009: las direcciones que difieren únicamente por acentos deben considerarse diferentes, mientras que la comparación seguirá siendo insensible a mayúsculas/minúsculas.
+
+**Límite de implementación:** esta aprobación es documental. No autoriza todavía cambios de esquema, migraciones ni SQL. Primero deberá comprobarse en el servidor MariaDB 11.4.13 del hosting que `utf8mb4_uca1400_as_ci` está disponible y produce el comportamiento esperado. Si no está disponible, se deberá presentar una alternativa para aprobación.
 
 Las migraciones de Laravel serán la fuente de verdad del esquema. Debido a que el hosting no dispone de terminal ni Composer, el procedimiento de producción utilizará scripts SQL generados y revisados a partir de las migraciones, aplicados mediante phpMyAdmin.
 
@@ -216,6 +221,12 @@ Esta arquitectura queda aprobada como referencia técnica para desarrollar el m�
 Las decisiones funcionales aprobadas en `FN-MOD-CORE-001` prevalecen sobre cualquier comportamiento predeterminado de Laravel o de sus dependencias.
 
 Cualquier cambio de arquitectura deberá documentarse, justificarse y aprobarse antes de implementarse.
+
+---
+
+## 15. Historial de cambios
+
+- 0.4 — 2026-11-05: incorpora DEC-CORE-009 y documenta el cotejamiento específico propuesto/aprobado para `users.email`, condicionado a validación en MariaDB 11.4.13. No autoriza cambios de esquema ni despliegue.
 
 ---
 
