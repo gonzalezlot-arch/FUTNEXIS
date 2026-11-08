@@ -30,9 +30,12 @@ return [
     | to expire immediately when the browser is closed then you may
     | indicate that via the expire_on_close configuration option.
     |
+    | FUTNEXIS fixes this value at 30 minutes (RN-CORE-009), so it does not
+    | depend on the environment file of each deployment.
+    |
     */
 
-    'lifetime' => (int) env('SESSION_LIFETIME', 120),
+    'lifetime' => 30,
 
     'expire_on_close' => env('SESSION_EXPIRE_ON_CLOSE', false),
 
@@ -47,7 +50,7 @@ return [
     |
     */
 
-    'encrypt' => env('SESSION_ENCRYPT', false),
+    'encrypt' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -169,7 +172,7 @@ return [
     |
     */
 
-    'secure' => env('SESSION_SECURE_COOKIE'),
+    'secure' => env('SESSION_SECURE_COOKIE', env('APP_ENV') === 'production' ? true : null),
 
     /*
     |--------------------------------------------------------------------------

@@ -1,9 +1,9 @@
 # FN-MOD-CORE-001 — Especificación funcional: usuarios, autenticación y organizaciones
 
-- Versión: 1.0
-- Estado: APROBADO
-- Fecha: 2026-11-03
-- Aprobación: aprobación expresa del responsable del producto en conversación.
+- Versión: 1.1
+- Estado: EN_REVISION (la última versión aprobada es la 1.0; esta versión incorpora DEC-CORE-010 a DEC-CORE-014 y espera la revisión del propietario)
+- Fecha: 2026-11-08
+- Aprobación de la versión 1.0: aprobación expresa del responsable del producto en conversación.
 - Alcance: reglas funcionales del núcleo de identidad, acceso, membresías, administración de cuentas y auditoría.
 
 ## 1. Objetivo
@@ -13,23 +13,26 @@ Definir el comportamiento funcional de las cuentas de usuario y su acceso seguro
 ## 2. Registro e identidad
 
 ### RF-CORE-001 — Registro
-El usuario podrá crear una cuenta mediante correo electrónico y contraseña.
+El usuario podrá crear una cuenta mediante correo electrónico. La contraseña se establece después de verificar el correo (DEC-CORE-013).
 
 ### RN-CORE-001 — Correo único
 - El correo será el identificador de acceso y será único globalmente en FUTNEXIS.
-- Para comparar correos se eliminarán espacios al inicio y al final y se aplicará comparación sin distinguir mayúsculas/minúsculas.
-- Si ya existe, se rechazará el registro y se mostrará: «Este correo electrónico ya se encuentra registrado. Inicia sesión o recupera tu contraseña».
+- Para comparar correos se eliminarán espacios al inicio y al final, se aplicará normalización Unicode NFC y comparación sin distinguir mayúsculas/minúsculas. Los correos que difieran por acentos son identidades diferentes (DEC-CORE-008 y DEC-CORE-010).
+- Si ya existe una cuenta verificada, se rechazará el registro y se mostrará: «Este correo electrónico ya se encuentra registrado. Inicia sesión o recupera tu contraseña».
+- Si la cuenta existente sigue pendiente de verificación, se enviará un nuevo enlace; un tercero no puede reservar un correo ajeno.
 - La unicidad se garantizará también en backend y base de datos.
 
 ### RN-CORE-002 — Verificación de correo
 - El registro quedará pendiente de verificación.
 - FUTNEXIS enviará un enlace o código de verificación con vencimiento y uso único.
+- Al usar el enlace, el propietario del correo establece su contraseña y la cuenta queda habilitada.
 - No se permitirá iniciar sesión hasta verificar el correo.
 - El usuario podrá solicitar un nuevo envío.
 
 ### RN-CORE-003 — Contraseña
 - Longitud mínima: 8 caracteres.
-- Debe contener al menos una mayúscula, una minúscula, un número y un carácter especial.
+- Debe contener al menos una mayúscula, una minúscula, un número y un carácter especial. Un espacio no cuenta como carácter especial.
+- Longitud máxima efectiva: 72 bytes; las contraseñas más largas se rechazan.
 - La política se validará en frontend y backend.
 - La contraseña se almacenará mediante un algoritmo de hash seguro; nunca en texto plano.
 
@@ -39,7 +42,8 @@ El usuario podrá crear una cuenta mediante correo electrónico y contraseña.
 El usuario iniciará sesión con correo y contraseña.
 
 ### RN-CORE-004 — Intentos fallidos
-- Tras cinco intentos consecutivos fallidos se bloqueará temporalmente el inicio de sesión durante 15 minutos.
+- Tras cinco intentos consecutivos fallidos se bloqueará temporalmente el inicio de sesión de la cuenta durante 15 minutos.
+- El restablecimiento correcto de la contraseña desbloquea la cuenta (DEC-CORE-012).
 - El control se realizará en backend.
 - El mensaje no revelará si una cuenta existe ni información sensible.
 
@@ -152,9 +156,9 @@ La solicitud se evaluará conforme a las obligaciones legales y reglas de retenc
 |---|---|---|
 | CA-CORE-001 | Registrar un correo nuevo | Cuenta pendiente de verificación. |
 | CA-CORE-002 | Registrar un correo ya existente con otra capitalización o espacios externos | Registro rechazado por duplicidad. |
-| CA-CORE-003 | Registrar contraseña que incumple la política | Rechazo en frontend y backend. |
+| CA-CORE-003 | Establecer, tras verificar el correo, una contraseña que incumple la política | Rechazo en frontend y backend. |
 | CA-CORE-004 | Iniciar sesión sin verificar correo | Acceso denegado. |
-| CA-CORE-005 | Verificar correo válido | Cuenta habilitada para iniciar sesión. |
+| CA-CORE-005 | Verificar correo válido y establecer una contraseña | Cuenta habilitada para iniciar sesión. |
 | CA-CORE-006 | Usar enlace de recuperación vencido o ya utilizado | Restablecimiento rechazado. |
 | CA-CORE-007 | Cambiar o recuperar contraseña | Todas las sesiones anteriores quedan invalidadas. |
 | CA-CORE-008 | Fallar cinco veces consecutivas | Bloqueo de inicio de sesión por 15 minutos. |
@@ -181,4 +185,5 @@ La solicitud se evaluará conforme a las obligaciones legales y reglas de retenc
 
 ## 12. Historial de cambios
 
+- 1.1 — 2026-11-08: EN_REVISION. Incorpora DEC-CORE-010 a DEC-CORE-014: la contraseña se establece después de verificar el correo, normalización NFC e identidades distintas por acentos, un espacio no es carácter especial, máximo de 72 bytes y desbloqueo por restablecimiento.
 - 1.0 — 2026-11-03: primera versión aprobada; consolida las decisiones funcionales confirmadas para usuarios, autenticación, organizaciones, sesiones, administración de cuentas, auditoría y solicitudes de eliminación de datos.
