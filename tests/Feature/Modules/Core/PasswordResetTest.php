@@ -3,8 +3,10 @@
 namespace Tests\Feature\Modules\Core;
 
 use App\Models\User;
+use App\Modules\Core\Enums\LoginOutcome;
 use App\Modules\Core\Notifications\PasswordChangedNotification;
 use App\Modules\Core\Notifications\ResetPasswordNotification;
+use App\Modules\Core\Notifications\VerifyEmailNotification;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -27,6 +29,58 @@ class PasswordResetTest extends TestCase
         $this->post(route('password.email'), ['email' => ' ANA@example.com '])->assertSessionHas('status');
 
         Notification::assertSentTo($user, ResetPasswordNotification::class);
+    }
+
+    public function test_a_completed_reset_lifts_the_account_lock(): void
+    {
+        Notification::fake();
+        $user = User::factory()->create(['password' => 'Original#2026']);
+        foreach (range(1, 5) as $attempt) {
+            $this->post(route('login'), ['email' => $user->email, 'password' => 'Incorrecta#1']);
+        }
+
+        $this->resetPassword($user->email, Password::broker()->createToken($user))->assertRedirectToRoute('login');
+
+        $this->post(route('login'), ['email' => $user->email, 'password' => self::NEW_PASSWORD])->assertRedirectToRoute('home');
+        $this->assertAuthenticatedAs($user);
+    }
+
+    public function test_a_rejected_reset_does_not_lift_the_account_lock(): void
+    {
+        $user = User::factory()->create(['password' => 'Original#2026']);
+        foreach (range(1, 5) as $attempt) {
+            $this->post(route('login'), ['email' => $user->email, 'password' => 'Incorrecta#1']);
+        }
+
+        $this->resetPassword($user->email, str_repeat('a', 64))->assertInvalid('email');
+
+        $this->post(route('login'), ['email' => $user->email, 'password' => 'Original#2026'])->assertInvalid('email');
+        $this->assertGuest();
+    }
+
+    public function test_a_completed_reset_is_recorded_for_audit(): void
+    {
+        Notification::fake();
+        $user = User::factory()->create();
+
+        $this->withHeader('User-Agent', 'FutnexisTest/1.0')->resetPassword($user->email, Password::broker()->createToken($user));
+
+        $this->assertDatabaseHas('login_attempts', [
+            'user_id' => $user->id,
+            'outcome' => LoginOutcome::PasswordReset->value,
+            'user_agent' => 'FutnexisTest/1.0',
+        ]);
+    }
+
+    public function test_a_pending_account_receives_its_activation_link_instead_of_a_reset_link(): void
+    {
+        Notification::fake();
+        $user = User::factory()->unverified()->create(['password' => null]);
+
+        $this->post(route('password.email'), ['email' => $user->email]);
+
+        Notification::assertSentTo($user, VerifyEmailNotification::class);
+        Notification::assertNotSentTo($user, ResetPasswordNotification::class);
     }
 
     public function test_unknown_and_known_addresses_get_the_same_response(): void

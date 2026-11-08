@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Modules\Core\Actions\AuthenticateUser;
 use App\Modules\Core\Enums\LoginOutcome;
 use App\Modules\Core\Models\LoginAttempt;
+use App\Modules\Core\Models\LoginThrottle;
 use App\Modules\Core\Support\LoginThrottler;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Testing\TestResponse;
@@ -127,41 +128,119 @@ class LoginTest extends TestCase
         $this->login($other->email)->assertRedirectToRoute('home');
     }
 
-    public function test_too_many_failures_from_one_ip_lock_that_ip_for_any_account(): void
+    public function test_a_correct_password_is_accepted_from_an_ip_over_its_limit(): void
     {
         $user = $this->verifiedUser();
+        $this->exceedIpLimit();
 
-        foreach (range(1, LoginThrottler::MAX_FAILURES_PER_IP) as $attempt) {
-            $this->login("usuario{$attempt}@example.com", 'Incorrecta#1');
-        }
+        $this->login($user->email)->assertRedirectToRoute('home');
 
-        $this->login($user->email)->assertInvalid(['email' => AuthenticateUser::LOCKED_MESSAGE]);
+        $this->assertAuthenticatedAs($user);
+    }
+
+    public function test_a_wrong_password_from_an_ip_over_its_limit_gets_the_network_message(): void
+    {
+        $user = $this->verifiedUser();
+        $this->exceedIpLimit();
+
+        $this->login($user->email, 'Incorrecta#1')->assertInvalid(['email' => AuthenticateUser::IP_LIMITED_MESSAGE]);
+
         $this->assertGuest();
     }
 
-    public function test_another_ip_is_not_affected_by_the_ip_lock(): void
+    public function test_the_ip_limit_never_replaces_the_account_lock(): void
     {
-        foreach (range(1, LoginThrottler::MAX_FAILURES_PER_IP) as $attempt) {
-            $this->login("usuario{$attempt}@example.com", 'Incorrecta#1');
-        }
         $user = $this->verifiedUser();
+        $this->exceedIpLimit();
+        $this->failLogin($user->email, 5);
 
-        $this->withServerVariables(['REMOTE_ADDR' => '203.0.113.9']);
+        $this->login($user->email)->assertInvalid(['email' => AuthenticateUser::LOCKED_MESSAGE]);
 
-        $this->login($user->email)->assertRedirectToRoute('home');
+        $this->assertGuest();
+    }
+
+    public function test_slow_failures_from_a_shared_ip_expire_with_the_window(): void
+    {
+        foreach (range(1, LoginThrottler::IP_FAILURE_THRESHOLD - 1) as $attempt) {
+            app(LoginThrottler::class)->recordIpFailure('127.0.0.1');
+        }
+
+        $this->travel(LoginThrottler::IP_WINDOW_MINUTES + 1)->minutes();
+        app(LoginThrottler::class)->recordIpFailure('127.0.0.1');
+
+        $this->assertFalse(app(LoginThrottler::class)->isIpOverLimit('127.0.0.1'));
+    }
+
+    public function test_another_ip_is_not_affected_by_the_ip_limit(): void
+    {
+        $this->exceedIpLimit();
+
+        $this->assertFalse(app(LoginThrottler::class)->isIpOverLimit('203.0.113.9'));
     }
 
     public function test_a_successful_login_does_not_reset_the_ip_counter(): void
     {
         $user = $this->verifiedUser();
+        $this->exceedIpLimit();
 
-        foreach (range(1, LoginThrottler::MAX_FAILURES_PER_IP - 1) as $attempt) {
-            $this->login("usuario{$attempt}@example.com", 'Incorrecta#1');
-        }
         $this->login($user->email)->assertRedirectToRoute('home');
-        $this->post(route('logout'));
 
-        $this->login('otro@example.com', 'Incorrecta#1')->assertInvalid(['email' => AuthenticateUser::LOCKED_MESSAGE]);
+        $this->assertTrue(app(LoginThrottler::class)->isIpOverLimit('127.0.0.1'));
+    }
+
+    public function test_unknown_addresses_from_an_ip_over_its_limit_write_nothing(): void
+    {
+        $this->exceedIpLimit();
+        $throttles = LoginThrottle::query()->count();
+
+        $this->login('nadie@example.com', 'Incorrecta#1')->assertInvalid(['email' => AuthenticateUser::IP_LIMITED_MESSAGE]);
+
+        $this->assertSame($throttles, LoginThrottle::query()->count());
+        $this->assertDatabaseCount('login_attempts', 0);
+    }
+
+    public function test_requests_while_locked_write_nothing_and_the_lock_keeps_its_account(): void
+    {
+        $user = $this->verifiedUser();
+        $this->failLogin($user->email, 5);
+        $attempts = LoginAttempt::query()->count();
+
+        $this->failLogin($user->email, 10);
+
+        $this->assertSame($attempts, LoginAttempt::query()->count());
+        $this->assertDatabaseHas('login_attempts', ['user_id' => $user->id, 'outcome' => LoginOutcome::Locked->value]);
+    }
+
+    public function test_a_locked_account_rejects_every_spelling_that_reaches_it(): void
+    {
+        $user = $this->verifiedUser(['email' => 'jose@example.com']);
+        $this->failLogin('jose@example.com', 5);
+
+        $this->login('JOSE@example.com')->assertInvalid(['email' => AuthenticateUser::LOCKED_MESSAGE]);
+        $this->login('  Jose@Example.COM ')->assertInvalid(['email' => AuthenticateUser::LOCKED_MESSAGE]);
+
+        $this->assertGuest();
+        $this->assertTrue(app(LoginThrottler::class)->isLocked(app(LoginThrottler::class)->accountKey($user, 'otra-forma@example.com')));
+    }
+
+    public function test_a_password_beyond_the_bcrypt_limit_does_not_match_a_stored_prefix(): void
+    {
+        $password = str_repeat('Aa1#', 18);
+        $user = $this->verifiedUser(['password' => $password]);
+
+        $this->login($user->email, $password.'sobrante')->assertInvalid(['email' => AuthenticateUser::INVALID_CREDENTIALS_MESSAGE]);
+
+        $this->assertGuest();
+        $this->login($user->email, $password)->assertRedirectToRoute('home');
+    }
+
+    public function test_a_pending_account_without_password_cannot_log_in(): void
+    {
+        $user = User::factory()->unverified()->create(['password' => null]);
+
+        $this->login($user->email, 'Cualquiera#2026')->assertInvalid(['email' => AuthenticateUser::INVALID_CREDENTIALS_MESSAGE]);
+
+        $this->assertGuest();
     }
 
     public function test_every_attempt_records_ip_and_device(): void
@@ -236,6 +315,13 @@ class LoginTest extends TestCase
     private function login(string $email, string $password = self::PASSWORD): TestResponse
     {
         return $this->post(route('login'), ['email' => $email, 'password' => $password]);
+    }
+
+    private function exceedIpLimit(): void
+    {
+        foreach (range(1, LoginThrottler::IP_FAILURE_THRESHOLD) as $attempt) {
+            app(LoginThrottler::class)->recordIpFailure('127.0.0.1');
+        }
     }
 
     private function failLogin(string $email, int $times): void

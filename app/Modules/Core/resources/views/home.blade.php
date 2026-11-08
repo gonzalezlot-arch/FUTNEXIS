@@ -26,6 +26,10 @@
             </header>
 
             <main class="home-main">
+                @error('form')
+                    <div class="auth-alert auth-alert-error" role="alert">{{ $message }}</div>
+                @enderror
+
                 <h1 class="home-title">Te damos la bienvenida a FUTNEXIS</h1>
                 <p class="home-copy">Tu cuenta está lista. Para empezar a gestionar torneos, necesitarás formar parte de una organización.</p>
 

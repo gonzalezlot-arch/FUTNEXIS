@@ -17,9 +17,9 @@ class RegistrationController extends Controller
 
     public function store(RegisterRequest $request, RegisterUser $registerUser): RedirectResponse
     {
-        $registerUser->handle($request->validated('email'), $request->validated('password'));
+        $registerUser->handle($request->validated('email'));
 
         return redirect()->route('verification.notice')
-            ->with('status', 'Cuenta creada. Te enviamos un enlace para confirmar tu correo electrónico.');
+            ->with('status', 'Recibimos tu solicitud. Si la dirección puede recibir correo, te llegará un enlace para activar tu cuenta.');
     }
 }

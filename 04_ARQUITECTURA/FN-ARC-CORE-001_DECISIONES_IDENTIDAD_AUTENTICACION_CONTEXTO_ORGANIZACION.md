@@ -2,10 +2,10 @@
 
 - **Proyecto:** FUTNEXIS
 - **Código:** FN-ARC-CORE-001
-- **Versión:** 0.4
-- **Estado:** APROBADO
+- **Versión:** 0.5
+- **Estado:** EN_REVISION (la última versión aprobada es la 0.4; esta versión incorpora DEC-CORE-010 a DEC-CORE-016 y espera la revisión del propietario)
 - **Módulo:** CORE
-- **Fecha:** 2026-11-04
+- **Fecha:** 2026-11-08
 
 ## 1. Objetivo
 
@@ -52,14 +52,14 @@ Se utilizarán los mecanismos de seguridad y hashing de Laravel, evitando desarr
 Se implementarán los siguientes flujos:
 
 - Registro con correo electrónico único y normalizado.
-- Verificación obligatoria del correo antes del primer acceso.
+- Verificación obligatoria del correo antes del primer acceso. La contraseña se establece después de verificar el correo, por quien demuestra tener acceso a él (DEC-CORE-013).
 - Enlaces de verificación con vencimiento de 24 horas y un solo uso.
 - Recuperación de contraseña mediante enlace con vencimiento de 60 minutos y un solo uso.
 - Códigos de autorización para acciones sensibles con vencimiento de 10 minutos.
 - La generación de un nuevo enlace o código del mismo tipo invalida el anterior.
 - Las validaciones de vencimiento y uso se realizarán en el servidor.
 
-Las contraseñas cumplirán los requisitos funcionales aprobados: mínimo ocho caracteres, mayúscula, minúscula, número y carácter especial.
+Las contraseñas cumplirán los requisitos funcionales aprobados: mínimo ocho caracteres, mayúscula, minúscula, número y carácter especial. Un espacio no cuenta como carácter especial, y las contraseñas de más de 72 bytes se rechazan porque bcrypt no verificaría su parte final (DEC-CORE-014).
 
 ## 5. Sesiones y protección de acceso
 
@@ -74,7 +74,9 @@ Se establece:
 
 Se utilizará inicialmente almacenamiento de sesiones en base de datos, sujeto a validación operativa en el hosting.
 
-El bloqueo por intentos fallidos seguirá la regla funcional de cinco intentos consecutivos y quince minutos de bloqueo, con controles adicionales por IP y dispositivo.
+El contenido de las sesiones se cifra y las direcciones con tokens de verificación o recuperación no se conservan en ellas. El cierre de todas las sesiones no depende del controlador de sesiones configurado.
+
+El bloqueo por intentos fallidos seguirá la regla funcional de cinco intentos consecutivos y quince minutos de bloqueo, asociado a la cuenta real (DEC-CORE-011). Se añade un límite secundario y tolerante por IP, que no rechaza una contraseña correcta. El dispositivo y el navegador se registran únicamente como información de auditoría; no se implementa bloqueo por dispositivo (DEC-CORE-005 y DEC-CORE-016).
 
 ## 6. Organizaciones y contexto de acceso
 
@@ -119,7 +121,7 @@ Se utilizará una base de datos exclusiva para FUTNEXIS.
 - Base de datos: `gltechso_futnexis`
 - Motor: MariaDB 11.4.13
 - Cotejamiento general: `utf8mb4_unicode_ci`
-- Cotejamiento aprobado para la columna `users.email`: `utf8mb4_uca1400_as_ci`, sujeto a validar su disponibilidad y comportamiento en MariaDB 11.4.13 del hosting antes de implementarlo.
+- Cotejamiento de las columnas `users.email` y `password_reset_tokens.email`: `utf8mb4_uca1400_as_ci`. Disponibilidad y comportamiento confirmados por el propietario en MariaDB 11.4.13 del hosting (DEC-CORE-010).
 
 **Desarrollo local:**
 - Base de datos independiente: `futnexis`
@@ -129,9 +131,9 @@ Los entornos mantendrán bases independientes.
 
 La decisión de cotejamiento específico para `users.email` responde a DEC-CORE-009: las direcciones que difieren únicamente por acentos deben considerarse diferentes, mientras que la comparación seguirá siendo insensible a mayúsculas/minúsculas.
 
-**Límite de implementación:** esta aprobación es documental. No autoriza todavía cambios de esquema, migraciones ni SQL. Primero deberá comprobarse en el servidor MariaDB 11.4.13 del hosting que `utf8mb4_uca1400_as_ci` está disponible y produce el comportamiento esperado. Si no está disponible, se deberá presentar una alternativa para aprobación.
+Ambas columnas comparten el cotejamiento porque, de lo contrario, el token de recuperación de una cuenta coincidiría también con la otra. La aplicación normaliza el correo a Unicode NFC, en minúsculas y sin espacios exteriores antes de guardarlo y compararlo.
 
-Las migraciones de Laravel serán la fuente de verdad del esquema. Debido a que el hosting no dispone de terminal ni Composer, el procedimiento de producción utilizará scripts SQL generados y revisados a partir de las migraciones, aplicados mediante phpMyAdmin.
+Las migraciones de Laravel serán la fuente de verdad del esquema. Debido a que el hosting no dispone de terminal ni Composer, el procedimiento de producción utilizará scripts SQL generados y revisados a partir de las migraciones, aplicados mediante phpMyAdmin, según `FN-OPS-CORE-001`.
 
 No se ejecutarán migraciones destructivas ni se modificará manualmente el esquema de producción sin respaldo y revisión.
 
@@ -226,6 +228,7 @@ Cualquier cambio de arquitectura deberá documentarse, justificarse y aprobarse 
 
 ## 15. Historial de cambios
 
+- 0.5 — 2026-11-08: EN_REVISION. Incorpora DEC-CORE-010 a DEC-CORE-016: cotejamiento confirmado, verificación antes de la contraseña, política de contraseña, sesiones cifradas e independientes del controlador, límite secundario por IP, y dispositivo solo como auditoría, lo que elimina la contradicción de la sección 5 con DEC-CORE-005.
 - 0.4 — 2026-11-05: incorpora DEC-CORE-009 y documenta el cotejamiento específico propuesto/aprobado para `users.email`, condicionado a validación en MariaDB 11.4.13. No autoriza cambios de esquema ni despliegue.
 
 ---

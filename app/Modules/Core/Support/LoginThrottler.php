@@ -2,95 +2,163 @@
 
 namespace App\Modules\Core\Support;
 
+use App\Models\User;
+use App\Modules\Core\Exceptions\LoginThrottleUnavailable;
 use App\Modules\Core\Models\LoginThrottle;
+use Closure;
+use Illuminate\Database\ConcurrencyErrorDetector;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 /**
- * Applies the login attempt limits per account and per IP address.
+ * Applies the login attempt limits.
  *
- * Pending difference: FN-ARC-CORE-001 section 5 and the CORE 01 request call for additional controls by IP and
- * device, while DEC-CORE-005 keeps device information as audit data and establishes no lock by device. This class
- * therefore locks by account and IP only; the device is recorded in login_attempts. Adding a device lock requires
- * resolving that difference first.
+ * The account limit is the primary control: five consecutive failures lock the account for 15 minutes.
+ * The IP limit is secondary: it never rejects a correct password. Device data is audit information only and
+ * establishes no lock (DEC-CORE-005, D8).
  */
 class LoginThrottler
 {
-    public const int MAX_FAILURES_PER_EMAIL = 5;
-
-    /**
-     * Higher than the per-account limit because several people can share one public IP address.
-     */
-    public const int MAX_FAILURES_PER_IP = 20;
+    public const int MAX_FAILURES_PER_ACCOUNT = 5;
 
     public const int LOCK_MINUTES = 15;
 
     /**
-     * Determine whether the address or the IP are currently locked.
+     * Tolerant on purpose: clubs, venues and mobile networks place many people behind one address.
      */
-    public function isLocked(string $email, ?string $ipAddress): bool
+    public const int IP_FAILURE_THRESHOLD = 100;
+
+    public const int IP_WINDOW_MINUTES = 15;
+
+    private const int TRANSACTION_ATTEMPTS = 5;
+
+    /**
+     * Identify the counter by the account found, so any spelling that reaches the same account shares it.
+     * Unknown addresses get their own counter, so responses do not reveal which accounts exist.
+     */
+    public function accountKey(?User $user, string $email): string
+    {
+        return $this->key($user === null ? 'email|'.$email : 'account|'.$user->id);
+    }
+
+    public function isLocked(string $accountKey): bool
     {
         return LoginThrottle::query()
-            ->whereIn('key_hash', [$this->emailKey($email), $this->ipKey($ipAddress)])
+            ->where('key_hash', $accountKey)
             ->where('locked_until', '>', now())
             ->exists();
     }
 
     /**
-     * Count a failed attempt, also for unknown addresses so that responses do not reveal which accounts exist.
-     */
-    public function recordFailure(string $email, ?string $ipAddress): void
-    {
-        $this->increment($this->emailKey($email), self::MAX_FAILURES_PER_EMAIL, resetsWhenIdle: false);
-        $this->increment($this->ipKey($ipAddress), self::MAX_FAILURES_PER_IP, resetsWhenIdle: true);
-    }
-
-    /**
-     * Restart the consecutive failures of an address after a successful login.
+     * Count an attempt before checking the password, so simultaneous requests cannot exceed the limit.
+     * Returns false when the attempt must be rejected without evaluating the password.
      *
-     * The IP counter is kept, otherwise an attacker could reset it by logging in to their own account.
+     * @throws LoginThrottleUnavailable
      */
-    public function clearFailures(string $email): void
+    public function reserveAttempt(string $accountKey): bool
     {
-        LoginThrottle::query()->where('key_hash', $this->emailKey($email))->delete();
-    }
+        return $this->withLockedRow($accountKey, function (LoginThrottle $throttle): bool {
+            if ($throttle->locked_until?->isFuture()) {
+                return false;
+            }
 
-    private function increment(string $keyHash, int $maximumFailures, bool $resetsWhenIdle): void
-    {
-        DB::transaction(function () use ($keyHash, $maximumFailures, $resetsWhenIdle): void {
-            LoginThrottle::query()->insertOrIgnore([
-                'key_hash' => $keyHash,
-                'failed_attempts' => 0,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-
-            $throttle = LoginThrottle::query()->where('key_hash', $keyHash)->lockForUpdate()->firstOrFail();
-
-            $lockHasExpired = $throttle->locked_until?->isPast() ?? false;
-            $isIdle = $resetsWhenIdle && $throttle->updated_at->lt(now()->subMinutes(self::LOCK_MINUTES));
-
-            if ($lockHasExpired || $isIdle) {
+            if ($throttle->locked_until !== null) {
                 $throttle->failed_attempts = 0;
                 $throttle->locked_until = null;
             }
 
             $throttle->failed_attempts++;
 
-            if ($throttle->failed_attempts >= $maximumFailures) {
+            if ($throttle->failed_attempts >= self::MAX_FAILURES_PER_ACCOUNT) {
                 $throttle->locked_until = now()->addMinutes(self::LOCK_MINUTES);
             }
 
             $throttle->save();
+
+            return true;
         });
     }
 
-    private function emailKey(string $email): string
+    /**
+     * Forget the failures of an account after a correct password or a completed password reset.
+     */
+    public function clear(string $accountKey): void
     {
-        return hash('sha256', 'email|'.$email);
+        LoginThrottle::query()->where('key_hash', $accountKey)->delete();
+    }
+
+    public function isIpOverLimit(?string $ipAddress): bool
+    {
+        return LoginThrottle::query()
+            ->where('key_hash', $this->ipKey($ipAddress))
+            ->where('failed_attempts', '>=', self::IP_FAILURE_THRESHOLD)
+            ->where('created_at', '>=', now()->subMinutes(self::IP_WINDOW_MINUTES))
+            ->exists();
+    }
+
+    /**
+     * Count a failure against the address within a fixed window. A correct password does not clear it,
+     * otherwise an attacker could reset the counter by logging in to their own account.
+     */
+    public function recordIpFailure(?string $ipAddress): void
+    {
+        try {
+            $failures = $this->withLockedRow($this->ipKey($ipAddress), function (LoginThrottle $throttle): int {
+                if ($throttle->created_at->lt(now()->subMinutes(self::IP_WINDOW_MINUTES))) {
+                    $throttle->failed_attempts = 0;
+                    $throttle->created_at = now();
+                }
+
+                $throttle->failed_attempts++;
+                $throttle->save();
+
+                return $throttle->failed_attempts;
+            });
+        } catch (LoginThrottleUnavailable) {
+            return;
+        }
+
+        if ($failures === self::IP_FAILURE_THRESHOLD) {
+            Log::warning('core.login.ip_threshold_reached', ['ip_bucket' => IpAddress::bucket($ipAddress)]);
+        }
+    }
+
+    /**
+     * Serialize on one row: inserting with ON DUPLICATE KEY takes an exclusive lock from the start,
+     * which avoids the shared-to-exclusive upgrade that makes concurrent requests deadlock.
+     *
+     * @template TResult
+     *
+     * @param  Closure(LoginThrottle): TResult  $callback
+     * @return TResult
+     *
+     * @throws LoginThrottleUnavailable
+     */
+    private function withLockedRow(string $keyHash, Closure $callback): mixed
+    {
+        try {
+            return DB::transaction(function () use ($keyHash, $callback): mixed {
+                LoginThrottle::query()->upsert([['key_hash' => $keyHash, 'failed_attempts' => 0]], ['key_hash'], ['key_hash']);
+
+                return $callback(LoginThrottle::query()->where('key_hash', $keyHash)->lockForUpdate()->firstOrFail());
+            }, self::TRANSACTION_ATTEMPTS);
+        } catch (QueryException $exception) {
+            if ((new ConcurrencyErrorDetector)->causedByConcurrencyError($exception)) {
+                throw new LoginThrottleUnavailable(previous: $exception);
+            }
+
+            throw $exception;
+        }
     }
 
     private function ipKey(?string $ipAddress): string
     {
-        return hash('sha256', 'ip|'.$ipAddress);
+        return $this->key('ip|'.IpAddress::bucket($ipAddress));
+    }
+
+    private function key(string $identifier): string
+    {
+        return hash_hmac('sha256', $identifier, (string) config('app.key'));
     }
 }

@@ -8,4 +8,5 @@ enum LoginOutcome: string
     case InvalidCredentials = 'invalid_credentials';
     case Unverified = 'unverified';
     case Locked = 'locked';
+    case PasswordReset = 'password_reset';
 }

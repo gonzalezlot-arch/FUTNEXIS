@@ -11,7 +11,7 @@ class LoginRequest extends NormalizedEmailRequest
     {
         return [
             ...$this->emailRules(),
-            'password' => ['required', 'string', 'max:255'],
+            'password' => ['bail', 'required', 'string', 'max:255'],
         ];
     }
 
@@ -24,7 +24,7 @@ class LoginRequest extends NormalizedEmailRequest
             ...$this->emailMessages(),
             'password.required' => 'Ingresa tu contraseña.',
             'password.string' => 'Ingresa tu contraseña.',
-            'password.max' => 'La contraseña no puede superar los 255 caracteres.',
+            'password.max' => 'El correo electrónico o la contraseña no son correctos.',
         ];
     }
 }

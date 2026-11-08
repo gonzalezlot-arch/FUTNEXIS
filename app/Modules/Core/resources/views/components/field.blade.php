@@ -1,6 +1,9 @@
 @props(['name', 'label', 'type' => 'text', 'value' => null, 'action' => null, 'inputId' => $name])
 
-@php($isPassword = $type === 'password')
+@php
+    $isPassword = $type === 'password';
+    $oldValue = $isPassword ? '' : old($name, $value);
+@endphp
 
 <div class="auth-field">
     <div class="auth-label-row">
@@ -13,7 +16,7 @@
             id="{{ $inputId }}"
             name="{{ $name }}"
             type="{{ $type }}"
-            value="{{ $isPassword ? '' : old($name, $value) }}"
+            value="{{ is_string($oldValue) ? $oldValue : '' }}"
             required
             @error($name) aria-invalid="true" aria-describedby="{{ $inputId }}-error" @enderror
         >

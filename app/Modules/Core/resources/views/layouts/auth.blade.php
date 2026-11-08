@@ -52,6 +52,10 @@
                         <div class="auth-alert" role="status">{{ session('status') }}</div>
                     @endif
 
+                    @error('form')
+                        <div class="auth-alert auth-alert-error" role="alert">{{ $message }}</div>
+                    @enderror
+
                     @yield('content')
                 </div>
             </main>

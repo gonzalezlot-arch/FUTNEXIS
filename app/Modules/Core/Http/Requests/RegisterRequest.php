@@ -3,23 +3,20 @@
 namespace App\Modules\Core\Http\Requests;
 
 use App\Modules\Core\Actions\RegisterUser;
-use App\Modules\Core\Http\Requests\Concerns\HasPasswordPolicyMessages;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Validation\Rule;
-use Illuminate\Validation\Rules\Password;
 
 class RegisterRequest extends NormalizedEmailRequest
 {
-    use HasPasswordPolicyMessages;
-
     /**
+     * Only verified accounts count as registered: a pending address can be requested again by its real owner.
+     *
      * @return array<string, array<int, ValidationRule|string>>
      */
     public function rules(): array
     {
         return [
-            'email' => [...$this->emailRules()['email'], Rule::unique('users', 'email')],
-            'password' => ['required', 'string', 'confirmed', 'max:255', Password::defaults()],
+            'email' => [...$this->emailRules()['email'], Rule::unique('users', 'email')->whereNotNull('email_verified_at')],
         ];
     }
 
@@ -30,7 +27,6 @@ class RegisterRequest extends NormalizedEmailRequest
     {
         return [
             ...$this->emailMessages(),
-            ...$this->passwordPolicyMessages(),
             'email.unique' => RegisterUser::DUPLICATE_EMAIL_MESSAGE,
         ];
     }

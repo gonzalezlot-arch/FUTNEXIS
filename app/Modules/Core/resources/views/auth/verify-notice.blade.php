@@ -1,8 +1,8 @@
 @extends('core::layouts.auth')
 
-@section('title', 'Verifica tu correo')
-@section('heading', 'Verifica tu correo')
-@section('intro', 'Abre el enlace que enviamos a tu correo para activar tu cuenta. Vence en 24 horas.')
+@section('title', 'Activa tu cuenta')
+@section('heading', 'Revisa tu correo')
+@section('intro', 'Abre el enlace que enviamos para confirmar tu dirección y crear tu contraseña. Vence en 24 horas.')
 
 @section('content')
     <hr class="auth-divider">

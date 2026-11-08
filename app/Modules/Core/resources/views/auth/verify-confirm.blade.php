@@ -1,13 +1,15 @@
 @extends('core::layouts.auth')
 
-@section('title', 'Confirma tu correo')
-@section('heading', 'Confirma tu correo')
-@section('intro', 'Un último paso para activar tu cuenta de FUTNEXIS.')
+@section('title', 'Activa tu cuenta')
+@section('heading', 'Crea tu contraseña')
+@section('intro', 'Al guardarla, tu correo quedará confirmado y tu cuenta activa.')
 
 @section('content')
-    <form class="auth-form" method="POST" action="{{ route('verification.confirm', ['token' => $token]) }}">
+    <form class="auth-form" method="POST" action="{{ route('verification.confirm', ['token' => $token]) }}" data-password-form novalidate>
         @csrf
 
-        <button class="auth-button" type="submit">Confirmar mi correo <x-dashboard.icon name="arrow-right" /></button>
+        <x-core::password-fields />
+
+        <button class="auth-button" type="submit">Activar mi cuenta <x-dashboard.icon name="arrow-right" /></button>
     </form>
 @endsection

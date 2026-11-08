@@ -8,15 +8,26 @@ use Illuminate\Foundation\Http\FormRequest;
 abstract class NormalizedEmailRequest extends FormRequest
 {
     /**
-     * Normalize the address before any rule evaluates it.
+     * Keep only the expected fields and normalize the address before any rule evaluates it.
+     * Unexpected fields are dropped so that malformed values are never flashed to the session.
      */
     protected function prepareForValidation(): void
     {
-        $email = $this->input('email');
+        $input = $this->only($this->expectedFields());
 
-        if (is_string($email)) {
-            $this->merge(['email' => EmailAddress::normalize($email)]);
+        if (is_string($input['email'] ?? null)) {
+            $input['email'] = EmailAddress::normalize($input['email']);
         }
+
+        $this->replace($input);
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    protected function expectedFields(): array
+    {
+        return array_keys($this->rules());
     }
 
     /**
@@ -24,7 +35,7 @@ abstract class NormalizedEmailRequest extends FormRequest
      */
     protected function emailRules(): array
     {
-        return ['email' => ['required', 'string', 'email', 'max:255']];
+        return ['email' => ['bail', 'required', 'string', 'email', 'max:255']];
     }
 
     /**

@@ -8,6 +8,7 @@
     <li data-password-rule="lowercase">Una minúscula</li>
     <li data-password-rule="number">Un número</li>
     <li data-password-rule="symbol">Un carácter especial</li>
+    <li data-password-rule="maxBytes">Hasta 72 bytes</li>
 </ul>
 
 <x-core::field name="password_confirmation" label="Confirmar contraseña" type="password" autocomplete="new-password" data-password-confirmation />

@@ -8,13 +8,15 @@ use Illuminate\Support\Facades\DB;
 class InvalidateUserSessions
 {
     /**
-     * Remove every stored session of the user (RN-CORE-005).
+     * Invalidate every session of the user, on any session driver (RN-CORE-005, RN-CORE-009).
      *
-     * Other session drivers cannot be queried by user; for them the "auth.session" middleware
-     * logs out any session whose stored password hash no longer matches.
+     * Raising the epoch rejects existing sessions on their next request. With the database driver
+     * the stored rows are removed as well, so their data does not outlive the session.
      */
     public function handle(User $user): void
     {
+        $user->increment('session_epoch');
+
         if (config('session.driver') !== 'database') {
             return;
         }

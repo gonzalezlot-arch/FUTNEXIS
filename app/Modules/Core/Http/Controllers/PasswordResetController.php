@@ -22,18 +22,27 @@ class PasswordResetController extends Controller
     {
         $sendPasswordResetLink->handle($request->validated('email'));
 
-        return back()->with('status', 'Si el correo está registrado, recibirás un enlace para restablecer tu contraseña en unos minutos.');
+        return redirect()->route('password.request')
+            ->with('status', 'Recibimos tu solicitud. Si el correo está registrado, te llegará un enlace para restablecer tu contraseña.');
     }
 
     public function edit(Request $request, string $token): View
     {
-        return view('core::auth.reset-password', ['token' => $token, 'email' => $request->query('email')]);
+        $email = $request->query('email');
+
+        return view('core::auth.reset-password', [
+            'token' => $token,
+            'email' => is_string($email) && mb_check_encoding($email, 'UTF-8') ? $email : null,
+        ]);
     }
 
     public function update(ResetPasswordRequest $request, ResetUserPassword $resetUserPassword): RedirectResponse
     {
-        if (! $resetUserPassword->handle($request->safe()->only(['email', 'token', 'password']))) {
-            return back()->withErrors(['email' => 'El enlace no es válido, ya se utilizó o venció. Solicita uno nuevo.']);
+        $credentials = $request->safe()->only(['email', 'token', 'password']);
+
+        if (! $resetUserPassword->handle($credentials, $request->ip(), $request->userAgent())) {
+            return redirect()->route('password.request')
+                ->withErrors(['email' => 'El enlace no es válido, ya se utilizó o venció. Solicita uno nuevo.']);
         }
 
         return redirect()->route('login')->with('status', 'Tu contraseña se actualizó. Inicia sesión con la nueva contraseña.');

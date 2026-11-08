@@ -3,6 +3,7 @@
 namespace App\Modules\Core\Notifications;
 
 use App\Models\User;
+use App\Modules\Core\Support\AppUrl;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -26,10 +27,10 @@ class ResetPasswordNotification extends Notification
                 'heading' => 'Restablece tu contraseña',
                 'body' => 'Recibimos una solicitud para restablecer la contraseña de tu cuenta.',
                 'actionText' => 'Crear una nueva contraseña',
-                'actionUrl' => config('app.url').route('password.reset', [
+                'actionUrl' => AppUrl::route('password.reset', [
                     'token' => $this->token,
                     'email' => $notifiable->email,
-                ], false),
+                ]),
                 'note' => 'El enlace vence en 60 minutos y solo puede usarse una vez. Si no lo solicitaste, ignora este mensaje: tu contraseña no cambiará.',
             ]);
     }
