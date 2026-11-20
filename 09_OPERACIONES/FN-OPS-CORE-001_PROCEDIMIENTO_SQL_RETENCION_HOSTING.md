@@ -1,7 +1,7 @@
 # FN-OPS-CORE-001 — Procedimiento SQL, retención y condiciones de hosting de CORE
 
-- Versión: 0.1
-- Estado: BORRADOR (pendiente de revisión del propietario)
+- Versión: 0.2
+- Estado: EN_REVISION (ajustes documentales aplicados; validaciones operativas pendientes)
 - Fecha: 2026-11-08
 - Relacionado con: `FN-ARC-CORE-001`, `FN-MOD-CORE-001`, DEC-CORE-010 a DEC-CORE-016.
 
@@ -95,7 +95,7 @@ Al borrar una cuenta sin verificar, sus intentos se conservan sin el vínculo co
 - Un club o una red móvil puede acumular fallos de muchas personas sin perjudicar a quien escribe bien su contraseña.
 - **Riesgo residual aceptado por D3:** como una contraseña correcta nunca se rechaza por IP, este límite no detiene por sí solo a un atacante que pruebe pocas contraseñas contra muchas cuentas. El freno real es el bloqueo por cuenta. Ante un ataque sostenido, el aviso del registro permite bloquear la IP desde cPanel.
 
-**Bloqueos provocados por terceros:** cualquiera que conozca un correo puede provocar el bloqueo de esa cuenta durante 15 minutos, y repetirlo. Es inherente a la regla aprobada de bloquear por cuenta y no puede eliminarse sin debilitarla. Lo mitiga D4: el propietario puede desbloquear la cuenta en cualquier momento restableciendo su contraseña. Riesgo residual aceptado para el piloto (DEC-CORE-011).
+**Bloqueos provocados por terceros:** cualquiera que conozca un correo puede provocar el bloqueo de esa cuenta durante 15 minutos, y repetirlo. Es inherente a la regla aprobada de bloquear por cuenta y no puede eliminarse sin debilitarla. Lo mitiga DEC-CORE-012: el propietario puede desbloquear la cuenta en cualquier momento restableciendo su contraseña. Riesgo residual aceptado para el piloto (DEC-CORE-011).
 
 ## 6. Proxies
 
@@ -107,7 +107,16 @@ Enviar a una dirección con caracteres no ASCII antes de la `@` (por ejemplo `jo
 
 Debe probarse con el SMTP real antes de ofrecer estas direcciones.
 
-## 8. Comprobaciones antes de producción
+## 8. Validaciones operativas pendientes
+
+La revisión documental no acredita que estas condiciones hayan sido probadas. Antes de producción deben verificarse en el hosting real:
+
+- Disponibilidad de Cron de cPanel y ruta efectiva del binario PHP.
+- Ejecución controlada de `core:prune-auth-data` y funcionamiento de la alternativa sin Cron.
+- Soporte SMTPUTF8 del servidor `mail.gltechsolutions.com` y entrega real a una dirección con acento.
+- Procedimiento de respaldo y restauración de la base de datos.
+
+## 9. Comprobaciones antes de producción
 
 - `APP_ENV=production`, `APP_DEBUG=false`, `APP_URL` en HTTPS y **nunca** `MAIL_MAILER=log`.
 - Raíz web apuntando a `public/` y redirección a HTTPS.
