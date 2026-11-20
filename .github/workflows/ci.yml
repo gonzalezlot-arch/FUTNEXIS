@@ -95,7 +95,11 @@ jobs:
       - name: Ejecutar las pruebas
         run: |
           php artisan config:clear --no-interaction
-          php artisan test
+          php artisan test --log-junit storage/logs/junit.xml
+
+      - name: Publicar los fallos como anotaciones
+        if: failure()
+        run: php .github/scripts/junit-annotations.php storage/logs/junit.xml
 
   audit:
     name: Auditoría de dependencias
