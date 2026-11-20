@@ -2,7 +2,7 @@
 
 - Versión: 0.2
 - Estado: EN_REVISION (ajustes documentales aplicados; validaciones operativas pendientes)
-- Fecha: 2026-11-08
+- Fecha: 2026-11-19
 - Relacionado con: `FN-ARC-CORE-001`, `FN-MOD-CORE-001`, DEC-CORE-010 a DEC-CORE-016.
 
 ## 1. Generar el SQL para phpMyAdmin
@@ -125,3 +125,8 @@ La revisión documental no acredita que estas condiciones hayan sido probadas. A
 - Permisos de escritura en `storage/` y `bootstrap/cache/`.
 - Prueba real de SMTP, incluida una dirección con acento.
 - Los servidores web registran las URL completas: los enlaces con token pueden aparecer en los registros de acceso. Conviene limitar quién los consulta.
+ 
+
+## 10. Historial de cambios
+
+- 0.2 — 2026-11-19: aclara la referencia a DEC-CORE-012 para el desbloqueo por restablecimiento y separa las validaciones operativas pendientes de las comprobaciones previas a producción.
