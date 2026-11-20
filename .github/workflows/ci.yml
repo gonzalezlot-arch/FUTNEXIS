@@ -1,0 +1,122 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tests:
+    name: Pruebas · PHP ${{ matrix.php }} · MariaDB ${{ matrix.mariadb }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['8.3', '8.5']
+        mariadb: ['10.11', '11.4']
+
+    # Base de datos aislada y desechable, creada solo para este trabajo. Nunca hay credenciales de producción.
+    services:
+      mariadb:
+        image: mariadb:${{ matrix.mariadb }}
+        env:
+          MARIADB_ROOT_PASSWORD: ci-root
+          MARIADB_DATABASE: futnexis_testing
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=20
+
+    env:
+      DB_CONNECTION: mariadb
+      DB_HOST: 127.0.0.1
+      DB_PORT: 3306
+      DB_DATABASE: futnexis_testing
+      DB_USERNAME: root
+      DB_PASSWORD: ci-root
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Preparar PHP ${{ matrix.php }}
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mbstring, intl, pdo_mysql, bcmath, fileinfo, zip
+          coverage: none
+          tools: composer:v2
+
+      - name: Validar composer.json
+        run: composer validate --strict --no-check-publish
+
+      - name: Caché de Composer
+        uses: actions/cache@v4
+        with:
+          path: ~/.composer/cache/files
+          key: composer-${{ matrix.php }}-${{ hashFiles('composer.lock') }}
+
+      - name: Instalar dependencias de PHP
+        run: composer install --no-interaction --prefer-dist --no-progress
+
+      - name: Preparar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: npm
+
+      - name: Instalar dependencias de Node
+        run: npm ci --ignore-scripts --no-audit --no-fund
+
+      - name: Compilar el frontend
+        run: npm run build
+
+      - name: Preparar entorno de la aplicación
+        run: |
+          cp .env.example .env
+          php artisan key:generate --no-interaction
+
+      - name: Comprobar el formato (Pint)
+        run: vendor/bin/pint --test
+
+      - name: Versión de MariaDB usada
+        run: mysql --host=127.0.0.1 --user=root --password=ci-root --execute="SELECT VERSION();"
+
+      - name: Ejecutar las pruebas
+        run: |
+          php artisan config:clear --no-interaction
+          php artisan test
+
+  audit:
+    name: Auditoría de dependencias
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.3'
+          coverage: none
+          tools: composer:v2
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Auditoría de Composer
+        run: composer audit --locked --no-interaction
+
+      - name: Auditoría de npm
+        run: npm audit --audit-level=low
