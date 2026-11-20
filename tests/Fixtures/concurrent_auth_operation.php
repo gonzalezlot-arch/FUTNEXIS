@@ -3,10 +3,12 @@
 /**
  * Runs one authentication operation in its own process, for the concurrency tests.
  *
- * Usage: php concurrent_auth_operation.php <login|reset> <startEpoch> <email> <secret>
+ * Usage: php concurrent_auth_operation.php <login|reset|verify|prune> <startEpoch> <email> <secret>
  */
 
 use App\Modules\Core\Actions\AuthenticateUser;
+use App\Modules\Core\Actions\ConfirmEmailVerification;
+use App\Modules\Core\Actions\PruneAuthenticationData;
 use App\Modules\Core\Actions\ResetUserPassword;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Validation\ValidationException;
@@ -31,6 +33,12 @@ try {
     if ($operation === 'login') {
         $app->make(AuthenticateUser::class)->handle($email, $secret, '198.51.100.7', 'concurrency-test');
         echo "authenticated\n";
+    } elseif ($operation === 'verify') {
+        $verified = $app->make(ConfirmEmailVerification::class)->handle($secret, 'Segura#'.getmypid().'Aa1');
+        echo $verified ? "verified {$email}\n" : "rejected {$email}\n";
+    } elseif ($operation === 'prune') {
+        $app->make(PruneAuthenticationData::class)->handle();
+        echo "pruned\n";
     } else {
         $accepted = $app->make(ResetUserPassword::class)->handle(
             ['email' => $email, 'token' => $secret, 'password' => 'Nueva#'.getmypid().'Aa1'],

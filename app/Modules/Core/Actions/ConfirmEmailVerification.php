@@ -2,6 +2,7 @@
 
 namespace App\Modules\Core\Actions;
 
+use App\Models\User;
 use App\Modules\Core\Models\EmailVerificationToken;
 use Illuminate\Support\Facades\DB;
 
@@ -20,21 +21,35 @@ class ConfirmEmailVerification
 
     /**
      * Consume a token and set the password chosen by the owner of the address, atomically.
-     * Returns false when the token is unknown, already used, replaced or expired.
+     * Returns false when the token is unknown, already used, replaced or expired, or when the
+     * retention cleanup deleted the pending account first.
+     *
+     * The account row is locked before its token, the same order the retention cleanup follows
+     * when it deletes the account and, by cascade, the token, so the two cannot deadlock.
      */
     public function handle(#[\SensitiveParameter] string $token, #[\SensitiveParameter] string $password): bool
     {
-        return DB::transaction(function () use ($token, $password): bool {
-            $verification = EmailVerificationToken::query()
-                ->where('token_hash', hash('sha256', $token))
-                ->lockForUpdate()
-                ->first();
+        $tokenHash = hash('sha256', $token);
 
-            if ($verification === null || $verification->expires_at->isPast()) {
+        return DB::transaction(function () use ($tokenHash, $password): bool {
+            $userId = EmailVerificationToken::query()->where('token_hash', $tokenHash)->value('user_id');
+
+            if ($userId === null) {
                 return false;
             }
 
-            $verification->user->forceFill([
+            $user = User::query()->whereKey($userId)->lockForUpdate()->first();
+
+            $verification = EmailVerificationToken::query()
+                ->where('token_hash', $tokenHash)
+                ->lockForUpdate()
+                ->first();
+
+            if ($user === null || $verification === null || (int) $verification->user_id !== (int) $user->id || $verification->expires_at->isPast()) {
+                return false;
+            }
+
+            $user->forceFill([
                 'password' => $password,
                 'email_verified_at' => now(),
             ])->save();

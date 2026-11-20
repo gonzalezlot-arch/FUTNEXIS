@@ -4,7 +4,9 @@ namespace Tests\Feature\Modules\Core;
 
 use App\Models\User;
 use App\Modules\Core\Actions\AuthenticateUser;
+use App\Modules\Core\Actions\PruneAuthenticationData;
 use App\Modules\Core\Enums\LoginOutcome;
+use App\Modules\Core\Models\EmailVerificationToken;
 use App\Modules\Core\Models\LoginAttempt;
 use App\Modules\Core\Models\LoginThrottle;
 use Illuminate\Database\QueryException;
@@ -13,6 +15,7 @@ use Illuminate\Process\Pool;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Process;
+use Illuminate\Support\Str;
 use PDOException;
 use Tests\TestCase;
 
@@ -27,7 +30,7 @@ class LoginConcurrencyTest extends TestCase
      */
     protected function tearDown(): void
     {
-        foreach (['login_attempts', 'login_throttles', 'password_reset_tokens', 'users'] as $table) {
+        foreach (['login_attempts', 'login_throttles', 'password_reset_tokens', 'email_verification_tokens', 'users'] as $table) {
             DB::table($table)->delete();
         }
 
@@ -59,6 +62,47 @@ class LoginConcurrencyTest extends TestCase
 
         $this->assertNoProcessFailed($results);
         $this->assertSame(1, substr_count($results, 'reset'));
+    }
+
+    public function test_verification_and_retention_cleanup_at_once_never_fail_or_leave_a_broken_account(): void
+    {
+        $tokens = [];
+
+        foreach (range(1, 6) as $index) {
+            $user = User::factory()->unverified()->create([
+                'email' => "pendiente{$index}@example.com",
+                'password' => null,
+                'created_at' => now()->subDays(PruneAuthenticationData::UNVERIFIED_ACCOUNT_RETENTION_DAYS + 1),
+            ]);
+            $tokens[$user->email] = Str::random(64);
+            EmailVerificationToken::query()->create([
+                'user_id' => $user->id,
+                'token_hash' => hash('sha256', $tokens[$user->email]),
+                'expires_at' => now()->addHours(12),
+            ]);
+        }
+
+        $results = $this->runMixedSimultaneously(array_merge(
+            collect($tokens)->map(fn (string $token, string $email): array => ['verify', $email, $token])->values()->all(),
+            array_fill(0, 6, ['prune', '-', '-']),
+        ));
+
+        $this->assertNoProcessFailed($results);
+        $this->assertSame(0, User::query()->whereNull('email_verified_at')->count(), 'No pending account may survive half-processed.');
+
+        foreach (array_keys($tokens) as $email) {
+            $user = User::query()->where('email', $email)->first();
+
+            if (str_contains($results, "verified {$email}")) {
+                $this->assertNotNull($user, "{$email} was reported as verified but was deleted.");
+                $this->assertTrue($user->hasVerifiedEmail());
+            } else {
+                $this->assertStringContainsString("rejected {$email}", $results);
+                $this->assertNull($user, "{$email} was rejected but its pending account still exists.");
+            }
+        }
+
+        $this->assertDatabaseCount('email_verification_tokens', 0);
     }
 
     public function test_a_deadlock_is_retried_and_the_attempt_is_counted_once(): void
@@ -108,6 +152,30 @@ class LoginConcurrencyTest extends TestCase
 
         $results = Process::pool(function (Pool $pool) use ($processes, $operation, $startEpoch, $email, $secret, $script): void {
             foreach (range(1, $processes) as $index) {
+                $pool->as((string) $index)->path(base_path())->timeout(60)->env([
+                    'APP_ENV' => 'testing',
+                    'DB_CONNECTION' => 'mariadb',
+                    'DB_DATABASE' => 'futnexis_testing',
+                    'MAIL_MAILER' => 'array',
+                    'LOG_CHANNEL' => 'null',
+                    'BCRYPT_ROUNDS' => '8',
+                ])->command([PHP_BINARY, $script, $operation, $startEpoch, $email, $secret]);
+            }
+        })->start()->wait();
+
+        return collect($results->collect())->map(fn ($result): string => $result->output().$result->errorOutput())->implode('');
+    }
+
+    /**
+     * @param  list<array{string, string, string}>  $operations  [operation, email, secret] per process
+     */
+    private function runMixedSimultaneously(array $operations): string
+    {
+        $startEpoch = (string) (microtime(true) + 4);
+        $script = base_path('tests/Fixtures/concurrent_auth_operation.php');
+
+        $results = Process::pool(function (Pool $pool) use ($operations, $startEpoch, $script): void {
+            foreach ($operations as $index => [$operation, $email, $secret]) {
                 $pool->as((string) $index)->path(base_path())->timeout(60)->env([
                     'APP_ENV' => 'testing',
                     'DB_CONNECTION' => 'mariadb',

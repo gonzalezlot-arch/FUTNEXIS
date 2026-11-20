@@ -3,14 +3,17 @@
 namespace Tests\Feature\Modules\Core;
 
 use App\Models\User;
+use App\Modules\Core\Actions\IssueEmailVerification;
 use App\Modules\Core\Actions\PruneAuthenticationData;
 use App\Modules\Core\Models\EmailVerificationToken;
 use App\Modules\Core\Models\LoginAttempt;
 use App\Modules\Core\Models\LoginThrottle;
+use App\Modules\Core\Notifications\VerifyEmailNotification;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Lottery;
 use Tests\TestCase;
 
@@ -83,6 +86,69 @@ class AuthenticationDataPruningTest extends TestCase
         $this->assertDatabaseHas('users', ['id' => $recent->id]);
     }
 
+    public function test_a_pending_account_is_kept_until_its_retention_period_even_if_its_link_expired(): void
+    {
+        $user = User::factory()->unverified()->create(['password' => null, 'created_at' => now()->subDays(PruneAuthenticationData::UNVERIFIED_ACCOUNT_RETENTION_DAYS)->addMinute()]);
+        EmailVerificationToken::query()->create(['user_id' => $user->id, 'token_hash' => str_repeat('c', 64), 'expires_at' => now()->subDays(3)]);
+
+        app(PruneAuthenticationData::class)->handle();
+
+        $this->assertDatabaseHas('users', ['id' => $user->id]);
+        $this->assertDatabaseMissing('email_verification_tokens', ['user_id' => $user->id]);
+    }
+
+    public function test_deleting_a_pending_account_leaves_no_verification_token_behind(): void
+    {
+        $user = User::factory()->unverified()->create(['password' => null, 'created_at' => now()->subDays(PruneAuthenticationData::UNVERIFIED_ACCOUNT_RETENTION_DAYS + 1)]);
+        EmailVerificationToken::query()->create(['user_id' => $user->id, 'token_hash' => str_repeat('d', 64), 'expires_at' => now()->addHours(12)]);
+
+        app(PruneAuthenticationData::class)->handle();
+
+        $this->assertDatabaseMissing('users', ['id' => $user->id]);
+        $this->assertDatabaseCount('email_verification_tokens', 0);
+    }
+
+    public function test_the_link_of_a_deleted_pending_account_is_rejected_without_an_error(): void
+    {
+        Notification::fake();
+        $user = User::factory()->unverified()->create(['password' => null]);
+        app(IssueEmailVerification::class)->handle($user);
+        $token = $this->tokenSentTo($user);
+        $user->forceFill(['created_at' => now()->subDays(PruneAuthenticationData::UNVERIFIED_ACCOUNT_RETENTION_DAYS + 1)])->save();
+
+        app(PruneAuthenticationData::class)->handle();
+
+        $this->get(route('verification.show', ['token' => $token]))->assertRedirectToRoute('verification.notice');
+        $this->post(route('verification.confirm', ['token' => $token]), ['password' => 'Segura#2026', 'password_confirmation' => 'Segura#2026'])
+            ->assertRedirectToRoute('verification.notice')
+            ->assertInvalid('email');
+        $this->assertDatabaseCount('users', 0);
+    }
+
+    public function test_an_address_freed_by_the_cleanup_can_register_again_with_a_new_period(): void
+    {
+        Notification::fake();
+        $old = User::factory()->unverified()->create(['email' => 'libre@example.com', 'password' => null, 'created_at' => now()->subDays(PruneAuthenticationData::UNVERIFIED_ACCOUNT_RETENTION_DAYS + 1)]);
+
+        app(PruneAuthenticationData::class)->handle();
+        $this->post(route('register'), ['email' => 'libre@example.com']);
+
+        $new = User::query()->where('email', 'libre@example.com')->sole();
+        $this->assertNotSame($old->id, $new->id);
+        $this->assertTrue($new->created_at->greaterThan(now()->subMinute()));
+        Notification::assertSentTo($new, VerifyEmailNotification::class);
+    }
+
+    public function test_an_account_verified_before_the_cleanup_runs_is_not_deleted(): void
+    {
+        $user = User::factory()->unverified()->create(['password' => null, 'created_at' => now()->subDays(PruneAuthenticationData::UNVERIFIED_ACCOUNT_RETENTION_DAYS + 1)]);
+        $user->forceFill(['email_verified_at' => now(), 'password' => 'Segura#2026'])->save();
+
+        app(PruneAuthenticationData::class)->handle();
+
+        $this->assertDatabaseHas('users', ['id' => $user->id]);
+    }
+
     public function test_verified_accounts_are_never_deleted(): void
     {
         $user = User::factory()->create(['created_at' => now()->subYears(2)]);
@@ -131,6 +197,19 @@ class AuthenticationDataPruningTest extends TestCase
         }
 
         $this->assertSame(0, LoginAttempt::query()->where('attempted_at', '<', now()->subDays(1))->count());
+    }
+
+    private function tokenSentTo(User $user): string
+    {
+        $token = null;
+
+        Notification::assertSentTo($user, VerifyEmailNotification::class, function (VerifyEmailNotification $notification) use (&$token): bool {
+            $token = $notification->token;
+
+            return true;
+        });
+
+        return $token;
     }
 
     private function attemptAt(Carbon $date, ?User $user = null): LoginAttempt
