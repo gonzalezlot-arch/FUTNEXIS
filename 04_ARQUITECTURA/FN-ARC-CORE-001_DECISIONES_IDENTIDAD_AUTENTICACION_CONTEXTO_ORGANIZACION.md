@@ -218,7 +218,7 @@ Antes del despliegue se deberá validar:
 
 ## 14. Criterio de aprobación
 
-Esta arquitectura queda aprobada como referencia técnica para desarrollar el módulo CORE de FUTNEXIS.
+La versión 0.5 queda presentada para revisión y aprobación del propietario. Hasta su aprobación, la versión 0.4 continúa siendo la última versión de arquitectura aprobada.
 
 Las decisiones funcionales aprobadas en `FN-MOD-CORE-001` prevalecen sobre cualquier comportamiento predeterminado de Laravel o de sus dependencias.
 
