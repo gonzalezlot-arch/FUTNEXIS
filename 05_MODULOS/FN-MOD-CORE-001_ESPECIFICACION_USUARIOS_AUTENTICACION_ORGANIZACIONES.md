@@ -1,8 +1,8 @@
 # FN-MOD-CORE-001 — Especificación funcional: usuarios, autenticación y organizaciones
 
-- Versión: 1.1
+- Versión: 1.2
 - Estado: EN_REVISION (la última versión aprobada es la 1.0; esta versión incorpora DEC-CORE-010 a DEC-CORE-014 y espera la revisión del propietario)
-- Fecha: 2026-11-08
+- Fecha: 2026-11-19
 - Aprobación de la versión 1.0: aprobación expresa del responsable del producto en conversación.
 - Alcance: reglas funcionales del núcleo de identidad, acceso, membresías, administración de cuentas y auditoría.
 
@@ -187,5 +187,6 @@ La solicitud se evaluará conforme a las obligaciones legales y reglas de retenc
 
 ## 12. Historial de cambios
 
+- 1.2 — 2026-11-19: añade criterios de aceptación explícitos para diferenciar correos que solo cambian por acentos y para comprobar el desbloqueo tras restablecer la contraseña. Se mantienen las reglas funcionales aprobadas.
 - 1.1 — 2026-11-08: EN_REVISION. Incorpora DEC-CORE-010 a DEC-CORE-014: la contraseña se establece después de verificar el correo, normalización NFC e identidades distintas por acentos, un espacio no es carácter especial, máximo de 72 bytes y desbloqueo por restablecimiento.
 - 1.0 — 2026-11-03: primera versión aprobada; consolida las decisiones funcionales confirmadas para usuarios, autenticación, organizaciones, sesiones, administración de cuentas, auditoría y solicitudes de eliminación de datos.
