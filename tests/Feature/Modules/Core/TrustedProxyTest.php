@@ -54,6 +54,10 @@ class TrustedProxyTest extends TestCase
     #[TestWith(['**', []])]
     #[TestWith(['10.0.0.1, 10.0.0.0/8', ['10.0.0.1', '10.0.0.0/8']])]
     #[TestWith(['*, 10.0.0.1', ['10.0.0.1']])]
+    #[TestWith(['0.0.0.0/0', []])]
+    #[TestWith(['::/0', []])]
+    #[TestWith(['10.0.0.1, 0.0.0.0/0, ::/00', ['10.0.0.1']])]
+    #[TestWith(['2001:db8::/32', ['2001:db8::/32']])]
     public function test_the_configuration_never_trusts_every_client(string $configured, array $expected): void
     {
         $this->assertSame($expected, CoreServiceProvider::parseTrustedProxies($configured));

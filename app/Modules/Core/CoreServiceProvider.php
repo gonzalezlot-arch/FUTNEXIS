@@ -85,7 +85,8 @@ class CoreServiceProvider extends ServiceProvider
     }
 
     /**
-     * Parse the configured proxies. The wildcards are discarded because they would trust any client.
+     * Parse the configured proxies. The wildcards and the ranges with a /0 prefix (such as 0.0.0.0/0 or ::/0)
+     * are discarded because they would trust any client.
      *
      * @return array<int, string>
      */
@@ -93,7 +94,7 @@ class CoreServiceProvider extends ServiceProvider
     {
         return array_values(array_filter(
             array_map('trim', explode(',', $configured)),
-            fn (string $proxy): bool => $proxy !== '' && $proxy !== '*' && $proxy !== '**',
+            fn (string $proxy): bool => $proxy !== '' && $proxy !== '*' && $proxy !== '**' && preg_match('#/0+$#', $proxy) !== 1,
         ));
     }
 
