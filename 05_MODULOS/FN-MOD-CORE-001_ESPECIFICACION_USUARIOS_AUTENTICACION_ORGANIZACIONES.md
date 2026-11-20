@@ -156,12 +156,14 @@ La solicitud se evaluará conforme a las obligaciones legales y reglas de retenc
 |---|---|---|
 | CA-CORE-001 | Registrar un correo nuevo | Cuenta pendiente de verificación. |
 | CA-CORE-002 | Registrar un correo ya existente con otra capitalización o espacios externos | Registro rechazado por duplicidad. |
+| CA-CORE-021 | Registrar `jose@dominio.com` y `josé@dominio.com` como direcciones distintas | Ambas identidades pueden registrarse por separado, siempre que cada correo se verifique. |
 | CA-CORE-003 | Establecer, tras verificar el correo, una contraseña que incumple la política | Rechazo en frontend y backend. |
 | CA-CORE-004 | Iniciar sesión sin verificar correo | Acceso denegado. |
 | CA-CORE-005 | Verificar correo válido y establecer una contraseña | Cuenta habilitada para iniciar sesión. |
 | CA-CORE-006 | Usar enlace de recuperación vencido o ya utilizado | Restablecimiento rechazado. |
 | CA-CORE-007 | Cambiar o recuperar contraseña | Todas las sesiones anteriores quedan invalidadas. |
 | CA-CORE-008 | Fallar cinco veces consecutivas | Bloqueo de inicio de sesión por 15 minutos. |
+| CA-CORE-022 | Restablecer correctamente la contraseña de una cuenta bloqueada | El bloqueo se elimina y la cuenta puede iniciar sesión con la nueva contraseña. |
 | CA-CORE-009 | Mantener sesión inactiva 30 minutos | Sesión expirada. |
 | CA-CORE-010 | Cerrar sesión global | Todas las sesiones quedan invalidadas. |
 | CA-CORE-011 | Asociar usuario a varias organizaciones | Roles y permisos independientes por organización. |
