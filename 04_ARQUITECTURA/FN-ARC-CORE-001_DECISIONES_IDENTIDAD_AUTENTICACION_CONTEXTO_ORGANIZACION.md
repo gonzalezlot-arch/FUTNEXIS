@@ -5,7 +5,7 @@
 - **Versión:** 0.5
 - **Estado:** EN_REVISION (la última versión aprobada es la 0.4; esta versión incorpora DEC-CORE-010 a DEC-CORE-016 y espera la revisión del propietario)
 - **Módulo:** CORE
-- **Fecha:** 2026-11-08
+- **Fecha:** 2026-11-19
 
 ## 1. Objetivo
 
@@ -228,6 +228,7 @@ Cualquier cambio de arquitectura deberá documentarse, justificarse y aprobarse 
 
 ## 15. Historial de cambios
 
+- 0.5 — 2026-11-19: aclara que la versión permanece EN_REVISION y que la 0.4 es la última arquitectura aprobada; no modifica decisiones técnicas.
 - 0.5 — 2026-11-08: EN_REVISION. Incorpora DEC-CORE-010 a DEC-CORE-016: cotejamiento confirmado, verificación antes de la contraseña, política de contraseña, sesiones cifradas e independientes del controlador, límite secundario por IP, y dispositivo solo como auditoría, lo que elimina la contradicción de la sección 5 con DEC-CORE-005.
 - 0.4 — 2026-11-05: incorpora DEC-CORE-009 y documenta el cotejamiento específico propuesto/aprobado para `users.email`, condicionado a validación en MariaDB 11.4.13. No autoriza cambios de esquema ni despliegue.
 
