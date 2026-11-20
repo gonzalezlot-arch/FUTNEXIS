@@ -1,6 +1,6 @@
 # FN-OPS-CORE-001 — Procedimiento SQL, retención y condiciones de hosting de CORE
 
-- Versión: 0.2
+- Versión: 0.3
 - Estado: EN_REVISION (ajustes documentales aplicados; validaciones operativas pendientes)
 - Fecha: 2026-11-19
 - Relacionado con: `FN-ARC-CORE-001`, `FN-MOD-CORE-001`, DEC-CORE-010 a DEC-CORE-016.
@@ -78,6 +78,20 @@ Se ejecuta de dos formas complementarias:
 
 Al borrar una cuenta sin verificar, sus intentos se conservan sin el vínculo con el usuario hasta cumplir su plazo.
 
+### 4.1 Pendiente de decisión del propietario: cuentas sin verificar y enlaces vigentes
+
+**Estado: ABIERTO.** No modifica ningún plazo aprobado; registra una contradicción detectada en la revisión final del PR #2 (2026-11-19).
+
+- **Comportamiento actual:** los 7 días se cuentan desde la creación de la cuenta (`users.created_at`). Pedir un nuevo enlace o volver a registrarse con el mismo correo pendiente no cambia ese punto de inicio.
+- **Contradicción:** FN-ARC-CORE-001 establece que cada enlace de verificación vence a las 24 horas, y DEC-CORE-015 establece que la cuenta sin verificar se elimina a los 7 días. Si el usuario pide un enlace durante las últimas 24 horas del plazo (por ejemplo, el día 6 a las 23:00), la limpieza elimina la cuenta, y con ella el enlace, antes de que el enlace cumpla sus 24 horas. El enlace recibido deja de funcionar antes de lo indicado.
+- **Consistencia de datos:** no quedan enlaces huérfanos. El token se elimina en cascada con la cuenta, y un enlace de una cuenta eliminada se rechaza como inválido sin error de servidor. El correo queda libre para registrarse de nuevo con un plazo nuevo.
+- **Opciones para decidir:**
+  1. **Mantener el comportamiento actual** y aceptar que un enlace pedido el último día puede durar menos de 24 horas.
+  2. **No eliminar una cuenta mientras tenga un enlace vigente.** Se conservan los 7 días desde la creación, pero la eliminación espera a que venza el último enlace: como máximo 7 días más 24 horas.
+  3. **Contar los 7 días desde el último enlace enviado.** Cambia el punto de inicio del plazo; un correo pendiente podría conservarse más tiempo si se siguen pidiendo enlaces.
+  4. **Acortar el último enlace** para que venza junto con la cuenta. Contradice los 24 horas de FN-ARC-CORE-001.
+- **Recomendación técnica:** opción 2. Cumple las dos reglas aprobadas, tiene un máximo acotado y no cambia el punto de inicio del plazo. Requiere aprobación antes de implementarse.
+
 ## 5. Límite secundario por IP
 
 **Valores aprobados por el propietario (DEC-CORE-011):** 100 contraseñas fallidas por IP en una ventana fija de 15 minutos. IPv6 se agrupa por red /64.
@@ -99,7 +113,7 @@ Al borrar una cuenta sin verificar, sus intentos se conservan sin el vínculo co
 
 ## 6. Proxies
 
-Por defecto no se confía en ninguna cabecera reenviada. Si el hosting antepone un proxy inverso, indicar sus direcciones en `TRUSTED_PROXIES`, en el `.env` del servidor. El comodín `*` se descarta. Si hay un proxy y no se configura, todos los visitantes aparentarán tener la misma IP.
+Por defecto no se confía en ninguna cabecera reenviada. Si el hosting antepone un proxy inverso, indicar sus direcciones en `TRUSTED_PROXIES`, en el `.env` del servidor. El comodín `*` y los rangos con prefijo `/0` (como `0.0.0.0/0` o `::/0`) se descartan, porque confiarían en cualquier cliente. Si hay un proxy y no se configura, todos los visitantes aparentarán tener la misma IP.
 
 ## 7. Correo y direcciones internacionales
 
@@ -129,4 +143,5 @@ La revisión documental no acredita que estas condiciones hayan sido probadas. A
 
 ## 10. Historial de cambios
 
+- 0.3 — 2026-11-19: registra en 4.1 la contradicción entre el plazo de 7 días de las cuentas sin verificar y la vigencia de 24 horas de los enlaces, con opciones y recomendación, pendiente de decisión; precisa en 6 que también se descartan los rangos `/0`. No modifica plazos ni decisiones aprobadas.
 - 0.2 — 2026-11-19: aclara la referencia a DEC-CORE-012 para el desbloqueo por restablecimiento y separa las validaciones operativas pendientes de las comprobaciones previas a producción.
