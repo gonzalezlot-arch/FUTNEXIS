@@ -1,3 +1,5 @@
+import './auth-forms';
+
 const appShell = document.querySelector('[data-app-shell]');
 const themeToggle = document.querySelector('[data-theme-toggle]');
 const themeStorageKey = 'futnexis-theme';
@@ -27,6 +29,8 @@ try {
 } catch {
 	document.documentElement.dataset.theme = 'light';
 }
+
+themeToggle?.setAttribute('aria-pressed', String(document.documentElement.dataset.theme === 'dark'));
 
 themeToggle?.addEventListener('click', () => {
 	const nextTheme = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';

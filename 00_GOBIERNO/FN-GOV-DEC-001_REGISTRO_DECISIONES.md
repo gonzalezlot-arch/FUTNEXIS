@@ -1,8 +1,8 @@
 # FN-GOV-DEC-001 — Registro maestro de decisiones
 
-- Versión: 2.8
+- Versión: 2.9
 - Estado: EN_REVISION
-- Fecha de corte: 2026-11-04
+- Fecha de corte: 2026-11-08
 
 ## Decisiones generales
 
@@ -151,9 +151,43 @@ Los correos que difieran por caracteres acentuados se considerarán diferentes. 
 [APROBADO PARA DOCUMENTACIÓN — 2026-11-05]
 Se aprueba `utf8mb4_uca1400_as_ci` exclusivamente para `users.email`, manteniendo `utf8mb4_unicode_ci` como cotejamiento general. La finalidad es considerar diferentes los correos que difieran por acentos y mantener la comparación insensible a mayúsculas/minúsculas. La implementación queda condicionada a comprobar disponibilidad y comportamiento en MariaDB 11.4.13 del hosting. Esta decisión no autoriza todavía migraciones, cambios de esquema ni SQL de producción.
 
+### DEC-CORE-010 — Identidad y unicidad del correo (D1 y D2)
+[APROBADO — 2026-11-08]
+El propietario confirmó en el hosting que `utf8mb4_uca1400_as_ci` está disponible: `SELECT 'a' COLLATE utf8mb4_uca1400_as_ci;` devolvió `a`, y la comparación entre `jose@dominio.com` y `josé@dominio.com` devolvió `0`. Queda cumplida la condición de DEC-CORE-009. Se utiliza ese cotejamiento en `users.email` y, con el mismo criterio, en `password_reset_tokens.email`. Antes de guardar y comparar se eliminan los espacios exteriores, se aplica Unicode NFC y se convierte a minúsculas, sin eliminar acentos. No se sustituye por `utf8mb4_bin` ni por otro cotejamiento sin autorización.
+
+### DEC-CORE-011 — Bloqueo por cuenta y límite secundario por IP (D3)
+[APROBADO — 2026-11-08]
+El control principal es la cuenta: cinco intentos fallidos consecutivos, bloqueo de 15 minutos y contador asociado a la cuenta real encontrada, no al texto escrito. El límite por IP es secundario y tolerante: una contraseña correcta no se rechaza solo por ese límite. El control usa operaciones atómicas y manejo de bloqueos mutuos. No se confía en cabeceras reenviadas salvo desde proxies configurados.
+
+[APROBADO — 2026-11-08] Valores del límite por IP: 100 fallos en una ventana fija de 15 minutos, agrupando IPv6 por red /64, como control secundario. Justificación y consecuencias en `FN-OPS-CORE-001`.
+
+[RIESGO ACEPTADO PARA EL PILOTO — 2026-11-08] Un tercero que conozca un correo puede provocar el bloqueo de esa cuenta durante 15 minutos y repetirlo. El propietario acepta este riesgo residual para el piloto, con las mitigaciones acordadas: expiración del bloqueo y desbloqueo por restablecimiento de contraseña (DEC-CORE-012).
+
+### DEC-CORE-012 — Desbloqueo por restablecimiento de contraseña (D4)
+[APROBADO — 2026-11-08]
+Restablecer correctamente la contraseña desbloquea la cuenta. El token debe ser válido, vigente y de un solo uso, y queda invalidado al usarlo. Se invalidan las sesiones anteriores, se limpia el bloqueo de la cuenta y la operación queda registrada en la auditoría.
+
+### DEC-CORE-013 — Protección contra prerregistro (D5)
+[APROBADO — 2026-11-08]
+El usuario proporciona su correo, recibe la verificación, confirma tener acceso y después establece su contraseña. La cuenta queda habilitada solo entonces. Quien prerregistre un correo ajeno no obtiene ninguna contraseña válida sobre esa cuenta. Modifica el flujo de RF-CORE-001 (ver `FN-MOD-CORE-001` v1.1).
+
+### DEC-CORE-014 — Política de contraseña y límite de bcrypt (D6)
+[APROBADO — 2026-11-08]
+Un espacio en blanco no cuenta como carácter especial. Se mantienen mínimo 8 caracteres, mayúscula, minúscula, número y carácter especial real, en frontend y backend. Como bcrypt ignora lo que excede de 72 bytes, las contraseñas más largas se rechazan en lugar de truncarse en silencio.
+
+### DEC-CORE-015 — Retención y limpieza de datos de acceso (D7)
+[APROBADO EL PRINCIPIO — 2026-11-08] Estos datos no se conservan indefinidamente y la limpieza debe ser compatible con el hosting compartido, sin SSH ni Composer.
+
+[APROBADO — 2026-11-08] Plazos: intentos de acceso con IP y navegador, 90 días; contadores inactivos, 30 días; bloqueos expirados, 24 horas; cuentas sin verificar, 7 días; tokens, al vencer. Justificación en `FN-OPS-CORE-001`.
+
+### DEC-CORE-016 — Identificación del dispositivo (D8)
+[APROBADO — 2026-11-08]
+El dispositivo y el navegador se registran como información de auditoría. No se implementa bloqueo por dispositivo. Se corrige la sección 5 de `FN-ARC-CORE-001` para eliminar la contradicción con DEC-CORE-005.
+
 ## Decisiones de arquitectura
 
 ## Historial
+- 2.9 — 2026-11-08: incorpora DEC-CORE-010 a DEC-CORE-016 (decisiones D1 a D8 de la corrección de la auditoría del PR #2). Registra además la aprobación de los valores del límite por IP y de los plazos de retención, y la aceptación del riesgo residual de bloqueos provocados por terceros para el piloto.
 - 2.8 — 2026-11-05: incorpora DEC-CORE-009 y aprueba documentar el cotejamiento específico para `users.email`, sujeto a validación en hosting; no autoriza implementación del esquema.
 - 2.6 — 2026-11-04: incorpora FN-ARC-CORE-001 v0.3 APROBADO y registra DEC-ARC-CORE-001 sobre arquitectura técnica del módulo CORE.
 - 2.7 — 2026-11-04: incorpora DEC-CORE-001 a DEC-CORE-008 aprobadas para cierre de Etapa 0.

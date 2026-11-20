@@ -12,7 +12,7 @@
         <div class="app-shell" data-app-shell>
             <aside class="sidebar" id="primary-navigation" aria-label="Navegación principal">
                 <div class="brand-row">
-                    <a class="brand-lockup" href="{{ route('dashboard') }}" aria-label="FUTNEXIS, panel principal">
+                    <a class="brand-lockup" href="{{ route('internal.demo') }}" aria-label="FUTNEXIS, panel principal">
                         <span class="brand-mark" aria-hidden="true">FN</span>
                         <span class="brand-copy">
                             <strong>FUTNEXIS</strong>
@@ -26,7 +26,7 @@
 
                 <span class="nav-caption">Gestión</span>
                 <nav class="sidebar-nav">
-                    <a class="nav-item" href="{{ route('dashboard') }}" aria-current="page" aria-label="Panel principal">
+                    <a class="nav-item" href="{{ route('internal.demo') }}" aria-current="page" aria-label="Panel principal">
                         <x-dashboard.icon name="grid" />
                         <span class="nav-item-label">Panel principal</span>
                     </a>
